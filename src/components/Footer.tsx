@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-[#e2e8f0] bg-[#f8fafb] text-slate-500 py-12 text-xs relative z-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className={`grid grid-cols-1 ${SITE_CONFIG.instanceCreationGuide ? 'md:grid-cols-5' : 'md:grid-cols-4'} gap-8`}>
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <img src={SITE_CONFIG.logoPath} alt={SITE_CONFIG.logoAlt} className="h-8 w-8 rounded-lg object-contain" />
@@ -78,6 +78,22 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
+          {SITE_CONFIG.instanceCreationGuide && (
+            <div>
+              <h4 className="font-bold text-[#1e293b] mb-3 uppercase tracking-wider text-[11px] font-mono">
+                Crear un portal
+              </h4>
+              <ul className="space-y-2.5">
+                <li><Link href="/crear-instancia" className="hover:text-[#0d9373] transition-colors">Guía de configuración</Link></li>
+                <li>
+                  <a href="https://github.com/soker90/adjudica-starter/generate" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-[#0d9373] transition-colors">
+                    Usar la plantilla <ExternalLink className="h-3 w-3" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Disclaimer legal obligatorio */}

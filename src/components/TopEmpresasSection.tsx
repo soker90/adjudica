@@ -34,7 +34,7 @@ export default function TopEmpresasSection({
               <Trophy className="h-4 w-4" />
             </span>
             <h3 className="font-bold text-[#1e293b] text-base sm:text-lg tracking-tight">
-              Top 10 Empresas Adjudicatarias
+              10 principales empresas adjudicatarias
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1">

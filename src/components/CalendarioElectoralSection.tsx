@@ -41,7 +41,7 @@ export default function CalendarioElectoralSection({ data }: CalendarioElectoral
               <Vote className="h-5 w-5" />
             </span>
             <h3 className="font-bold text-[#1e293b] text-base sm:text-lg tracking-tight">
-              Adjudicaciones vs. Calendario Electoral (Ciclo Político)
+              Adjudicaciones y calendario electoral (ciclo político)
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1.5 max-w-2xl">
@@ -70,7 +70,7 @@ export default function CalendarioElectoralSection({ data }: CalendarioElectoral
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-[#fef2f2] text-[#991b1b] border border-[#fecaca]">
                   Elecciones 28-M 2023
                 </span>
-                <span className="text-[11px] font-mono text-slate-400">Mar – May 2023</span>
+                <span className="text-[11px] font-mono text-slate-400">Mar.–may. 2023</span>
               </div>
               <div>
                 <div className="flex items-baseline gap-2">
@@ -108,7 +108,7 @@ export default function CalendarioElectoralSection({ data }: CalendarioElectoral
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-[#f1f5f9] text-slate-700 border border-slate-200">
                   Elecciones 26-M 2019
                 </span>
-                <span className="text-[11px] font-mono text-slate-400">Mar – May 2019</span>
+                <span className="text-[11px] font-mono text-slate-400">Mar.–may. 2019</span>
               </div>
               <div>
                 <div className="flex items-baseline gap-2">
@@ -299,7 +299,7 @@ export default function CalendarioElectoralSection({ data }: CalendarioElectoral
               <div className="flex items-center gap-4 text-[11px] font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-xs bg-[#dc2626]" />
-                  <span className="text-slate-700 font-bold">Ventana Preelectoral (Mar–May)</span>
+                  <span className="text-slate-700 font-bold">Ventana preelectoral (marzo–mayo)</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-xs bg-[#0d9373]" />

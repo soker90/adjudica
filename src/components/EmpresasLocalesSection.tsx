@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { formatCurrency, formatCompactCurrency } from '@/lib/format';
 import type { EmpresasLocalesStats } from '@/lib/db';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 interface EmpresasLocalesSectionProps {
   data: EmpresasLocalesStats;
@@ -26,6 +27,8 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
   const [activeTab, setActiveTab] = useState<'ambitos' | 'evolucion' | 'sectores' | 'ranking' | 'metodologia'>('ambitos');
   const [searchQuery, setSearchQuery] = useState('');
   const [filtroRanking, setFiltroRanking] = useState<'locales' | 'externas' | 'todas'>('todas');
+  const localidad = SITE_CONFIG.localityName || 'el ámbito local';
+  const provincia = SITE_CONFIG.provinceName ? `Provincia de ${SITE_CONFIG.provinceName}` : 'Ámbito provincial';
 
   const { 
     resumen, 
@@ -63,7 +66,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-[#1e293b] flex items-center gap-2">
-                <span>Empresas Locales vs. Externas: Impacto Territorial</span>
+                <span>Empresas locales frente a externas: impacto territorial</span>
                 <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-[#ecfdf5] border border-[#d1fae5] text-[#0d9373]">
                   Registro Mercantil / BORME
                 </span>
@@ -105,7 +108,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             </span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            Volumen adjudicado a empresas con domicilio registral en el ámbito configurado
+            Volumen adjudicado a empresas con domicilio registral en {localidad}
           </p>
         </div>
 
@@ -128,7 +131,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             </span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            Casi 1 de cada 4 adjudicaciones recae en el ámbito configurado
+            Porcentaje de adjudicaciones que recae en {localidad}
           </p>
         </div>
 
@@ -136,7 +139,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
         <div className="mint-card p-5 border-l-4 border-l-[#3b82f6]">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono">
-              Total provincia configurada (Provincia)
+              Total provincial
             </span>
             <div className="p-1.5 rounded-md bg-[#eff6ff] text-[#3b82f6]">
               <MapPin className="h-4 w-4" />
@@ -151,7 +154,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             </span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            Gasto acumulado en el ámbito configurado y comarca/provincia
+            Gasto acumulado en {localidad} y su ámbito provincial
           </p>
         </div>
 
@@ -236,7 +239,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             }`}
           >
             <Building2 className="h-4 w-4" />
-            <span>Top Empresas Locales vs. Externas</span>
+            <span>Empresas locales frente a externas</span>
           </button>
 
           <button
@@ -331,10 +334,10 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                 <tr>
                   <th className="py-3 px-4">Ejercicio</th>
                   <th className="py-3 px-4 text-right">Volumen Total</th>
-                  <th className="py-3 px-4 text-right">el ámbito configurado (Local)</th>
+                  <th className="py-3 px-4 text-right">{localidad}</th>
                   <th className="py-3 px-4 text-right">% Local</th>
-                  <th className="py-3 px-4 text-right">provincia configurada</th>
-                  <th className="py-3 px-4 text-right">Castilla-La Mancha</th>
+                  <th className="py-3 px-4 text-right">{provincia}</th>
+                  <th className="py-3 px-4 text-right">Resto de la comunidad autónoma</th>
                   <th className="py-3 px-4 text-right">Nacional / Externas</th>
                   <th className="py-3 px-4 text-center">% Contratos Locales</th>
                 </tr>
@@ -404,7 +407,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                 <div className="space-y-2 text-xs font-mono">
                   <div>
                     <div className="flex justify-between text-[11px] mb-1">
-                      <span className="text-[#0d9373] font-bold">Local (el ámbito configurado): {formatCompactCurrency(t.volumenLocal)}</span>
+                      <span className="text-[#0d9373] font-bold">Local ({localidad}): {formatCompactCurrency(t.volumenLocal)}</span>
                       <strong className="text-[#0d9373]">{t.pctLocal}%</strong>
                     </div>
                     <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
@@ -438,7 +441,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
         </div>
       )}
 
-      {/* Tab 4: Top Empresas Locales vs. Externas */}
+      {/* Pestaña 4: Empresas locales y externas */}
       {activeTab === 'ranking' && (
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#f8fafb] p-3.5 rounded-xl border border-[#e2e8f0]">
@@ -460,7 +463,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                 className="text-xs bg-white border border-[#e2e8f0] rounded-lg px-2.5 py-1.5 focus:outline-hidden"
               >
                 <option value="todas">Todas las adjudicatarias</option>
-                <option value="locales">Solo empresas locales del ámbito configurado</option>
+                <option value="locales">Solo empresas locales de {localidad}</option>
                 <option value="externas">Solo empresas nacionales / externas</option>
               </select>
             </div>
@@ -474,7 +477,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                   <div className="flex items-center gap-2">
                     <Building2 className="h-4 w-4 text-[#0d9373]" />
                     <h3 className="font-bold text-[#1e293b] text-sm">
-                      Top Empresas Locales (el ámbito configurado)
+                      Empresas locales ({localidad})
                     </h3>
                   </div>
                   <span className="text-xs text-[#0d9373] font-mono font-bold">
@@ -521,7 +524,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                   <div className="flex items-center gap-2">
                     <Globe2 className="h-4 w-4 text-[#e11d48]" />
                     <h3 className="font-bold text-[#1e293b] text-sm">
-                      Top Corporaciones Nacionales / Externas
+                      Principales corporaciones nacionales y externas
                     </h3>
                   </div>
                   <span className="text-xs text-[#e11d48] font-mono font-bold">
@@ -578,7 +581,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
               En España, el Código de Identificación Fiscal (CIF) de las sociedades mercantiles codifica en sus dos primeros dígitos numéricos la <strong>provincia de matriculación en el Registro Mercantil</strong>.
             </p>
             <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
-              <li>El código provincial del NIF se contrasta con la provincia configurada; los alias y NIF locales configurados permiten identificar entidades de la localidad.</li>
+              <li>El código provincial del NIF se contrasta con la provincia configurada; los alias y NIF locales permiten identificar entidades de {localidad}.</li>
               <li>Las entidades del resto de provincias de la misma comunidad autónoma se clasifican como regionales.</li>
               <li>Las entidades de otras provincias se clasifican como nacionales.</li>
             </ul>
@@ -596,7 +599,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             </p>
             <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
               <li>Contratos de mantenimiento, cerrajería, pintura, fontanería, suministros escolares y artes gráficas locales.</li>
-              <li>Asignación al cómputo de empresas y profesionales con domicilio registral o fiscal en el ámbito configurado.</li>
+              <li>Asignación al cómputo de empresas y profesionales con domicilio registral o fiscal en {localidad}.</li>
             </ul>
           </div>
         </div>

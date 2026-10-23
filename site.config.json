@@ -6,6 +6,7 @@
   "logoPath": "/logo.svg",
   "logoAlt": "Logotipo de Adjudica",
   "brandMark": "A",
+  "instanceCreationGuide": true,
   "theme": {
     "accent": "#00d4a4",
     "primary": "#0d9373",

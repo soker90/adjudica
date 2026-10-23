@@ -714,7 +714,7 @@ export default function AuditoriaClientView({
                       {/* Fiabilidad del dato estructurado (PLACSP) */}
                       <span
                         className="inline-flex items-center gap-1 text-[11px] font-mono text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200 ml-auto sm:ml-0"
-                        title="Distinción analítica: 1) Certeza del dato estructurado (comprobado en registro PLACSP); 2) Intensidad de la señal (score analítico cuantitativo); 3) Ausencia de certeza jurídica (el indicio no prejuzga culpabilidad ni infracción legal, que requiere contradicción y resolución administrativa o judicial)."
+                        title="Distinción analítica: 1) certeza del dato estructurado (comprobado en el registro PLACSP); 2) intensidad de la señal (puntuación analítica cuantitativa); 3) ausencia de certeza jurídica (el indicio no prejuzga culpabilidad ni infracción legal, que requiere contradicción y resolución administrativa o judicial)."
                       >
                         <CheckCircle2 className="h-3 w-3 text-emerald-600 shrink-0" />
                         <span>Datos contrastados en PLACSP</span>

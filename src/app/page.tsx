@@ -200,7 +200,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
           />
         </div>
 
-        {/* Top 10 Empresas Adjudicatarias */}
+        {/* Diez principales empresas adjudicatarias */}
         <TopEmpresasSection
           topVolumen={stats.topEmpresasVolumen.map(e => ({ ...e, adjudicatario: e.awardee }))}
           topContratos={stats.topEmpresasContratos.map(e => ({ ...e, adjudicatario: e.awardee }))}

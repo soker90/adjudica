@@ -92,7 +92,7 @@ const QUICK_ACTIONS: PaletteItem[] = [
   {
     type: 'action',
     id: 'act-empresas',
-    title: 'Top Empresas Adjudicatarias del ámbito configurado',
+    title: 'Principales empresas adjudicatarias del ámbito configurado',
     subtitle: 'Ranking de proveedores por volumen total y número de contratos',
     meta: 'Directorio',
     href: '/empresas',

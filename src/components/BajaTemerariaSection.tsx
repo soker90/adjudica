@@ -180,7 +180,7 @@ export function BajaTemerariaSection({ data }: BajaTemerariaSectionProps) {
           }`}
         >
           <TrendingDown className="h-3.5 w-3.5" />
-          <span>Top Bajas Acusadas ({topBajas.length})</span>
+          <span>Mayores descuentos sobre el presupuesto ({topBajas.length})</span>
         </button>
 
         <button

@@ -142,7 +142,7 @@ export function LotesSection({ data }: LotesSectionProps) {
         {/* Card 3: Concurrencia comparada */}
         <div className="mint-card p-5 border-l-4 border-l-[#0d9373] bg-white">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono">Licitadores: Lotes vs. Único</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono">Licitadores: lotes frente a expediente único</span>
             <div className="p-1.5 rounded-lg bg-[#ecfdf5] text-[#0d9373] border border-[#a7f3d0]">
               <Users className="h-4 w-4" />
             </div>

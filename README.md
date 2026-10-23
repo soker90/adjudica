@@ -1,19 +1,25 @@
 # Adjudica
 
-Adjudica is the generic application for public procurement transparency and analysis. Configure each deployment through its site configuration, PLACSP contracting-authority list, database, and visual assets. Keep deployment-specific configuration and data in the instance repository.
+Adjudica es la aplicación común para consultar y analizar la contratación pública. Cada portal se configura en su propio repositorio: allí se guardan la marca, los organismos, la base SQLite y los datos particulares. El código se comparte desde este repositorio mediante un submódulo.
 
-## Instance configuration
+## Crear un portal
 
-- `site.config.json`: site name, description, canonical URL, geographic label, logo and theme.
-- `data/contracting-authorities.json`: the PLACSP profiles included in the deployment. Add one entry for each authority to monitor.
-- `data/*.db`: generated SQLite database for that instance.
-- `public/logo.svg`: default brand mark; an instance can replace it during its build.
+Usa la plantilla [Adjudica Starter](https://github.com/soker90/adjudica-starter/generate). La guía de configuración está disponible en la aplicación y en el [README de la plantilla](https://github.com/soker90/adjudica-starter#readme).
 
-See [`data/contracting-authorities.example.json`](data/contracting-authorities.example.json) for the authority shape. Each authority is independent and has a stable internal `id`, external `placsp_id`, official `name`, and institutional `scope`.
+En la plantilla se configuran el nombre y el logotipo del portal, los perfiles de contratación PLACSP que se quieren seguir, y la SQLite de la instancia. Las actualizaciones se ejecutan con GitHub Actions; no hace falta copiar el código de la aplicación.
 
-## Development
+## Archivos de configuración
 
-Requirements: Node.js 22+ and pnpm 11.
+- `site.config.json`: nombre, descripción, URL, ámbito geográfico, logotipo y tema visual.
+- `data/contracting-authorities.json`: perfiles PLACSP incluidos en el portal, uno por organismo.
+- `data/contracts.db`: base SQLite generada para los datos de ese portal.
+- `public/logo.svg`: imagen de marca predeterminada.
+
+Consulta [`data/contracting-authorities.example.json`](data/contracting-authorities.example.json) para ver el formato de cada perfil.
+
+## Desarrollo local
+
+Requisitos: Node.js 22 o posterior y pnpm 11.
 
 ```sh
 pnpm install
@@ -21,4 +27,4 @@ pnpm run init-db
 pnpm dev
 ```
 
-The instance database can be selected with `ADJUDICA_DB_PATH`; the authority catalog with `ADJUDICA_AUTHORITIES_CONFIG_PATH`; and the instance root with `ADJUDICA_INSTANCE_ROOT`.
+En una instancia, selecciona su base de datos con `ADJUDICA_DB_PATH`, el catálogo de organismos con `ADJUDICA_AUTHORITIES_CONFIG_PATH` y la raíz de configuración y datos con `ADJUDICA_INSTANCE_ROOT`.

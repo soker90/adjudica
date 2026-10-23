@@ -222,7 +222,7 @@ export function ModificadosSection({ data }: ModificadosSectionProps) {
           <Info className="h-4 w-4 text-[#e11d48] shrink-0 mt-0.5" />
           <div>
             <span className="font-bold text-slate-900 block mb-0.5">
-              Diferenciación analítica: Modificados formales vs. Encarecimiento en cascada
+              Diferenciación analítica: modificados formales frente a encarecimiento en cascada
             </span>
             <span className="leading-relaxed">
               Los registros oficiales de PLACSP rara vez publican modificaciones formales directas bajo el art. 205 LCSP ({resumen.totalCasos} detectados en el periodo). Paralelamente, la plataforma documenta el fenómeno de <strong>relicitaciones en cascada tras renuncia</strong>, como el caso paradigmático de la <em>Estación de Autobuses</em> (+64,0% acumulado entre 2023 y 2025).
@@ -611,7 +611,7 @@ export function ModificadosSection({ data }: ModificadosSectionProps) {
               <div className="flex items-center gap-2">
                 <Building2 className="h-4 w-4 text-[#e11d48]" />
                 <h3 className="font-bold text-[#1e293b] text-sm">
-                  Top Contratistas con Modificaciones
+                  Contratistas con más modificaciones
                 </h3>
               </div>
               <span className="text-xs text-slate-400 font-mono">

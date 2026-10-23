@@ -386,7 +386,7 @@ export function getEmpresasLocalesStats(year?: number | string, scope?: string):
   const desgloseAmbitos: GastoAmbitoItem[] = [
     {
       ambito: 'local',
-      nombre: 'el ámbito configurado (Local)',
+      nombre: SITE_CONFIG.localityName || 'Ámbito local',
       contratos: conteosAmbito.local.contratos.size,
       pctContratos: totalContratosGlobal > 0 ? Math.round((conteosAmbito.local.contratos.size / totalContratosGlobal) * 1000) / 10 : 0,
       volumen: volumenLocal,
@@ -503,7 +503,8 @@ export function getEmpresasLocalesStats(year?: number | string, scope?: string):
 
   const totalEmpresasLocales = conteosAmbito.local.empresas.size;
   const totalEmpresasExternas = Object.values(empresasMap).filter((e) => e.ambito !== 'local').length;
-  const diagnostico = `El ${pctContratosLocales}% de los expedientes adjudicados corresponden a empresas y profesionales con domicilio registral en el ámbito configurado (${pctGastoLocal}% del volumen económico). Por su parte, el ${pctGastoNacTotal}% del volumen licitado se adjudicó a entidades con sede social fuera del municipio (suministros de electricidad, gestión comarcal de residuos e infraestructuras mayores). El domicilio registral clasifica la sede de la razón social adjudicataria, sin prejuzgar la contratación de empleo, delegaciones o subcontratación en el ámbito local.`;
+  const localidad = SITE_CONFIG.localityName || 'el ámbito local';
+  const diagnostico = `El ${pctContratosLocales}% de los expedientes adjudicados corresponden a empresas y profesionales con domicilio registral en ${localidad} (${pctGastoLocal}% del volumen económico). Por su parte, el ${pctGastoNacTotal}% del volumen licitado se adjudicó a entidades con sede social fuera de la localidad. El domicilio registral clasifica la sede de la razón social adjudicataria, sin prejuzgar la contratación de empleo, delegaciones o subcontratación en el ámbito local.`;
 
   return {
     resumen: {

@@ -341,7 +341,7 @@ export default function ContractAlertsCard({ alertas = [], redFlags = [], placsp
                       <div className="font-semibold text-slate-800 flex items-center justify-between">
                         <span className="flex items-center gap-1 text-[#0d9373]">
                           <Scale className="h-3.5 w-3.5" />
-                          Normalización analítica del score ({alerta.scoreEscala ? alerta.scoreEscala.toFixed(1) : '6.7'}/10):
+                          Normalización analítica de la puntuación ({alerta.scoreEscala ? alerta.scoreEscala.toFixed(1) : '6.7'}/10):
                         </span>
                         <span className="font-mono text-[10px] text-slate-500">Art. 149 LCSP</span>
                       </div>
