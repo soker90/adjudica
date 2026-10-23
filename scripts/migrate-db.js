@@ -98,6 +98,22 @@ function migrateDb(db) {
       console.log('contracts.award_amount_type already exists.');
     }
 
+    const grantsExist = db.prepare("SELECT count(*) AS n FROM sqlite_master WHERE type='table' AND name='grants'").get().n > 0;
+    if (grantsExist) {
+      let grantColumns = db.prepare("PRAGMA table_info('grants')").all();
+      const hasLegacyAuthorityFlag = grantColumns.some((column) => column.name === 'is_alcazar');
+      const hasGenericAuthorityFlag = grantColumns.some((column) => column.name === 'is_target_authority');
+      if (hasLegacyAuthorityFlag && !hasGenericAuthorityFlag) {
+        db.exec('ALTER TABLE grants RENAME COLUMN is_alcazar TO is_target_authority');
+        grantColumns = db.prepare("PRAGMA table_info('grants')").all();
+      } else if (hasLegacyAuthorityFlag && hasGenericAuthorityFlag) {
+        db.exec('UPDATE grants SET is_target_authority = is_alcazar WHERE is_target_authority = 0 AND is_alcazar != 0');
+      } else if (!hasGenericAuthorityFlag) {
+        db.exec('ALTER TABLE grants ADD COLUMN is_target_authority INTEGER NOT NULL DEFAULT 0');
+      }
+      db.exec('CREATE INDEX IF NOT EXISTS idx_grants_is_target_authority ON grants(is_target_authority)');
+    }
+
     db.exec('COMMIT');
   } catch (error) {
     db.exec('ROLLBACK');
