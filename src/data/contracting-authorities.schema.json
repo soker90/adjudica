@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:adjudica:schemas:contracting-authorities",
+  "title": "Contracting authorities configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["authorities"],
+  "properties": {
+    "authorities": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/authority" }
+    }
+  },
+  "$defs": {
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contracting_authority_id", "name", "scope"],
+      "properties": {
+        "contracting_authority_id": { "type": "string", "minLength": 1 },
+        "placsp_id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "scope": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

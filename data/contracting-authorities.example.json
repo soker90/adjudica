@@ -1,0 +1,11 @@
+{
+  "authorities": [
+    {
+      "contracting_authority_id": "authority-001",
+      "placsp_id": "PLACSP_PROFILE_ID",
+      "name": "Official contracting authority name",
+      "scope": "municipal",
+      "aliases": []
+    }
+  ]
+}

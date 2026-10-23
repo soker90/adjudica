@@ -1,0 +1,19 @@
+{
+  "name": "adjudica",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Generic data and configuration foundation for public procurement analysis.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {},
+  "exports": {
+    "./canonical-schema": "./src/data/canonical-schema.js",
+    "./contract-identity": "./src/data/contract-identity.js",
+    "./award-amount": "./src/data/award-amount.js",
+    "./placsp-xml": "./src/placsp/xml.js",
+    "./nif-rules": "./src/privacy/nif-rules.js",
+    "./nif-privacy": "./src/privacy/nif-privacy.js"
+  }
+}
