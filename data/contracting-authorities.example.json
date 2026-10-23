@@ -1,11 +1,13 @@
 {
-  "authorities": [
+  "version": 1,
+  "contracting_authorities": [
     {
-      "contracting_authority_id": "authority-001",
+      "id": "authority-001",
       "placsp_id": "PLACSP_PROFILE_ID",
+      "nif": "PUBLIC_AUTHORITY_NIF",
       "name": "Official contracting authority name",
-      "scope": "municipal",
-      "aliases": []
+      "scope": "Directa Municipal",
+      "historical_names": []
     }
   ]
 }

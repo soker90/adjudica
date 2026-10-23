@@ -1,0 +1,19 @@
+{
+  "siteName": "Adjudica",
+  "siteDescription": "Datos abiertos y análisis de contratación pública de los organismos configurados.",
+  "siteUrl": "https://example.org",
+  "geographicLabel": "Administraciones públicas",
+  "logoPath": "/logo.svg",
+  "logoAlt": "Logotipo de Adjudica",
+  "brandMark": "A",
+  "theme": {
+    "accent": "#00d4a4",
+    "primary": "#0d9373",
+    "soft": "#ecfdf5"
+  },
+  "localityName": "",
+  "provinceCode": "",
+  "provinceName": "",
+  "localityAliases": [],
+  "localSupplierNifs": []
+}
