@@ -76,7 +76,7 @@ export interface FlujoStats {
 const STOP_WORDS = new Set([
   'de', 'la', 'el', 'en', 'y', 'a', 'del', 'las', 'los', 'para', 'con', 'por', 'o', 'al', 'se', 'su',
   'servicio', 'servicios', 'contrato', 'suministro', 'suministros', 'obras', 'obra', 'adquisicion',
-  'arrendamiento', 'ayuntamiento', 'localidad', 'juan', 'mancomunidad', 'organismo_asociado', 'gestion',
+  'arrendamiento', 'ayuntamiento', 'localidad', 'mancomunidad', 'organismo_asociado', 'gestion',
   'ejecucion', 'realizacion', 'case_number', 'lote', 'lotes', 'municipal', 'municipio'
 ]);
 

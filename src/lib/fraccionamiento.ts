@@ -103,7 +103,7 @@ const STOPWORDS = new Set([
   'incluida', 'incluidos', 'incluidas', 'mediante', 'asi', 'así', 'su', 'sus',
   // Términos genéricos del dominio
   'contrato', 'menor', 'suministro', 'suministros', 'servicio', 'servicios', 'obra',
-  'obras', 'ayuntamiento', 'localidad', 'san', 'juan',
+  'obras', 'ayuntamiento', 'localidad',
 ]);
 
 /** Normaliza un objeto del contrato a tokens comparables. */
