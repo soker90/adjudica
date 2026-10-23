@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 data_raw/
+data/*.db
+data/historical-sources.json
 *.parquet
 *.zip
 *.backup.db
