@@ -66,5 +66,5 @@ jobs:
 
       - name: Build
         env:
-          DNI_SALT: ${{ secrets.DNI_SALT }}
+          DNI_SALT: adjudica-ci-dummy-salt-not-for-production
         run: pnpm build
