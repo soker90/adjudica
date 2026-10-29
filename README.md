@@ -28,3 +28,18 @@ pnpm dev
 ```
 
 En una instancia, selecciona su base de datos con `ADJUDICA_DB_PATH`, el catálogo de organismos con `ADJUDICA_AUTHORITIES_CONFIG_PATH` y la raíz de configuración y datos con `ADJUDICA_INSTANCE_ROOT`.
+
+## Versiones
+
+La versión de la aplicación se mantiene en `package.json` y se publica con etiquetas Git `vX.Y.Z`. Cada instancia fija una versión concreta mediante el commit registrado en el submódulo `adjudica`; no se actualiza automáticamente al cambiar la rama principal.
+
+Para actualizar una instancia a una versión publicada, desde la raíz de su repositorio ejecuta:
+
+```sh
+git -C adjudica fetch --tags origin
+git -C adjudica checkout vX.Y.Z
+git add adjudica
+git commit -m "Actualiza Adjudica a vX.Y.Z"
+```
+
+Así, el tag identifica el release y el commit de la instancia conserva la referencia exacta que debe desplegar.
