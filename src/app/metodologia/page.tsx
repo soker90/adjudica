@@ -61,11 +61,29 @@ export default function MethodologyPage() {
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">{methodology.title ?? DEFAULT_METHODOLOGY.title}</h1>
         <p className="max-w-3xl text-sm leading-6 text-slate-600">{methodologyDescription}</p>
       </header>
-      {methodology.sections.map((section) => (
-        <section key={section.id ?? section.title} id={section.id} className="space-y-3">
+      {methodology.sections.length > 0 && (
+        <nav aria-label="Índice de secciones" className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+          <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            {methodology.indexTitle ?? 'Índice de secciones'}
+          </span>
+          <div className="flex flex-wrap gap-2">
+            {methodology.sections.map((section, index) => (
+              <a
+                key={section.id ?? section.title}
+                href={`#${section.id ?? `section-${index + 1}`}`}
+                className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
+              >
+                {section.title}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
+      {methodology.sections.map((section, index) => (
+        <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="space-y-3 scroll-mt-20">
           <h2 className="text-xl font-bold text-slate-900">{section.title}</h2>
-          {section.paragraphs.map((paragraph, index) => (
-            <p key={index} className="text-sm leading-6 text-slate-700">{paragraph}</p>
+          {section.paragraphs.map((paragraph, paragraphIndex) => (
+            <p key={paragraphIndex} className="text-sm leading-6 text-slate-700">{paragraph}</p>
           ))}
         </section>
       ))}

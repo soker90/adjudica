@@ -122,15 +122,15 @@ export default function AmbitoSelector({
           <Info className="h-4 w-4 text-[#0d9373] shrink-0 mt-0.5" />
           <div className="space-y-1 text-slate-600">
             <p>
-              <strong className="text-slate-900">{SCOPE_PRESENTATION[activePresentation].label}.</strong>{' '}
+              <strong className="text-slate-900">{SCOPE_PRESENTATION[activePresentation].noteTitle ?? `${SCOPE_PRESENTATION[activePresentation].label}.`}</strong>{' '}
               {SCOPE_PRESENTATION[activePresentation].description}
             </p>
             <div className="pt-0.5">
               <Link
-                href="/metodologia"
+                href={SCOPE_PRESENTATION[activePresentation].noteLinkHref ?? '/metodologia'}
                 className="font-medium text-[#0d9373] hover:text-[#00b48a] underline inline-flex items-center gap-1 text-[11px]"
               >
-                <span>{SCOPE_PRESENTATION.methodologyLinkLabel}</span>
+                <span>{SCOPE_PRESENTATION[activePresentation].noteLinkLabel ?? SCOPE_PRESENTATION.methodologyLinkLabel}</span>
               </Link>
             </div>
           </div>

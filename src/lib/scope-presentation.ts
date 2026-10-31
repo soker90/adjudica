@@ -5,6 +5,9 @@ export interface ScopePresentationItem {
   shortLabel: string;
   description: string;
   tooltip: string;
+  noteTitle?: string;
+  noteLinkLabel?: string;
+  noteLinkHref?: string;
 }
 
 const DEFAULT_SCOPE_PRESENTATION = {
@@ -39,9 +42,17 @@ export interface ScopePresentationConfig {
   methodologyLinkLabel?: string;
 }
 
+export interface ResolvedScopePresentation {
+  selectorTitle: string;
+  primary: ScopePresentationItem;
+  associated: ScopePresentationItem & { enabled: boolean };
+  all: ScopePresentationItem;
+  methodologyLinkLabel: string;
+}
+
 export function createScopePresentation(
   configured: ScopePresentationConfig = {},
-): typeof DEFAULT_SCOPE_PRESENTATION {
+): ResolvedScopePresentation {
   return {
     selectorTitle: configured.selectorTitle ?? DEFAULT_SCOPE_PRESENTATION.selectorTitle,
     primary: { ...DEFAULT_SCOPE_PRESENTATION.primary, ...(configured.primary ?? {}) },

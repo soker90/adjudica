@@ -31,7 +31,7 @@ export default function HomeHero({ ultimaActualizacion, ultimaSincronizacion, ul
           <div className="mb-6 text-[11px] font-medium text-slate-500 font-mono">
             <RefreshCw className="inline h-3 w-3 mr-1" />
             Sincronizado con PLACSP el {formatDate(ultimaSincronizacion || ultimaActualizacion)}
-            {ultimaLicitacion && <> · Último expediente publicado: {formatDate(ultimaLicitacion)}</>}
+            {ultimaLicitacion && <> · {SITE_CONFIG.homeLatestPublicationLabel ?? 'Último expediente publicado'}: {formatDate(ultimaLicitacion)}</>}
           </div>
         )}
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1e293b] max-w-4xl mx-auto leading-[1.15]">

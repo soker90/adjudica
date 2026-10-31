@@ -102,12 +102,12 @@ export default function Footer() {
             Aviso de Neutralidad y Exoneración de Potestades Públicas:
           </p>
           <p>
-            {SITE_CONFIG.siteName} es una iniciativa independiente de análisis de datos públicos de contratación. Los resultados tienen carácter exclusivamente informativo y metodológico. No constituyen informe de fiscalización, auditoría pública, dictamen jurídico vinculante, resolución administrativa ni declaración de ilegalidad, nulidad, responsabilidad o infracción.
+            {SITE_CONFIG.footerDisclaimer ?? `${SITE_CONFIG.siteName} es una iniciativa independiente de análisis de datos públicos de contratación. Los resultados tienen carácter exclusivamente informativo y metodológico. No constituyen informe de fiscalización, auditoría pública, dictamen jurídico vinculante, resolución administrativa ni declaración de ilegalidad, nulidad, responsabilidad o infracción.`}
           </p>
         </div>
 
         <div className="border-t border-[#e2e8f0] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400 font-mono">
-          <p>© {new Date().getFullYear()} {SITE_CONFIG.siteName} · Datos Abiertos</p>
+          <p>© {new Date().getFullYear()} {SITE_CONFIG.footerCopyright ?? `${SITE_CONFIG.siteName} · Datos Abiertos`}</p>
           <div className="flex flex-wrap items-center gap-3">
             <Link href="/aviso-legal" className="hover:text-slate-600 transition-colors">Aviso Legal</Link>
             <span>•</span>
