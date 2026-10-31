@@ -27,5 +27,13 @@
   "footerDescription": "",
   "classifyIndividualsAsLocal": false,
   "fraccionamientoStopWords": [],
-  "flujoStopWords": []
+  "flujoStopWords": [],
+  "associatedAuthorityNameMatch": "",
+  "associatedAuthorityTimeMetricKey": "",
+  "estimatedContractEndDateOffsetDays": 0,
+  "localBusinessLabel": "",
+  "regionalBusinessLabel": "",
+  "localBusinessSeatLabel": "",
+  "localIndividualSeatLabel": "",
+  "outsideLocalityLabel": "localidad"
 }

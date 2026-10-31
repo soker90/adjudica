@@ -1,3 +1,4 @@
+import { SITE_CONFIG } from './site-config';
 import { eligibleAwardLotStatusSql, eligibleAwardResultStateSql, excludeAwardWhenLegacyLotTerminalSql, lotAwardsAmountCoverageSql, eligibleLegacyLotAwardAmountSql, allowParentAwardAmountFallbackSql, excludeLegacyLotWhenStructuredTerminalResultSql } from './lot-status.js';
 import { DatabaseSync } from 'node:sqlite';
 import { parseScope } from './db';
@@ -850,6 +851,15 @@ export function evaluarVigenciaContrato(
   };
 }
 
+
+function adjustEstimatedEndDate(date: string | null): string | null {
+  const offsetDays = Number(SITE_CONFIG.estimatedContractEndDateOffsetDays || 0);
+  if (!date || !offsetDays) return date;
+  const adjusted = new Date(`${date}T00:00:00.000Z`);
+  adjusted.setUTCDate(adjusted.getUTCDate() + offsetDays);
+  return adjusted.toISOString().slice(0, 10);
+}
+
 export function getContratosVivosStats(
   getDbSync: () => DatabaseSync,
   scope?: string | null,
@@ -1090,7 +1100,7 @@ export function getContratosVivosStats(
         duracionTexto: vig.duracionTexto,
         duracionValor: r.duration ? parseFloat(r.duration) : null,
         duracionUnidad: r.duration_unit,
-        fechaFinEstimada: vig.fechaFinEstimada,
+        fechaFinEstimada: adjustEstimatedEndDate(vig.fechaFinEstimada),
         diasRestantes: vig.diasRestantes,
         estadoVigencia: vig.estadoVigencia,
         esPlurianual: vig.esPlurianual,

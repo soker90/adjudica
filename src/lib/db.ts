@@ -1,3 +1,4 @@
+import { SITE_CONFIG } from './site-config';
 import { normalizeIdentityPart } from '../../scripts/contract-identity';
 import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
@@ -492,7 +493,8 @@ export interface TiemposStats {
   masLentas: OutlierItem[];
   mediaAyto: number;
   mediaAguas: number;
-  mediaOrganismoAsociado: number;
+  mediaOrganismoAsociado?: number;
+  mediaComsermancha?: number;
   bajaPercentiles?: PercentilesStats;
 }
 
@@ -1582,7 +1584,8 @@ export function getTiemposStats(year?: number | string, scope?: string): Tiempos
 
   const mediaAyto = porOrganismo.find((o) => o.organo.includes('Ayuntamiento'))?.mediaDias || percentiles.media;
   const mediaAguas = porOrganismo.find((o) => o.organo.includes('Aguas'))?.mediaDias || percentiles.media;
-  const mediaOrganismoAsociado = porOrganismo.find((o) => o.organo.includes('organismo asociado'))?.mediaDias || percentiles.media;
+  const associatedAuthorityMatch = SITE_CONFIG.associatedAuthorityNameMatch || 'organismo asociado';
+  const mediaOrganismoAsociado = porOrganismo.find((o) => o.organo.toLowerCase().includes(associatedAuthorityMatch.toLowerCase()))?.mediaDias || percentiles.media;
 
   // Licitaciones más rápidas (top 5)
   const masRapidas = rows.slice(0, 5).map((r: any) => ({
@@ -1692,7 +1695,7 @@ export function getTiemposStats(year?: number | string, scope?: string): Tiempos
     masLentas,
     mediaAyto,
     mediaAguas,
-    mediaOrganismoAsociado,
+    [SITE_CONFIG.associatedAuthorityTimeMetricKey || 'mediaOrganismoAsociado']: mediaOrganismoAsociado,
     bajaPercentiles,
   });
 }

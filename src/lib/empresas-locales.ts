@@ -139,7 +139,7 @@ const LOCALITY_ALIASES = [SITE_CONFIG.localityName, ...(SITE_CONFIG.localityAlia
   .filter(Boolean);
 
 function getConfiguredLocalityLabel(): string {
-  return [SITE_CONFIG.localityName, SITE_CONFIG.provinceName].filter(Boolean).join(', ') || SITE_CONFIG.geographicLabel;
+  return SITE_CONFIG.localBusinessSeatLabel || [SITE_CONFIG.localityName, SITE_CONFIG.provinceName].filter(Boolean).join(', ') || SITE_CONFIG.geographicLabel;
 }
 
 export function clasificarEmpresaGeografia(nif: string | null | undefined, awardee: string | null | undefined): {
@@ -159,7 +159,7 @@ export function clasificarEmpresaGeografia(nif: string | null | undefined, award
   }
 
   if (SITE_CONFIG.classifyIndividualsAsLocal && (isOpaquePersonaFisicaId(cleanNif) || /^[0-9]{8}[A-Z]$/.test(cleanNif) || /^[XYZ][0-9]{7}[A-Z]$/.test(cleanNif))) {
-    return { ambito: 'local', sede: `${getConfiguredLocalityLabel()} (Autónomo / Residente)` };
+    return { ambito: 'local', sede: SITE_CONFIG.localIndividualSeatLabel || `${getConfiguredLocalityLabel()} (Autónomo / Residente)` };
   }
 
   // 3. No residentes / Entidades extranjeras
@@ -389,7 +389,7 @@ export function getEmpresasLocalesStats(year?: number | string, scope?: string):
   const desgloseAmbitos: GastoAmbitoItem[] = [
     {
       ambito: 'local',
-      nombre: SITE_CONFIG.localityName || 'Ámbito local',
+      nombre: SITE_CONFIG.localBusinessLabel || SITE_CONFIG.localityName || 'Ámbito local',
       contratos: conteosAmbito.local.contratos.size,
       pctContratos: totalContratosGlobal > 0 ? Math.round((conteosAmbito.local.contratos.size / totalContratosGlobal) * 1000) / 10 : 0,
       volumen: volumenLocal,
@@ -409,7 +409,7 @@ export function getEmpresasLocalesStats(year?: number | string, scope?: string):
     },
     {
       ambito: 'regional',
-      nombre: 'Otras provincias de la comunidad autónoma',
+      nombre: SITE_CONFIG.regionalBusinessLabel || 'Otras provincias de la comunidad autónoma',
       contratos: conteosAmbito.regional.contratos.size,
       pctContratos: totalContratosGlobal > 0 ? Math.round((conteosAmbito.regional.contratos.size / totalContratosGlobal) * 1000) / 10 : 0,
       volumen: volumenRegional,
@@ -507,7 +507,7 @@ export function getEmpresasLocalesStats(year?: number | string, scope?: string):
   const totalEmpresasLocales = conteosAmbito.local.empresas.size;
   const totalEmpresasExternas = Object.values(empresasMap).filter((e) => e.ambito !== 'local').length;
   const localidad = SITE_CONFIG.localityName || 'el ámbito local';
-  const diagnostico = `El ${pctContratosLocales}% de los expedientes adjudicados corresponden a empresas y profesionales con domicilio registral en ${localidad} (${pctGastoLocal}% del volumen económico). Por su parte, el ${pctGastoNacTotal}% del volumen licitado se adjudicó a entidades con sede social fuera de la localidad. El domicilio registral clasifica la sede de la razón social adjudicataria, sin prejuzgar la contratación de empleo, delegaciones o subcontratación en el ámbito local.`;
+  const diagnostico = `El ${pctContratosLocales}% de los expedientes adjudicados corresponden a empresas y profesionales con domicilio registral en ${localidad} (${pctGastoLocal}% del volumen económico). Por su parte, el ${pctGastoNacTotal}% del volumen licitado se adjudicó a entidades con sede social fuera de ${SITE_CONFIG.outsideLocalityLabel || 'la localidad'}. El domicilio registral clasifica la sede de la razón social adjudicataria, sin prejuzgar la contratación de empleo, delegaciones o subcontratación en el ámbito local.`;
 
   return {
     resumen: {
