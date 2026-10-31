@@ -10,7 +10,7 @@ type ScopePresentationItemConfig = {
   noteLinkHref?: string;
 };
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeAuditDescription'> & {
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeAuditDescription' | 'analysisPresentation' | 'dataPresentation'> & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
@@ -27,6 +27,8 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>
   };
   homeAuditDescription?: string;
+  analysisPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>; methodologyLinkLabel?: string };
+  dataPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>> };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
     contractsSubtitle?: string;
     contractsBadge?: string;
