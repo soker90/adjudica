@@ -24,7 +24,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     title?: string;
     description?: string;
     indexTitle?: string;
-    sections?: Array<{ id?: string; title: string; paragraphs: string[]; blocks?: Array<{ type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>;
+    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>
   };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
     contractsSubtitle?: string;
