@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 import Link from 'next/link';
 import { getAlertasV2, getAuditoriaKpis } from '@/lib/db';
 import AuditoriaClientView from '@/components/AuditoriaClientView';
@@ -8,7 +9,7 @@ import { ShieldAlert, ChevronRight } from 'lucide-react';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Centro de Análisis de Riesgos de Contratación | la plataforma',
+  title: `Centro de Análisis de Riesgos de Contratación | ${SITE_CONFIG.siteName}`,
   description:
     'Monitoreo preventivo y señales estadísticas sobre la contratación pública del ámbito configurado conforme a los criterios de la LCSP.',
 };
