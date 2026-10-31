@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Building2, Landmark, Users2, Info, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDecimal } from '@/lib/format';
+import { SCOPE_PRESENTATION, getScopePresentationKey } from '@/lib/scope-presentation';
 
 interface AmbitoSelectorProps {
   currentAmbito?: string;
@@ -26,11 +27,11 @@ export default function AmbitoSelector({
   const searchParams = useSearchParams();
 
   const activeAmbito = (currentAmbito || searchParams.get('ambito') || 'directa').toLowerCase();
+  const activePresentation = getScopePresentationKey(activeAmbito);
 
   const handleChange = (ambitoKey: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (ambitoKey === 'directa') {
-      // Directa Municipal es el ámbito predeterminado en V2
       params.delete('ambito');
     } else {
       params.set('ambito', ambitoKey);
@@ -45,7 +46,7 @@ export default function AmbitoSelector({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2 sm:p-3 rounded-xl bg-[#f8fafb] border border-[#e2e8f0]">
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 px-1">
           <Landmark className="h-4 w-4 text-[#0d9373]" />
-          <span>Filtrar por entidad:</span>
+          <span>{SCOPE_PRESENTATION.selectorTitle}</span>
         </div>
 
         <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
@@ -53,15 +54,15 @@ export default function AmbitoSelector({
           <button
             type="button"
             onClick={() => handleChange('directa')}
-            title="Gasto gestionado directamente por el organismo configurado y sus organismos locales"
+            title={SCOPE_PRESENTATION.primary.tooltip}
             className={`flex-1 sm:flex-initial px-3 py-2 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center sm:justify-start gap-1.5 cursor-pointer min-h-[40px] ${
-              activeAmbito === 'directa'
+              activePresentation === 'primary'
                 ? 'bg-[#ecfdf5] text-[#0d9373] border-[#a7f3d0] shadow-xs font-bold ring-1 ring-[#0d9373]/20'
                 : 'bg-white text-slate-600 border-[#e2e8f0] hover:bg-slate-50 hover:text-slate-900'
             }`}
           >
             <Building2 className="h-3.5 w-3.5 text-[#0d9373] shrink-0" />
-            <span className="whitespace-nowrap">Solo Ayuntamiento</span>
+            <span className="whitespace-nowrap">{SCOPE_PRESENTATION.primary.label}</span>
             {counts?.directaVolumen ? (
               <span className="text-[10px] font-mono opacity-85 ml-0.5 px-1.5 py-0.2 bg-emerald-100/60 rounded text-emerald-800">
                 {formatDecimal(counts.directaVolumen / 1e6, 1)} M€
@@ -73,17 +74,15 @@ export default function AmbitoSelector({
           <button
             type="button"
             onClick={() => handleChange('mancomunidad')}
-            title="Servicios mancomunados de recogida y tratamiento de residuos para 21 municipios asociados"
+            title={SCOPE_PRESENTATION.associated.tooltip}
             className={`flex-1 sm:flex-initial px-3 py-2 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center sm:justify-start gap-1.5 cursor-pointer min-h-[40px] ${
-              activeAmbito === 'mancomunidad'
+              activePresentation === 'associated'
                 ? 'bg-[#eff6ff] text-[#2563eb] border-[#bfdbfe] shadow-xs font-bold ring-1 ring-[#2563eb]/20'
                 : 'bg-white text-slate-600 border-[#e2e8f0] hover:bg-slate-50 hover:text-slate-900'
             }`}
           >
             <Users2 className="h-3.5 w-3.5 text-[#2563eb] shrink-0" />
-            <span className="whitespace-nowrap">
-              organismo asociado <span className="hidden sm:inline">(21 municipios)</span>
-            </span>
+            <span className="whitespace-nowrap">{SCOPE_PRESENTATION.associated.label}</span>
             {counts?.mancomunidadVolumen ? (
               <span className="text-[10px] font-mono opacity-85 ml-0.5 px-1.5 py-0.2 bg-blue-100/60 rounded text-blue-800">
                 {formatDecimal(counts.mancomunidadVolumen / 1e6, 1)} M€
@@ -95,15 +94,15 @@ export default function AmbitoSelector({
           <button
             type="button"
             onClick={() => handleChange('todos')}
-            title="Suma total de toda la contratación pública oficial registrada en el ámbito configurado"
+            title={SCOPE_PRESENTATION.all.tooltip}
             className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center sm:justify-start gap-1.5 cursor-pointer min-h-[40px] ${
-              activeAmbito === 'todos'
+              activePresentation === 'all'
                 ? 'bg-[#0f172a] text-white border-[#0f172a] shadow-xs font-bold ring-1 ring-slate-900/30'
                 : 'bg-white text-slate-600 border-[#e2e8f0] hover:bg-slate-50 hover:text-slate-900'
             }`}
           >
             <BarChart3 className="h-3.5 w-3.5 shrink-0" />
-            <span>Total</span>
+            <span>{SCOPE_PRESENTATION.all.label}</span>
             {counts?.totalVolumen ? (
               <span className={`text-[10px] font-mono opacity-85 ml-0.5 px-1.5 py-0.2 rounded ${
                 activeAmbito === 'todos' ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-700'
@@ -120,29 +119,16 @@ export default function AmbitoSelector({
         <div className="flex items-start gap-2.5 px-3.5 py-2.5 rounded-lg border text-xs leading-relaxed transition-all bg-white border-slate-200">
           <Info className="h-4 w-4 text-[#0d9373] shrink-0 mt-0.5" />
           <div className="space-y-1 text-slate-600">
-            {activeAmbito === 'directa' ? (
-              <p>
-                <strong className="text-slate-900">Estás consultando: Solo organismo configurado.</strong>{' '}
-                Muestra el dinero gestionado exclusivamente por la corporación municipal y sus entes locales (organismo configurado, Patronato Municipal de Cultura e Instituto Municipal de Deportes).
-              </p>
-            ) : activeAmbito === 'mancomunidad' ? (
-              <p>
-                <strong className="text-slate-900">Estás consultando: Mancomunidad organismo asociado.</strong>{' '}
-                Muestra las entidades asociadas incluidas en la configuración y sus contratos. Su actividad puede abarcar varios municipios y sus costes pueden compartirse entre las localidades participantes.
-              </p>
-            ) : (
-              <p>
-                <strong className="text-slate-900">Estás consultando: Total de contratación en el ámbito configurado.</strong>{' '}
-                Suma global de todos los contratos oficiales registrados en la Plataforma del Estado (PLACSP): combina el gasto municipal propio con el de la Mancomunidad organismo asociado (21 localidades).
-              </p>
-            )}
-
+            <p>
+              <strong className="text-slate-900">{SCOPE_PRESENTATION[activePresentation].label}.</strong>{' '}
+              {SCOPE_PRESENTATION[activePresentation].description}
+            </p>
             <div className="pt-0.5">
-              <Link 
-                href="/metodologia#organismo_asociado" 
+              <Link
+                href="/metodologia"
                 className="font-medium text-[#0d9373] hover:text-[#00b48a] underline inline-flex items-center gap-1 text-[11px]"
               >
-                <span>¿Por qué separamos el Ayuntamiento y organismo asociado? Ver explicación metodológica</span>
+                <span>{SCOPE_PRESENTATION.methodologyLinkLabel}</span>
               </Link>
             </div>
           </div>
