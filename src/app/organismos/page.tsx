@@ -117,7 +117,7 @@ export default function OrganismosPage() {
             </div>
             <p className="text-[11px] text-slate-500">
               {presentation.summaryAssociatedDescription ?? 'Gasto adjudicado del ámbito asociado'}
-              {associatedIncome > 0 ? ` (+${formatCompactCurrency(associatedIncome)} ingresos)` : ''}
+              {associatedIncome > 0 ? ` (+${formatCompactCurrency(associatedIncome)} ${presentation.associatedIncomeLabel ?? 'ingresos'})` : ''}
             </p>
           </div>
 
@@ -212,7 +212,10 @@ export default function OrganismosPage() {
                       </span>
                     )}
                   </div>
-                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#0d9373] transition-colors" />
+                  <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 group-hover:text-[#0d9373] transition-colors">
+                    {presentation?.profileLinkLabel ?? 'Ver perfil'}
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
                 </div>
               </Link>
             );
