@@ -18,6 +18,7 @@ import {
   Clock
 } from 'lucide-react';
 import EmpresaContratosView from '@/components/EmpresaContratosView';
+import { SITE_CONFIG } from '@/lib/site-config';
 import EmpresaSubvencionesSection from '@/components/EmpresaSubvencionesSection';
 import { FilterDenominacionTrigger, FilterFilialTrigger, FilterProrrogasTrigger } from '@/components/EmpresaFilterTriggers';
 
@@ -31,12 +32,12 @@ export async function generateMetadata({
   const { id } = await params;
   const decodedId = decodeURIComponent(id);
   const emp = getEmpresaDetail(decodedId);
-  if (!emp) return { title: 'Empresa no encontrada · la plataforma' };
+  if (!emp) return { title: `Empresa no encontrada · ${SITE_CONFIG.siteName}` };
 
   const isCanonical = emp.id === decodedId;
   return {
-    title: `${emp.nombre} · Dossier de Proveedor · la plataforma`,
-    description: `Perfil de contratación municipal de ${emp.nombre} en el ámbito configurado.`,
+    title: `${emp.nombre} · Dossier de Proveedor · ${SITE_CONFIG.siteName}`,
+    description: `Perfil de contratación municipal de ${emp.nombre} en ${SITE_CONFIG.localityName}.`,
     robots: {
       index: isCanonical,
       follow: true,
