@@ -1,4 +1,3 @@
-import { SITE_CONFIG } from './site-config';
 import { eligibleAwardLotStatusSql, eligibleAwardResultStateSql, excludeAwardWhenLegacyLotTerminalSql, lotAwardsAmountCoverageSql, eligibleLegacyLotAwardAmountSql, allowParentAwardAmountFallbackSql, excludeLegacyLotWhenStructuredTerminalResultSql } from './lot-status.js';
 import { DatabaseSync } from 'node:sqlite';
 import { parseScope } from './db';
@@ -180,6 +179,11 @@ function addUtcMonthsClamped(date: Date, months: number): void {
   date.setUTCDate(Math.min(originalDay, lastDayOfTargetMonth));
 }
 
+function parseDateInUtcIfUnzoned(value: string): Date {
+  const normalized = value.replace(/^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?)$/, '$1T$2Z');
+  return new Date(normalized);
+}
+
 export function calcularFechaFin(
   startDateStr: string | null | undefined,
   dur: string | null | undefined,
@@ -189,7 +193,7 @@ export function calcularFechaFin(
   const durParsed = parseDuration(dur, unit);
   if (!durParsed) return null;
 
-  const d = new Date(startDateStr);
+  const d = parseDateInUtcIfUnzoned(startDateStr);
   if (isNaN(d.getTime())) return null;
 
   const { val, unit: u } = durParsed;
@@ -684,7 +688,7 @@ export function evaluarEstadoContractual(params: EvaluacionEstadoContractualPara
 
   let finDate: Date | null = null;
   if (params.fechaFinExplicita) {
-    const explicitEnd = new Date(params.fechaFinExplicita);
+    const explicitEnd = parseDateInUtcIfUnzoned(params.fechaFinExplicita);
     if (!isNaN(explicitEnd.getTime())) {
       finDate = explicitEnd;
     }
@@ -851,14 +855,6 @@ export function evaluarVigenciaContrato(
   };
 }
 
-
-function adjustEstimatedEndDate(date: string | null): string | null {
-  const offsetDays = Number(SITE_CONFIG.estimatedContractEndDateOffsetDays || 0);
-  if (!date || !offsetDays) return date;
-  const adjusted = new Date(`${date}T00:00:00.000Z`);
-  adjusted.setUTCDate(adjusted.getUTCDate() + offsetDays);
-  return adjusted.toISOString().slice(0, 10);
-}
 
 export function getContratosVivosStats(
   getDbSync: () => DatabaseSync,
@@ -1100,7 +1096,7 @@ export function getContratosVivosStats(
         duracionTexto: vig.duracionTexto,
         duracionValor: r.duration ? parseFloat(r.duration) : null,
         duracionUnidad: r.duration_unit,
-        fechaFinEstimada: adjustEstimatedEndDate(vig.fechaFinEstimada),
+        fechaFinEstimada: vig.fechaFinEstimada,
         diasRestantes: vig.diasRestantes,
         estadoVigencia: vig.estadoVigencia,
         esPlurianual: vig.esPlurianual,
