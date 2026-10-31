@@ -17,7 +17,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   scopePresentation?: {
     selectorTitle?: string;
     primary?: { label?: string; shortLabel?: string; description?: string; tooltip?: string };
-    associated?: { label?: string; shortLabel?: string; description?: string; tooltip?: string };
+    associated?: { enabled?: boolean; label?: string; shortLabel?: string; description?: string; tooltip?: string };
     all?: { label?: string; shortLabel?: string; description?: string; tooltip?: string };
     methodologyLinkLabel?: string;
   };
