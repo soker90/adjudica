@@ -1,7 +1,7 @@
 import { getDb, parseScope } from './db';
 import { getCorporateContractSource } from './db-corporate';
 import { canceledContractStatusSql } from './contract-status-sql';
-import { isOpaquePersonaFisicaId, isPersonaFisicaNif } from './nif-rules';
+import { isOpaquePersonaFisicaId } from './nif-rules';
 import { SITE_CONFIG } from './site-config';
 
 export type AmbitoGeografico = 'local' | 'provincial' | 'regional' | 'nacional' | 'internacional';
@@ -158,7 +158,7 @@ export function clasificarEmpresaGeografia(nif: string | null | undefined, award
     };
   }
 
-  if (SITE_CONFIG.classifyIndividualsAsLocal && (isOpaquePersonaFisicaId(cleanNif) || isPersonaFisicaNif(cleanNif))) {
+  if (SITE_CONFIG.classifyIndividualsAsLocal && (isOpaquePersonaFisicaId(cleanNif) || /^[0-9]{8}[A-Z]$/.test(cleanNif) || /^[XYZ][0-9]{7}[A-Z]$/.test(cleanNif))) {
     return { ambito: 'local', sede: `${getConfiguredLocalityLabel()} (Autónomo / Residente)` };
   }
 
