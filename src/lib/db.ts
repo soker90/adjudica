@@ -492,7 +492,7 @@ export interface TiemposStats {
   masLentas: OutlierItem[];
   mediaAyto: number;
   mediaAguas: number;
-  mediaorganismo asociado: number;
+  mediaOrganismoAsociado: number;
   bajaPercentiles?: PercentilesStats;
 }
 
@@ -1582,7 +1582,7 @@ export function getTiemposStats(year?: number | string, scope?: string): Tiempos
 
   const mediaAyto = porOrganismo.find((o) => o.organo.includes('Ayuntamiento'))?.mediaDias || percentiles.media;
   const mediaAguas = porOrganismo.find((o) => o.organo.includes('Aguas'))?.mediaDias || percentiles.media;
-  const mediaorganismo asociado = porOrganismo.find((o) => o.organo.includes('organismo asociado'))?.mediaDias || percentiles.media;
+  const mediaOrganismoAsociado = porOrganismo.find((o) => o.organo.includes('organismo asociado'))?.mediaDias || percentiles.media;
 
   // Licitaciones más rápidas (top 5)
   const masRapidas = rows.slice(0, 5).map((r: any) => ({
@@ -1692,7 +1692,7 @@ export function getTiemposStats(year?: number | string, scope?: string): Tiempos
     masLentas,
     mediaAyto,
     mediaAguas,
-    mediaorganismo asociado,
+    mediaOrganismoAsociado,
     bajaPercentiles,
   });
 }
