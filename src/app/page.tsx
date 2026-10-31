@@ -25,9 +25,9 @@ import {
 
 export const dynamic = 'force-dynamic';
 
-export default async function HomePage({ searchParams }: { searchParams?: Promise<{ scope?: string }> }) {
+export default async function HomePage({ searchParams }: { searchParams?: Promise<{ scope?: string; ambito?: string }> }) {
   const resolvedParams = searchParams ? await searchParams : {};
-  const rawAmbito = resolvedParams.scope || 'directa';
+  const rawAmbito = resolvedParams.ambito || resolvedParams.scope || 'directa';
   const scope = rawAmbito === 'todos' ? undefined : rawAmbito;
   const stats = getStats(undefined, scope);
   const selectedScope = getScopePresentationKey(stats.ambitoSeleccionado);
