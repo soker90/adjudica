@@ -91,7 +91,7 @@
       "tooltip": "Servicios mancomunados de recogida y tratamiento de residuos para 21 municipios asociados."
     },
     "all": {
-      "label": "Total Alcázar",
+      "label": "Total",
       "shortLabel": "Total",
       "description": "Suma de la contratación municipal directa y de la contratación de Comsermancha publicada en PLACSP.",
       "tooltip": "Vista conjunta de los organismos municipales y Comsermancha."
@@ -344,5 +344,28 @@
         ]
       }
     ]
+  },
+  "homePresentation": {
+    "primary": {
+      "contractsSubtitle": "Contratación del Ayuntamiento (2018–2026)",
+      "contractsBadge": "Solo Ayuntamiento · 2018–2026",
+      "spendSubtitle": "Gasto público con adjudicación registrada",
+      "organismsSubtitle": "Dependencias municipales directas",
+      "organismsBadge": "Ayto, Aguas, Patronato..."
+    },
+    "associated": {
+      "contractsSubtitle": "Mancomunidad de residuos (21 municipios, 2018–2026)",
+      "contractsBadge": "Comsermancha · 2018–2026",
+      "spendSubtitle": "Gasto adjudicado Comsermancha",
+      "organismsSubtitle": "Mancomunidad supramunicipal",
+      "organismsBadge": "Entidades públicas"
+    },
+    "all": {
+      "contractsSubtitle": "Total de licitaciones en Alcázar (2018–2026)",
+      "contractsBadge": "Total Alcázar · 2018–2026",
+      "spendSubtitle": "Contratación municipal y mancomunada",
+      "organismsSubtitle": "Entidades directas e indirectas",
+      "organismsBadge": "Entidades públicas"
+    }
   }
 }
