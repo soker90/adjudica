@@ -105,7 +105,7 @@ export default function AmbitoSelector({
             <span>{SCOPE_PRESENTATION.all.label}</span>
             {counts?.totalVolumen ? (
               <span className={`text-[10px] font-mono opacity-85 ml-0.5 px-1.5 py-0.2 rounded ${
-                activeAmbito === 'todos' ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-700'
+                activePresentation === 'all' ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-700'
               }`}>
                 {formatDecimal(counts.totalVolumen / 1e6, 1)} M€
               </span>
