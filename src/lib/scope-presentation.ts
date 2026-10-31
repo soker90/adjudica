@@ -5,6 +5,9 @@ export interface ScopePresentationItem {
   shortLabel: string;
   description: string;
   tooltip: string;
+  noteTitle?: string;
+  noteLinkLabel?: string;
+  noteLinkHref?: string;
 }
 
 const DEFAULT_SCOPE_PRESENTATION = {
