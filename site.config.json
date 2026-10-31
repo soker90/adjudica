@@ -1,34 +1,72 @@
 {
-  "siteName": "Adjudica",
-  "siteDescription": "Datos abiertos y análisis de contratación pública de los organismos configurados.",
-  "siteUrl": "https://example.org",
-  "geographicLabel": "Administraciones públicas",
+  "siteName": "LicitAlcázar",
+  "siteDescription": "Portal cívico independiente de datos abiertos sobre licitaciones, adjudicaciones, contratos menores y gasto público en Alcázar de San Juan (Ciudad Real), basado en los registros de la Plataforma de Contratación del Sector Público (PLACSP).",
+  "siteUrl": "https://licitalcazar-sandy.vercel.app",
+  "geographicLabel": "Alcázar de San Juan",
   "logoPath": "/logo.svg",
-  "logoAlt": "Logotipo de Adjudica",
-  "brandMark": "A",
+  "logoAlt": "Logotipo de LicitAlcázar",
+  "brandMark": "L",
   "instanceCreationGuide": true,
   "theme": {
     "accent": "#00d4a4",
     "primary": "#0d9373",
     "soft": "#ecfdf5"
   },
-  "localityName": "",
-  "provinceCode": "",
-  "provinceName": "",
-  "localityAliases": [],
+  "localityName": "Alcázar de San Juan",
+  "provinceCode": "13",
+  "provinceName": "Ciudad Real",
+  "localityAliases": [
+    "Alcazar de San Juan",
+    "Alcázar",
+    "Alcazar"
+  ],
   "localSupplierNifs": [],
-  "metadataTitle": "",
-  "metadataDescription": "",
-  "metadataKeywords": [],
-  "heroEyebrow": "Contratación pública y datos abiertos",
-  "heroTitle": "Contratación pública en {geographicLabel}",
-  "heroDescription": "",
-  "heroQuickFilters": [],
-  "footerDescription": "",
+  "metadataTitle": "LicitAlcázar · Inteligencia de Contratación Pública en Alcázar de San Juan",
+  "metadataDescription": "Portal cívico independiente de datos abiertos sobre licitaciones, adjudicaciones, contratos menores y gasto público en Alcázar de San Juan (Ciudad Real), basado en los registros de PLACSP.",
+  "metadataKeywords": [
+    "Alcázar de San Juan",
+    "licitaciones",
+    "contratación pública",
+    "adjudicaciones",
+    "Aguas de Alcázar",
+    "Ayuntamiento de Alcázar de San Juan",
+    "Comsermancha"
+  ],
+  "heroEyebrow": "Portal de Transparencia y Contratación Municipal",
+  "heroTitle": "Inteligencia de Contratación en {geographicLabel}",
+  "heroDescription": "Monitoriza las licitaciones oficiales, adjudicaciones y empresas contratistas del Ayuntamiento de Alcázar de San Juan, sus organismos autónomos, empresas públicas y entidades mancomunadas.",
+  "heroQuickFilters": [
+    {
+      "label": "Ayuntamiento",
+      "query": "Ayuntamiento",
+      "icon": "building"
+    },
+    {
+      "label": "Aguas de Alcázar",
+      "query": "Aguas de Alcázar",
+      "icon": "building"
+    },
+    {
+      "label": "Patronato de Cultura",
+      "query": "Cultura",
+      "icon": "building"
+    },
+    {
+      "label": "Comsermancha",
+      "query": "COMSERMANCHA",
+      "icon": "building"
+    },
+    {
+      "label": "Obras y Proyectos",
+      "query": "Obras",
+      "icon": "building"
+    }
+  ],
+  "footerDescription": "Portal cívico independiente para la monitorización, análisis y transparencia de la contratación pública en el municipio de Alcázar de San Juan (Ciudad Real). Datos abiertos procedentes directamente de la Plataforma de Contratación del Sector Público (PLACSP).",
   "classifyIndividualsAsLocal": false,
   "fraccionamientoStopWords": [],
   "flujoStopWords": [],
-  "associatedAuthorityNameMatch": "",
+  "associatedAuthorityNameMatch": "COMSERMANCHA",
   "associatedAuthorityTimeMetricKey": "",
   "localBusinessLabel": "",
   "regionalBusinessLabel": "",
@@ -38,66 +76,151 @@
   "localBusinessDiagnosisTemplate": "",
   "legacyResponseOmitContractFields": [],
   "scopePresentation": {
-    "selectorTitle": "Filtrar por organismo:",
+    "selectorTitle": "Filtrar por entidad:",
     "primary": {
-      "label": "Organismos principales",
-      "shortLabel": "Principal",
-      "description": "Contratación de los organismos principales incluidos en la configuración.",
-      "tooltip": "Contratación gestionada por los organismos principales configurados."
+      "label": "Solo Ayuntamiento",
+      "shortLabel": "Ayuntamiento",
+      "description": "Contratación gestionada exclusivamente por el Ayuntamiento de Alcázar de San Juan y sus entes locales.",
+      "tooltip": "Ayuntamiento, Aguas de Alcázar, Patronato Municipal de Cultura e Instituto Municipal de Deportes."
     },
     "associated": {
       "enabled": true,
-      "label": "Organismos asociados",
-      "shortLabel": "Asociados",
-      "description": "Contratación de los organismos asociados incluidos en la configuración.",
-      "tooltip": "Contratación de los organismos asociados incluidos en la configuración."
+      "label": "Comsermancha (21 municipios)",
+      "shortLabel": "Comsermancha",
+      "description": "Contratación de la Mancomunidad de Servicios COMSERMANCHA, que presta servicio a 21 municipios.",
+      "tooltip": "Servicios mancomunados de recogida y tratamiento de residuos para 21 municipios asociados."
     },
     "all": {
-      "label": "Todos los organismos",
+      "label": "Total Alcázar",
       "shortLabel": "Total",
-      "description": "Contratación de todos los organismos incluidos en la configuración.",
-      "tooltip": "Suma de la contratación de todos los organismos incluidos en la configuración."
+      "description": "Suma de la contratación municipal directa y de la contratación de Comsermancha publicada en PLACSP.",
+      "tooltip": "Vista conjunta de los organismos municipales y Comsermancha."
     },
     "methodologyLinkLabel": "Consultar metodología"
   },
   "methodology": {
-    "eyebrow": "Transparencia metodológica",
-    "title": "Metodología y fuentes",
-    "description": "Criterios utilizados para procesar la contratación de {geographicLabel} y presentar los resultados.",
+    "version": "Versión 2.1 · Actualizado 2026",
+    "eyebrow": "Transparencia y Neutralidad",
+    "title": "Metodología y Verificabilidad de Datos",
+    "description": "En LicitAlcázar la neutralidad e integridad son absolutas. Esta guía detalla la fundamentación técnica, legal y algorítmica aplicada a cada expediente, explicando de forma rigurosa cómo se procesan los datos para garantizar su contraste directo en la Plataforma de Contratación del Sector Público.",
     "sections": [
       {
-        "id": "fuentes-oficiales",
-        "title": "Fuentes oficiales",
+        "id": "fuente-y-actualizacion",
+        "title": "Fuente Oficial y Sincronización",
         "paragraphs": [
-          "Los expedientes se obtienen de los conjuntos de datos abiertos de la Plataforma de Contratación del Sector Público (PLACSP). Los perfiles incluidos se definen en el catálogo de organismos de cada instancia. Cada expediente conserva su identificador y enlace de origen cuando estos están disponibles."
+          "Los datos proceden de la Plataforma de Contratación del Sector Público (PLACSP). Los expedientes conservan sus identificadores y enlaces de origen para permitir el contraste directo con la fuente oficial. La fecha de sincronización y la fecha del último expediente publicado se muestran en la portada."
         ]
       },
       {
-        "id": "cobertura-actualizacion",
-        "title": "Cobertura y actualización",
+        "id": "cobertura-temporal",
+        "title": "Cobertura Temporal",
         "paragraphs": [
-          "La cobertura depende de la información publicada por cada órgano y del periodo disponible en los conjuntos de datos descargados. La ausencia de un expediente en esta plataforma no demuestra que la contratación no se produjera. Las fechas de sincronización y publicación se muestran junto a los datos cuando están disponibles."
+          "La cobertura histórica de LicitAlcázar comienza en 2018 y depende de la disponibilidad y publicación de datos en PLACSP. El menor registro de algunos perfiles en los primeros ejercicios responde a su incorporación escalonada a la plataforma y a la integración gradual de contratos menores telemáticos. La ausencia de un expediente en esta plataforma no demuestra que la contratación no se produjera."
         ]
       },
       {
-        "id": "calculos-indicadores",
-        "title": "Cálculos e indicadores",
+        "id": "comsermancha",
+        "title": "Tratamiento de Comsermancha",
         "paragraphs": [
-          "Los importes, plazos, porcentajes de concurrencia y señales estadísticas se calculan a partir de los campos publicados. Los importes unitarios o de semántica desconocida no se tratan como importes totales comparables. Los indicadores sirven para orientar la consulta de expedientes y no determinan por sí solos irregularidades ni responsabilidades."
+          "La Mancomunidad de Servicios COMSERMANCHA gestiona servicios para 21 municipios asociados. Su contratación se presenta separada de la contratación directa del Ayuntamiento de Alcázar de San Juan, porque su presupuesto no constituye gasto municipal directo de Alcázar."
         ]
       },
       {
-        "id": "organismos-independientes",
-        "title": "Organismos independientes",
+        "id": "oferta-unica",
+        "title": "Criterio de Oferta Única",
         "paragraphs": [
-          "Cada órgano de contratación se mantiene como una entidad independiente, identificada por su clave interna y su identificador PLACSP cuando exista. El campo de ámbito permite agrupar la presentación; no fusiona ni sustituye la identidad de los organismos."
+          "El indicador de oferta única identifica procedimientos con una sola oferta admitida cuando la información publicada permite determinarlo. Debe interpretarse como una señal descriptiva de concurrencia, no como evidencia autónoma de irregularidad."
+        ]
+      },
+      {
+        "id": "utes",
+        "title": "Tratamiento de UTE",
+        "paragraphs": [
+          "Las uniones temporales de empresas se tratan como adjudicatarios conjuntos cuando así constan en la fuente. La identificación de sus integrantes y la consolidación de grupos empresariales se mantienen diferenciadas de la identidad jurídica del adjudicatario."
+        ]
+      },
+      {
+        "id": "division-lotes",
+        "title": "División en Lotes y PYMEs (Art. 99)",
+        "paragraphs": [
+          "La información de lotes se analiza diferenciando el expediente principal de sus adjudicaciones parciales. La división en lotes y la participación de PYMEs se interpretan a partir de los datos disponibles en PLACSP."
+        ]
+      },
+      {
+        "id": "banderas-rojas",
+        "title": "Indicadores de Auditoría",
+        "paragraphs": [
+          "Los indicadores y señales estadísticas sirven para orientar la consulta y priorizar expedientes que merecen revisión. No determinan por sí solos irregularidades, responsabilidades ni infracciones."
+        ]
+      },
+      {
+        "id": "hhi",
+        "title": "Concentración HHI y CR5",
+        "paragraphs": [
+          "Los indicadores de concentración describen la distribución de importes adjudicados entre proveedores. Deben leerse atendiendo al ámbito, periodo y universo de contratos seleccionado."
+        ]
+      },
+      {
+        "id": "flujo",
+        "title": "Flujo y Licitaciones Desiertas",
+        "paragraphs": [
+          "El análisis del flujo sigue el ciclo de vida de los expedientes, incluyendo procedimientos desiertos o sin ofertas y posibles readjudicaciones posteriores cuando pueden relacionarse con suficiente evidencia."
+        ]
+      },
+      {
+        "id": "contratos-vivos",
+        "title": "Contratos Vivos y Vencimientos",
+        "paragraphs": [
+          "El seguimiento de contratos en ejecución y sus vencimientos utiliza las fechas y duraciones publicadas. Las fechas estimadas se distinguen de las fechas expresamente registradas."
+        ]
+      },
+      {
+        "id": "distribucion-tiempos",
+        "title": "Tiempos, Mediana y Outliers",
+        "paragraphs": [
+          "Los plazos se analizan mediante medidas robustas como la mediana y la identificación de valores atípicos. Los resultados dependen de que las fechas necesarias estén disponibles y sean coherentes."
+        ]
+      },
+      {
+        "id": "evolucion-temporal",
+        "title": "Series Temporales y Cobertura LCSP",
+        "paragraphs": [
+          "Las series temporales muestran la evolución de la contratación registrada, teniendo en cuenta cambios de cobertura y disponibilidad de los perfiles de contratación."
+        ]
+      },
+      {
+        "id": "renovacion-mercado",
+        "title": "Renovación de Proveedores y Rotación",
+        "paragraphs": [
+          "La rotación de proveedores describe cambios en las empresas adjudicatarias a lo largo del tiempo y no debe interpretarse de forma aislada como indicador de competencia efectiva."
+        ]
+      },
+      {
+        "id": "calendario-electoral",
+        "title": "Calendario Electoral y Ciclo Político",
+        "paragraphs": [
+          "La comparación temporal con ciclos electorales es descriptiva y no establece causalidad entre decisiones de contratación y procesos políticos."
+        ]
+      },
+      {
+        "id": "modificados-sobrecostes",
+        "title": "Modificados, Sobrecostes y Art. 204/205 LCSP",
+        "paragraphs": [
+          "Las modificaciones contractuales se analizan a partir de los datos publicados y de la relación disponible entre el expediente original y sus modificaciones. La ausencia de información no permite concluir que no existieran modificaciones."
+        ]
+      },
+      {
+        "id": "duracion-efectiva",
+        "title": "Duración Registrada vs. Prevista (Art. 29 y 195)",
+        "paragraphs": [
+          "La duración efectiva se estima comparando fechas previstas y registradas cuando ambas existen. Las prórrogas y modificaciones pueden alterar el periodo real de ejecución."
         ]
       },
       {
         "id": "privacidad-rectificacion",
-        "title": "Privacidad y rectificación",
+        "title": "Privacidad y Rectificación",
         "paragraphs": [
-          "Los identificadores personales se seudonimizan antes de su almacenamiento mediante una clave secreta estable. La información de origen continúa siendo responsabilidad de la entidad que la publicó. Consulta los canales de privacidad y rectificación para comunicar incidencias sobre la presentación de datos."
+          "Los identificadores personales se seudonimizan antes de su almacenamiento mediante una clave secreta estable. La información de origen continúa siendo responsabilidad de la entidad que la publicó. Los canales de privacidad y rectificación permiten comunicar incidencias sobre la presentación de datos."
         ]
       }
     ]
