@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 import Link from 'next/link';
 import { ShieldCheck, Lock, ExternalLink, ChevronRight } from 'lucide-react';
 import { LEGAL_CONFIG } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad y Protección de Datos | la plataforma',
+  title: `Política de Privacidad y Protección de Datos | ${SITE_CONFIG.siteName}`,
   description: 'Tratamiento de información, base jurídica, medidas de enmascaramiento y ejercicio de derechos conforme al RGPD y a la Ley Orgánica 3/2018.',
 };
 
