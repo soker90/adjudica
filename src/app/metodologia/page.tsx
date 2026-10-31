@@ -10,26 +10,36 @@ const DEFAULT_METHODOLOGY = {
       id: 'fuentes-oficiales',
       title: 'Fuentes oficiales',
       paragraphs: ['Los expedientes se obtienen de los conjuntos de datos abiertos de la Plataforma de Contratación del Sector Público (PLACSP). Los perfiles incluidos se definen en el catálogo de organismos de cada instancia. Cada expediente conserva su identificador y enlace de origen cuando estos están disponibles.'],
+      showInIndex: true,
+      blocks: [],
     },
     {
       id: 'cobertura-actualizacion',
       title: 'Cobertura y actualización',
       paragraphs: ['La cobertura depende de la información publicada por cada órgano y del periodo disponible en los conjuntos de datos descargados. La ausencia de un expediente en esta plataforma no demuestra que la contratación no se produjera. Las fechas de sincronización y publicación se muestran junto a los datos cuando están disponibles.'],
+      showInIndex: true,
+      blocks: [],
     },
     {
       id: 'calculos-indicadores',
       title: 'Cálculos e indicadores',
       paragraphs: ['Los importes, plazos, porcentajes de concurrencia y señales estadísticas se calculan a partir de los campos publicados. Los importes unitarios o de semántica desconocida no se tratan como importes totales comparables. Los indicadores sirven para orientar la consulta de expedientes y no determinan por sí solos irregularidades ni responsabilidades.'],
+      showInIndex: true,
+      blocks: [],
     },
     {
       id: 'organismos-independientes',
       title: 'Organismos independientes',
       paragraphs: ['Cada órgano de contratación se mantiene como una entidad independiente, identificada por su clave interna y su identificador PLACSP cuando exista. El campo de ámbito permite agrupar la presentación; no fusiona ni sustituye la identidad de los organismos.'],
+      showInIndex: true,
+      blocks: [],
     },
     {
       id: 'privacidad-rectificacion',
       title: 'Privacidad y rectificación',
       paragraphs: ['Los identificadores personales se seudonimizan antes de su almacenamiento mediante una clave secreta estable. La información de origen continúa siendo responsabilidad de la entidad que la publicó. Consulta los canales de privacidad y rectificación para comunicar incidencias sobre la presentación de datos.'],
+      showInIndex: true,
+      blocks: [],
     },
   ],
 };
@@ -67,7 +77,7 @@ export default function MethodologyPage() {
             {methodology.indexTitle ?? 'Índice de secciones'}
           </span>
           <div className="flex flex-wrap gap-2">
-            {methodology.sections.map((section, index) => (
+            {methodology.sections.filter((section) => section.showInIndex !== false).map((section, index) => (
               <a
                 key={section.id ?? section.title}
                 href={`#${section.id ?? `section-${index + 1}`}`}
@@ -82,7 +92,19 @@ export default function MethodologyPage() {
       {methodology.sections.map((section, index) => (
         <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="space-y-3 scroll-mt-20">
           <h2 className="text-xl font-bold text-slate-900">{section.title}</h2>
-          {section.paragraphs.map((paragraph, paragraphIndex) => (
+          {section.blocks?.length ? (
+            <div className="space-y-3">
+              {section.blocks.map((block, blockIndex) => {
+                if (block.type === 'heading') {
+                  return <h3 key={blockIndex} className="pt-2 text-base font-semibold text-slate-800">{block.text}</h3>;
+                }
+                if (block.type === 'listItem') {
+                  return <div key={blockIndex} className="flex gap-2 pl-3 text-sm leading-6 text-slate-700"><span aria-hidden="true">•</span><p>{block.text}</p></div>;
+                }
+                return <p key={blockIndex} className="text-sm leading-6 text-slate-700">{block.text}</p>;
+              })}
+            </div>
+          ) : section.paragraphs.map((paragraph, paragraphIndex) => (
             <p key={paragraphIndex} className="text-sm leading-6 text-slate-700">{paragraph}</p>
           ))}
         </section>
