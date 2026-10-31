@@ -24,7 +24,7 @@ describe('Next.js function file tracing', () => {
     expect(includes).not.toHaveProperty('/**');
 
     for (const route of dbRoutes) {
-      expect(includes[route]).toEqual(['./data/licitaciones_organismo_objetivo.db']);
+      expect(includes[route]).toEqual(['./data/contracts.db', './data/historical-sources.json']);
     }
   });
 });
