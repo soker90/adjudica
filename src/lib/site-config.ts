@@ -10,7 +10,7 @@ type ScopePresentationItemConfig = {
   noteLinkHref?: string;
 };
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch'> & {
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeAuditDescription'> & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
@@ -26,6 +26,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     indexTitle?: string;
     sections?: Array<{ id?: string; title: string; paragraphs: string[] }>;
   };
+  homeAuditDescription?: string;
   homePresentation?: Record<'primary' | 'associated' | 'all', {
     contractsSubtitle?: string;
     contractsBadge?: string;
