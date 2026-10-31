@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SITE_CONFIG } from '@/lib/site-config';
-import { getScopeLabel } from '@/lib/scope-presentation';
+import { getScopeLabel, SCOPE_PRESENTATION } from '@/lib/scope-presentation';
 import { Suspense } from 'react';
 import { getStats } from '@/lib/db';
 import { getPlacspId } from '@/lib/placsp';
