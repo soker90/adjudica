@@ -10,6 +10,8 @@
  * los datos y los inyecta aquí; los tests validan la lógica sin base de datos.
  */
 
+import { SITE_CONFIG } from './site-config';
+
 export const UMBRAL_OBRAS = 40000;
 export const UMBRAL_NO_OBRAS = 15000;
 export const VENTANA_DIAS = 365;
@@ -103,7 +105,7 @@ const STOPWORDS = new Set([
   'incluida', 'incluidos', 'incluidas', 'mediante', 'asi', 'así', 'su', 'sus',
   // Términos genéricos del dominio
   'contrato', 'menor', 'suministro', 'suministros', 'servicio', 'servicios', 'obra',
-  'obras', 'ayuntamiento', 'localidad',
+  'obras', 'ayuntamiento',
 ]);
 
 /** Normaliza un objeto del contrato a tokens comparables. */
@@ -114,7 +116,7 @@ export function tokensDeObjeto(objeto: string | null | undefined): string[] {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9\s]/g, ' ')
     .split(/\s+/)
-    .filter((t) => t.length >= 2 && !STOPWORDS.has(t));
+    .filter((t) => t.length >= 2 && !STOPWORDS.has(t) && !(SITE_CONFIG.fraccionamientoStopWords || []).includes(t));
 }
 
 /** Similitud de Jaccard entre dos conjuntos de tokens. */

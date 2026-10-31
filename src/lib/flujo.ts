@@ -1,3 +1,5 @@
+import { SITE_CONFIG } from './site-config';
+
 export interface FlujoKpis {
   adjudicadas: { contratos: number; volumen: number; pctContratos: number; pctVolumen: number };
   desiertas: { contratos: number; volumen: number; pctContratos: number; pctVolumen: number };
@@ -76,7 +78,7 @@ export interface FlujoStats {
 const STOP_WORDS = new Set([
   'de', 'la', 'el', 'en', 'y', 'a', 'del', 'las', 'los', 'para', 'con', 'por', 'o', 'al', 'se', 'su',
   'servicio', 'servicios', 'contrato', 'suministro', 'suministros', 'obras', 'obra', 'adquisicion',
-  'arrendamiento', 'ayuntamiento', 'localidad', 'mancomunidad', 'organismo_asociado', 'gestion',
+  'arrendamiento', 'ayuntamiento', 'mancomunidad', 'gestion',
   'ejecucion', 'realizacion', 'case_number', 'lote', 'lotes', 'municipal', 'municipio'
 ]);
 
@@ -88,7 +90,7 @@ export function cleanWords(text: string): string[] {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^\w\s]/g, ' ')
     .split(/\s+/)
-    .filter((w) => w.length > 2 && !STOP_WORDS.has(w));
+    .filter((w) => w.length > 2 && !STOP_WORDS.has(w) && !(SITE_CONFIG.flujoStopWords || []).includes(w));
 }
 
 export function jaccardSimilarity(wordsA: string[], wordsB: string[]): number {

@@ -25,5 +25,7 @@
   "heroDescription": "",
   "heroQuickFilters": [],
   "footerDescription": "",
-  "classifyIndividualsAsLocal": false
+  "classifyIndividualsAsLocal": false,
+  "fraccionamientoStopWords": [],
+  "flujoStopWords": []
 }
