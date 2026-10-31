@@ -38,7 +38,7 @@ export default function TopEmpresasSection({
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1">
-            Principales contratistas y proveedores por volumen presupuestario adjudicado en el ámbito configurado
+            Principales contratistas y proveedores por volumen presupuestario adjudicado en {SITE_CONFIG.localityName}
           </p>
         </div>
 
