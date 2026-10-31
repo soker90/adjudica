@@ -15,7 +15,7 @@ export default function Footer() {
                 {SITE_CONFIG.geographicLabel}
               </span>
             </div>
-            <p className="text-[#64748b] leading-relaxed max-w-md text-xs">{SITE_CONFIG.siteDescription}</p>
+            <p className="text-[#64748b] leading-relaxed max-w-md text-xs">{SITE_CONFIG.footerDescription || SITE_CONFIG.siteDescription}</p>
           </div>
 
           <div>

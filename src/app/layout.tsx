@@ -7,14 +7,14 @@ import CommandPalette from '@/components/CommandPalette';
 import { SITE_URL } from '@/lib/config';
 import { SITE_CONFIG } from '@/lib/site-config';
 
-const siteTitle = `${SITE_CONFIG.siteName} · Contratación Pública`;
-const siteDescription = SITE_CONFIG.siteDescription;
+const siteTitle = SITE_CONFIG.metadataTitle || `${SITE_CONFIG.siteName} · Contratación Pública`;
+const siteDescription = SITE_CONFIG.metadataDescription || SITE_CONFIG.siteDescription;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: siteTitle,
   description: siteDescription,
-  keywords: ['licitaciones', 'contratación pública', 'adjudicaciones', 'datos abiertos'],
+  keywords: SITE_CONFIG.metadataKeywords.length ? SITE_CONFIG.metadataKeywords : ['licitaciones', 'contratación pública', 'adjudicaciones', 'datos abiertos'],
   robots: { index: true, follow: true },
   alternates: {
     canonical: '/',

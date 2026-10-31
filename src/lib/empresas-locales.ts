@@ -1,6 +1,7 @@
 import { getDb, parseScope } from './db';
 import { getCorporateContractSource } from './db-corporate';
 import { canceledContractStatusSql } from './contract-status-sql';
+import { isOpaquePersonaFisicaId, isPersonaFisicaNif } from './nif-rules';
 import { SITE_CONFIG } from './site-config';
 
 export type AmbitoGeografico = 'local' | 'provincial' | 'regional' | 'nacional' | 'internacional';
@@ -157,7 +158,9 @@ export function clasificarEmpresaGeografia(nif: string | null | undefined, award
     };
   }
 
-  // A person's NIF does not identify their place of residence; only configured locality evidence is used.
+  if (SITE_CONFIG.classifyIndividualsAsLocal && (isOpaquePersonaFisicaId(cleanNif) || isPersonaFisicaNif(cleanNif))) {
+    return { ambito: 'local', sede: `${getConfiguredLocalityLabel()} (Autónomo / Residente)` };
+  }
 
   // 3. No residentes / Entidades extranjeras
   if (cleanNif.startsWith('W') || cleanNif.startsWith('N')) {

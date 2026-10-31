@@ -16,5 +16,14 @@
   "provinceCode": "",
   "provinceName": "",
   "localityAliases": [],
-  "localSupplierNifs": []
+  "localSupplierNifs": [],
+  "metadataTitle": "",
+  "metadataDescription": "",
+  "metadataKeywords": [],
+  "heroEyebrow": "Contratación pública y datos abiertos",
+  "heroTitle": "Contratación pública en {geographicLabel}",
+  "heroDescription": "",
+  "heroQuickFilters": [],
+  "footerDescription": "",
+  "classifyIndividualsAsLocal": false
 }
