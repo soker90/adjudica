@@ -9,6 +9,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   flujoStopWords: string[];
   legacyResponseOmitContractFields: string[];
   methodology?: {
+    version?: string;
     eyebrow?: string;
     title?: string;
     description?: string;
