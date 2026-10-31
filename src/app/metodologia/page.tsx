@@ -40,13 +40,13 @@ const methodology = {
   sections: SITE_CONFIG.methodology?.sections ?? DEFAULT_METHODOLOGY.sections,
 };
 
-const methodologyDescription = methodology.description.replace(
+const methodologyDescription = (methodology.description ?? DEFAULT_METHODOLOGY.description).replace(
   '{geographicLabel}',
   SITE_CONFIG.geographicLabel,
 );
 
 export const metadata: Metadata = {
-  title: methodology.title,
+  title: methodology.title ?? DEFAULT_METHODOLOGY.title,
   description: methodologyDescription,
 };
 
@@ -54,8 +54,8 @@ export default function MethodologyPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <header className="space-y-3 border-b border-slate-200 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700">{methodology.eyebrow}</p>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">{methodology.title}</h1>
+        <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700">{methodology.eyebrow ?? DEFAULT_METHODOLOGY.eyebrow}</p>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">{methodology.title ?? DEFAULT_METHODOLOGY.title}</h1>
         <p className="max-w-3xl text-sm leading-6 text-slate-600">{methodologyDescription}</p>
       </header>
       {methodology.sections.map((section) => (
