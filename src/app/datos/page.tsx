@@ -1,6 +1,5 @@
 import { getScopeLabel, getScopePresentationKey } from '@/lib/scope-presentation';
 import { SITE_CONFIG } from '@/lib/site-config';
-import { SITE_CONFIG } from '@/lib/site-config';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { 
