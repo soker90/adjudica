@@ -74,7 +74,7 @@ export default function RectificacionPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
           <div className="p-3.5 rounded-xl border border-slate-200 bg-white space-y-1">
             <span className="font-bold text-slate-900 block">Tipo A · Error material en el dato publicado</span>
-            <p className="text-slate-600">Discordancia evidente entre el registro publicado en PLACSP y el valor mostrado en la plataforma (importe, adjudicatario, fecha, procedimiento o estado).</p>
+            <p className="text-slate-600">Discordancia evidente entre el registro publicado en PLACSP y el valor mostrado en {SITE_CONFIG.siteName} (importe, adjudicatario, fecha, procedimiento o estado).</p>
           </div>
           <div className="p-3.5 rounded-xl border border-slate-200 bg-white space-y-1">
             <span className="font-bold text-slate-900 block">Tipo B · Error en la identificación de empresa</span>
@@ -115,7 +115,7 @@ export default function RectificacionPage() {
               <span>Identificación del expediente o entidad</span>
             </div>
             <p className="text-xs text-slate-600 ml-8">
-              Indique el enlace de la ficha en la plataforma y el número oficial del expediente en PLACSP o el NIF mercantil de la entidad.
+              Indique el enlace de la ficha de {SITE_CONFIG.siteName} y el número oficial del expediente en PLACSP o el NIF mercantil de la entidad.
             </p>
           </div>
 
