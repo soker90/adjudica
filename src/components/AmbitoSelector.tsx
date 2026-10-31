@@ -71,6 +71,7 @@ export default function AmbitoSelector({
           </button>
 
           {/* Associated contracting group */}
+          {SCOPE_PRESENTATION.associated.enabled && (
           <button
             type="button"
             onClick={() => handleChange('mancomunidad')}
@@ -89,6 +90,7 @@ export default function AmbitoSelector({
               </span>
             ) : null}
           </button>
+          )}
 
           {/* All configured contracting groups */}
           <button
