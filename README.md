@@ -12,6 +12,7 @@ En la plantilla se configuran el nombre y el logotipo del portal, los perfiles d
 
 - `site.config.json`: nombre, descripción, URL, ámbito geográfico, logotipo, tema visual y textos de presentación.
 - `scopePresentation` en `site.config.json`: etiquetas, nombres cortos, descripciones y tooltips de los grupos principal, asociado y consolidado. La aplicación mantiene sus identificadores internos y cada instancia puede sustituir todos los textos visibles sin modificar el código común.
+- `methodology` en `site.config.json`: título, introducción y secciones de metodología propias de la instancia. Si no se define, se muestra la metodología genérica de Adjudica.
 - `data/contracting-authorities.json`: perfiles PLACSP incluidos en el portal, uno por organismo.
 - `data/contracts.db`: base SQLite generada para los datos de ese portal.
 - `public/logo.svg`: imagen de marca predeterminada.
