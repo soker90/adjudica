@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getScopeLabel, getScopePresentationKey } from '@/lib/scope-presentation';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { Suspense } from 'react';
 import { getStats } from '@/lib/db';
 import { getPlacspId } from '@/lib/placsp';
@@ -30,20 +31,21 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const scope = rawAmbito === 'todos' ? undefined : rawAmbito;
   const stats = getStats(undefined, scope);
   const selectedScope = getScopePresentationKey(stats.ambitoSeleccionado);
+  const homeCopy = SITE_CONFIG.homePresentation?.[selectedScope];
 
   const kpis = [
     {
       title: 'Licitaciones Analizadas',
       value: formatNumber(stats.totalLicitaciones),
-      subtitle: `Contratación: ${getScopeLabel(stats.ambitoSeleccionado)}`,
-      badge: getScopeLabel(stats.ambitoSeleccionado),
+      subtitle: homeCopy?.contractsSubtitle ?? `Contratación: ${getScopeLabel(stats.ambitoSeleccionado)}`,
+      badge: homeCopy?.contractsBadge ?? getScopeLabel(stats.ambitoSeleccionado),
       icon: FileText,
       iconBg: 'bg-[#eff6ff] text-[#2563eb] border-[#d1fae5]',
     },
     {
       title: 'Gasto Público Adjudicado',
       value: formatCompactCurrency(stats.gastoAdjudicado),
-      subtitle: `Gasto adjudicado: ${getScopeLabel(stats.ambitoSeleccionado)}`,
+      subtitle: homeCopy?.spendSubtitle ?? `Gasto adjudicado: ${getScopeLabel(stats.ambitoSeleccionado)}`,
       badge: selectedScope === 'primary'
         ? `${formatPercent(stats.desgloseAmbito.directa.pctGasto, 1)} del gasto`
         : selectedScope === 'associated'
@@ -55,8 +57,8 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     {
       title: 'Organismos Públicos',
       value: formatNumber(stats.totalOrganismos),
-      subtitle: `Entidades incluidas en ${getScopeLabel(stats.ambitoSeleccionado)}`,
-      badge: getScopeLabel(stats.ambitoSeleccionado),
+      subtitle: homeCopy?.organismsSubtitle ?? `Entidades incluidas en ${getScopeLabel(stats.ambitoSeleccionado)}`,
+      badge: homeCopy?.organismsBadge ?? getScopeLabel(stats.ambitoSeleccionado),
       icon: Building2,
       iconBg: 'bg-[#ecfeff] text-[#0891b2] border-[#cffafe]',
     },
