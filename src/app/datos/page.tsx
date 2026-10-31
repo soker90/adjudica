@@ -1,3 +1,4 @@
+import { getScopeLabel } from '@/lib/scope-presentation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { 
