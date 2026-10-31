@@ -142,7 +142,7 @@ export default function PrivacidadPage() {
             Los datos analizados proceden de los registros públicos telemáticos de la Plataforma de Contratación del Sector Público (PLACSP). Conforme a la doctrina de la Agencia Española de Protección de Datos (AEPD), la reutilización regulada en la Ley 37/2007 no legitima por sí sola el tratamiento indiscriminado de datos personales ni sustituye las exigencias de base jurídica, minimización y exactitud del RGPD.
           </p>
           <p className="text-xs text-slate-600">
-            la plataforma no indexa ni difunde datos de contacto privado (teléfonos particulares, correos personales ni domicilios residenciales) aunque figuren en anexos documentales de la plataforma de contratación.
+            {SITE_CONFIG.siteName} no indexa ni difunde datos de contacto privado (teléfonos particulares, correos personales ni domicilios residenciales) aunque figuren en anexos documentales de la plataforma de contratación.
           </p>
         </section>
 
@@ -163,7 +163,7 @@ export default function PrivacidadPage() {
             3. Decisiones Automatizadas y Perfilado (Art. 22 RGPD)
           </h2>
           <p>
-            la plataforma <strong>no adopta decisiones automatizadas que produzcan efectos jurídicos</strong> ni perfilados que evalúen aspectos de la personalidad de los contratistas en los términos del artículo 22 del RGPD. Los indicadores cuantitativos generados (bajas porcentuales, concurrencia única, acumulación) reflejan parámetros aritméticos del expediente y no juicios subjetivos sobre la conducta ética o legal de las personas físicas intervinientes.
+            {SITE_CONFIG.siteName} <strong>no adopta decisiones automatizadas que produzcan efectos jurídicos</strong> ni perfilados que evalúen aspectos de la personalidad de los contratistas en los términos del artículo 22 del RGPD. Los indicadores cuantitativos generados (bajas porcentuales, concurrencia única, acumulación) reflejan parámetros aritméticos del expediente y no juicios subjetivos sobre la conducta ética o legal de las personas físicas intervinientes.
           </p>
         </section>
 
@@ -189,7 +189,7 @@ export default function PrivacidadPage() {
             5. Evaluaciones y Obligaciones Documentales Pendientes del Responsable
           </h2>
           <p className="text-xs text-amber-900 leading-relaxed">
-            Para la completa conformidad con el RGPD y la LOPDGDD, el responsable de la explotación de la plataforma debe mantener documentadas las siguientes actuaciones:
+            Para la completa conformidad con el RGPD y la LOPDGDD, el responsable de la explotación de {SITE_CONFIG.siteName} debe mantener documentadas las siguientes actuaciones:
           </p>
           <ul className="list-disc list-inside space-y-1 text-xs text-amber-900 ml-2">
             <li>Elaborar y conservar una prueba documentada de ponderación del interés legítimo (art. 6.1.f RGPD) para cada finalidad del tratamiento.</li>
