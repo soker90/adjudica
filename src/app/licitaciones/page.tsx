@@ -1,5 +1,6 @@
 'use client';
 
+import { getScopeLabel } from '@/lib/scope-presentation';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
