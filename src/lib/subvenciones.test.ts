@@ -1,14 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { DatabaseSync } from 'node:sqlite';
 import { ensureSubvencionesTable, getSubvencionesByNifs } from './db';
-import { buildTargetPatterns, isTargetOrgan } from '../../scripts/sync-subvenciones';
+import { buildTargetPatterns, isTargetOrgan, normalizeMatchText } from '../../scripts/sync-subvenciones';
+import { SITE_CONFIG } from './site-config';
 
 describe('Integración BDNS - Subvenciones Públicas (Issue #17)', () => {
   describe('isTargetAuthorityOrgan', () => {
     it('detecta entes y convocatorias del organismo configurado', () => {
       expect(isTargetOrgan({ nivel3: 'AYUNTAMIENTO DE AMBITO CONFIGURADO' }, ['AYUNTAMIENTO DE AMBITO CONFIGURADO'])).toBe(true);
       expect(isTargetOrgan({ nivel2: 'AMBITO CONFIGURADO' }, ['AMBITO CONFIGURADO'])).toBe(true);
-      expect(isTargetOrgan({ nivel1: 'LOCAL', convocatoria: 'Ayudas municipales directas del organismo configurado' }, ['AYUNTAMIENTO DE AMBITO CONFIGURADO'])).toBe(true);
+      expect(isTargetOrgan({ nivel1: 'LOCAL', convocatoria: `Ayudas municipales directas del Ayuntamiento de ${SITE_CONFIG.localityName}` }, [`AYUNTAMIENTO DE ${normalizeMatchText(SITE_CONFIG.localityName)}`])).toBe(true);
     });
 
     it('no clasifica entes externos como el ámbito configurado', () => {
@@ -19,13 +20,13 @@ describe('Integración BDNS - Subvenciones Públicas (Issue #17)', () => {
 
   describe('buildTargetPatterns', () => {
     it('deriva la nomenclatura municipal que usa BDNS desde las autoridades de PLACSP', () => {
-      const patterns = buildTargetPatterns([
-        { name: 'Concejalía Delegada de Contratación del organismo configurado' },
-      ]);
+      const authorityName = `Concejalía Delegada de Contratación del Ayuntamiento de ${SITE_CONFIG.localityName}`;
+      const municipality = normalizeMatchText(SITE_CONFIG.localityName);
+      const patterns = buildTargetPatterns([{ name: authorityName }]);
 
-      expect(patterns).toContain('CONCEJALIA DELEGADA DE CONTRATACION DEL AYUNTAMIENTO DE AMBITO CONFIGURADO');
-      expect(patterns).toContain('AYUNTAMIENTO DE AMBITO CONFIGURADO');
-      expect(patterns).toContain('AMBITO CONFIGURADO');
+      expect(patterns).toContain(normalizeMatchText(authorityName));
+      expect(patterns).toContain(`AYUNTAMIENTO DE ${municipality}`);
+      expect(patterns).toContain(municipality);
     });
   });
 
