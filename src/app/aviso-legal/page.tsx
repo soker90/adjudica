@@ -2,9 +2,10 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Scale, AlertTriangle, ChevronRight } from 'lucide-react';
 import { LEGAL_CONFIG } from '@/lib/config';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Aviso Legal y Condiciones de Uso | la plataforma',
+  title: `Aviso Legal y Condiciones de Uso | ${SITE_CONFIG.siteName}`,
   description: 'Condiciones de uso, exoneración de potestades públicas, marco de reutilización de datos abiertos y régimen de responsabilidad de la plataforma.',
 };
 
@@ -47,7 +48,7 @@ export default function AvisoLegalPage() {
           </h2>
         </div>
         <p className="text-xs sm:text-sm leading-relaxed text-amber-900">
-          <strong>la plataforma es una iniciativa cívica e independiente de análisis de información pública sobre contratación.</strong> Sus resultados consisten en datos, cálculos e indicadores elaborados a partir de las fuentes identificadas. No constituyen informes de fiscalización, auditoría pública, dictámenes jurídicos vinculantes, resoluciones administrativas ni declaraciones de ilegalidad, nulidad, responsabilidad o infracción.
+          <strong>{SITE_CONFIG.siteName} es una iniciativa cívica e independiente de análisis de información pública sobre contratación.</strong> Sus resultados consisten en datos, cálculos e indicadores elaborados a partir de las fuentes identificadas. No constituyen informes de fiscalización, auditoría pública, dictámenes jurídicos vinculantes, resoluciones administrativas ni declaraciones de ilegalidad, nulidad, responsabilidad o infracción.
         </p>
       </div>
 
@@ -74,7 +75,7 @@ export default function AvisoLegalPage() {
             Información identificativa: Los datos identificativos exigibles deberán completarse atendiendo a la identidad del titular, su actividad y la normativa que resulte aplicable.
           </p>
           <ul className="list-disc list-inside space-y-1 text-xs text-slate-600 ml-2">
-            <li><strong>Denominación del proyecto:</strong> la plataforma (Iniciativa de Datos Abiertos del ámbito configurado).</li>
+            <li><strong>Denominación del proyecto:</strong> {SITE_CONFIG.siteName} (Iniciativa de Datos Abiertos de {SITE_CONFIG.geographicLabel}).</li>
             <li><strong>Titularidad:</strong> {LEGAL_CONFIG.titularDisplay}</li>
             <li><strong>Canal de contacto general:</strong> {LEGAL_CONFIG.contactoEmail ? <a href={`mailto:${LEGAL_CONFIG.contactoEmail}`} className="text-emerald-700 underline font-medium">{LEGAL_CONFIG.contactoEmail}</a> : LEGAL_CONFIG.contactoEmailDisplay}</li>
             <li><strong>Canal de rectificación y ejercicio de derechos:</strong> {LEGAL_CONFIG.rectificacionEmail ? <a href={`mailto:${LEGAL_CONFIG.rectificacionEmail}`} className="text-emerald-700 underline font-medium">{LEGAL_CONFIG.rectificacionEmail}</a> : LEGAL_CONFIG.rectificacionEmailDisplay}</li>
@@ -88,7 +89,7 @@ export default function AvisoLegalPage() {
             2. Ausencia de Potestades Oficiales y No Sustitución Institucional
           </h2>
           <p>
-            la plataforma carece de potestades administrativas, inspectoras, fiscalizadoras o sancionadoras. La plataforma y sus algoritmos analíticos <strong>no sustituyen</strong> en ningún caso las funciones ni los pronunciamientos de:
+            {SITE_CONFIG.siteName} carece de potestades administrativas, inspectoras, fiscalizadoras o sancionadoras. {SITE_CONFIG.siteName} y sus algoritmos analíticos <strong>no sustituyen</strong> en ningún caso las funciones ni los pronunciamientos de:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
@@ -120,7 +121,7 @@ export default function AvisoLegalPage() {
             Los datos analizados proceden íntegramente de los canales públicos sindicados de la <strong>Plataforma de Contratación del Sector Público (PLACSP)</strong> gestionada por la Dirección General del Patrimonio del Estado (Ministerio de Hacienda), en el marco de la <strong>Ley 37/2007, de 16 de noviembre, sobre reutilización de la información del sector público</strong> y el artículo 8 de la Ley 19/2013 de Transparencia.
           </p>
           <p className="text-xs text-slate-600">
-            La plataforma procesa y estructura estos datos de manera automatizada. No puede garantizar la exactitud, exhaustividad o integridad de los documentos o metadatos volcados en origen por las entidades contratantes en la plataforma estatal. Cuando un documento no se localiza en la fuente telemática, ello no permite concluir que no exista en el expediente físico o electrónico custodiado por la administración.
+            {SITE_CONFIG.siteName} procesa y estructura estos datos de manera automatizada. No puede garantizar la exactitud, exhaustividad o integridad de los documentos o metadatos volcados en origen por las entidades contratantes en la plataforma estatal. Cuando un documento no se localiza en la fuente telemática, ello no permite concluir que no exista en el expediente físico o electrónico custodiado por la administración.
           </p>
         </section>
 
@@ -143,7 +144,7 @@ export default function AvisoLegalPage() {
             5. Enlaces Oficiales y Licencia de Datos
           </h2>
           <p>
-            Cada ficha de licitación proporciona un enlace directo al expediente original en PLACSP. la plataforma no ejerce control sobre el contenido de los servidores estatales ni se responsabiliza de caídas temporales o modificaciones en las URL institucionales.
+            Cada ficha de licitación proporciona un enlace directo al expediente original en PLACSP. {SITE_CONFIG.siteName} no ejerce control sobre el contenido de los servidores estatales ni se responsabiliza de caídas temporales o modificaciones en las URL institucionales.
           </p>
           <p className="text-xs text-slate-600">
             Los datos públicos agregados se ofrecen bajo criterios de datos abiertos con fines cívicos, docentes y de investigación ciudadana. El código fuente de la plataforma se distribuye bajo licencia libre accesible en el repositorio del proyecto.
