@@ -27,7 +27,7 @@ const eslintConfig = [
     },
   },
   {
-    files: ["scripts/**/*.js", "src/data/**/*.js"],
+    files: ["scripts/**/*.js", "src/data/**/*.js", "src/privacy/**/*.js"],
     rules: {
       "@typescript-eslint/no-require-imports": "off",
     },

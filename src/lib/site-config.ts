@@ -1,3 +1,8 @@
 import siteConfig from '../../site.config.json';
 
-export const SITE_CONFIG = siteConfig;
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs'> & {
+  localityAliases: string[];
+  localSupplierNifs: string[];
+};
+
+export const SITE_CONFIG = siteConfig as SiteConfig;

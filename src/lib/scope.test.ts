@@ -75,8 +75,8 @@ describe('getStats scope isolation (Issue #24)', () => {
     expect(statsDirecta.totalImporte).toBeCloseTo(statsConsolidado.desgloseAmbito.directa.volumen, 1);
 
     // Top Organismos should not contain organismo asociado
-    const hasorganismo asociado = statsDirecta.topOrganismos.some(o => o.organo.includes('organismo asociado'));
-    expect(hasorganismo asociado).toBe(false);
+    const hasAssociatedAuthority = statsDirecta.topOrganismos.some(o => o.organo.includes('organismo asociado'));
+    expect(hasAssociatedAuthority).toBe(false);
   });
 
   it('filters statistics correctly when Mancomunidad is selected', () => {
