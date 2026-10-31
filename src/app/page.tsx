@@ -3,7 +3,7 @@ import { getScopeLabel, getScopePresentationKey } from '@/lib/scope-presentation
 import { Suspense } from 'react';
 import { getStats } from '@/lib/db';
 import { getPlacspId } from '@/lib/placsp';
-import { formatCurrency, formatNumber, formatDate, formatCompactCurrency, formatDecimal, formatPercent } from '@/lib/format';
+import { formatCurrency, formatNumber, formatDate, formatCompactCurrency, formatPercent } from '@/lib/format';
 import { getContractAmountPresentation } from '@/lib/importe-presentacion';
 import HomeHero from '@/components/HomeHero';
 import HomeAuditoriaSection from '@/components/HomeAuditoriaSection';
