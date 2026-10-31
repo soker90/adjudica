@@ -64,6 +64,11 @@ export default function Navbar() {
             <span className="font-extrabold tracking-tight text-base sm:text-lg text-slate-900 font-sans">
               {SITE_CONFIG.siteName}
             </span>
+            {SITE_CONFIG.headerBrandSuffix && (
+              <span className="hidden sm:inline-block text-[10px] font-mono font-medium text-slate-400">
+                {SITE_CONFIG.headerBrandSuffix}
+              </span>
+            )}
           </Link>
 
           {/* Desktop Nav */}
