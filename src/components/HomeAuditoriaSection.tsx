@@ -4,6 +4,7 @@ import {
 } from 'lucide-react';
 import { getAlertasV2, getAuditoriaKpis } from '@/lib/db';
 import { formatCompactCurrency, formatNumber } from '@/lib/format';
+import { SITE_CONFIG } from '@/lib/site-config';
 import HomeAlertCard from '@/components/HomeAlertCard';
 
 interface HomeAuditoriaSectionProps {
@@ -28,7 +29,7 @@ export default function HomeAuditoriaSection({ scope }: HomeAuditoriaSectionProp
             <h3 className="font-bold text-[#1e293b] text-base sm:text-lg tracking-tight">Centro de Análisis de Riesgos de Contratación</h3>
             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-200 uppercase font-mono">LCSP 9/2017</span>
           </div>
-          <p className="text-xs text-[#64748b] mt-1 max-w-2xl">Señales estadísticas automáticas para identificar riesgos de concentración, bajas acusadas y concurrencia restringida en el gasto público del ámbito configurado.</p>
+          <p className="text-xs text-[#64748b] mt-1 max-w-2xl">{SITE_CONFIG.homeAuditDescription ?? 'Señales estadísticas automáticas para identificar riesgos de concentración, bajas acusadas y concurrencia restringida en el gasto público del ámbito configurado.'}</p>
         </div>
         <Link href={`/auditoria${scope && scope !== 'directa' ? `?ambito=${scope}` : ''}`} className="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1.5 self-start sm:self-auto transition-colors group shrink-0">
           <span>Acceder al Centro de Análisis ({kpis.totalAlertas})</span><ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
