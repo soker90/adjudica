@@ -10,7 +10,7 @@ type ScopePresentationItemConfig = {
   noteLinkHref?: string;
 };
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch'> & {
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeRiskDescription' | 'analysisPresentation'> & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
@@ -24,7 +24,8 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     title?: string;
     description?: string;
     indexTitle?: string;
-    sections?: Array<{ id?: string; title: string; paragraphs: string[] }>;
+    indexItems?: Array<{ id: string; label: string }>;
+    sections?: Array<{ id?: string; title: string; paragraphs: string[]; anchors?: Array<{ id: string; paragraphIndex: number }> }>;
   };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
     contractsSubtitle?: string;
@@ -60,12 +61,19 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     associatedSummaryAuthorityMatch?: string;
     defaultAuthorityBadge?: string;
     authorityBadges?: Array<{ match: string; label: string }>;
+    associatedIncomeLabel?: string;
+    profileLinkLabel?: string;
   };
   footerDisclaimer?: string;
   footerCopyright?: string;
   homeLatestPublicationLabel?: string;
   headerBrandSuffix?: string;
   associatedAuthorityNameMatch?: string;
+  homeRiskDescription?: string;
+  analysisPresentation?: {
+    scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>;
+    methodologyLinkLabel?: string;
+  };
 };
 
 export const SITE_CONFIG = siteConfig as SiteConfig;
