@@ -13,8 +13,12 @@ describe('scope presentation', () => {
     expect(getScopePresentationKey(scope)).toBe(expected);
   });
 
-  it('keeps the associated group visible by default', () => {
-    expect(createScopePresentation().associated.enabled).toBe(true);
+  it('hides the associated group by default', () => {
+    expect(createScopePresentation().associated.enabled).toBe(false);
+  });
+
+  it('enables the associated group when an instance configures it', () => {
+    expect(createScopePresentation({ associated: { enabled: true } }).associated.enabled).toBe(true);
   });
 
   it('applies instance labels and can hide an unused associated group', () => {

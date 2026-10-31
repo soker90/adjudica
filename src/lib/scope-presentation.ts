@@ -19,7 +19,7 @@ const DEFAULT_SCOPE_PRESENTATION = {
     tooltip: 'Contratación gestionada por los organismos principales configurados.',
   },
   associated: {
-    enabled: true,
+    enabled: false,
     label: 'Organismos asociados',
     shortLabel: 'Asociados',
     description: 'Contratación de los organismos asociados incluidos en la configuración.',
