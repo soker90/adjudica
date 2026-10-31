@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 import Link from 'next/link';
 import { Scale, AlertTriangle, ChevronRight } from 'lucide-react';
 import { LEGAL_CONFIG } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Aviso Legal y Condiciones de Uso | la plataforma',
-  description: 'Condiciones de uso, exoneración de potestades públicas, marco de reutilización de datos abiertos y régimen de responsabilidad de la plataforma.',
+  title: `Aviso Legal y Condiciones de Uso | ${SITE_CONFIG.siteName}`,
+  description: `Condiciones de uso, exoneración de potestades públicas, marco de reutilización de datos abiertos y régimen de responsabilidad de ${SITE_CONFIG.siteName}.`,
 };
 
 export default function AvisoLegalPage() {
