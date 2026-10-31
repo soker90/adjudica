@@ -32,17 +32,17 @@ const DEFAULT_SCOPE_PRESENTATION = {
 
 const configured = SITE_CONFIG.scopePresentation ?? {};
 
-export const SCOPE_PRESENTATION = {
-  ...DEFAULT_SCOPE_PRESENTATION,
-  ...configured,
-  primary: { ...DEFAULT_SCOPE_PRESENTATION.primary, ...configured.primary },
-  associated: { ...DEFAULT_SCOPE_PRESENTATION.associated, ...configured.associated },
-  all: { ...DEFAULT_SCOPE_PRESENTATION.all, ...configured.all },
+export const SCOPE_PRESENTATION: typeof DEFAULT_SCOPE_PRESENTATION = {
+  selectorTitle: configured.selectorTitle ?? DEFAULT_SCOPE_PRESENTATION.selectorTitle,
+  primary: { ...DEFAULT_SCOPE_PRESENTATION.primary, ...(configured.primary ?? {}) },
+  associated: { ...DEFAULT_SCOPE_PRESENTATION.associated, ...(configured.associated ?? {}) },
+  all: { ...DEFAULT_SCOPE_PRESENTATION.all, ...(configured.all ?? {}) },
+  methodologyLinkLabel: configured.methodologyLinkLabel ?? DEFAULT_SCOPE_PRESENTATION.methodologyLinkLabel,
 };
 
 export function getScopePresentationKey(scope?: string | null): 'primary' | 'associated' | 'all' {
   const normalized = (scope ?? '').trim().toLowerCase();
-  if (!normalized || normalized === 'todos' || normalized === 'all') return 'all';
+  if (!normalized || normalized === 'todos' || normalized === 'all' || normalized === 'total' || normalized === 'consolidado') return 'all';
   if (normalized.includes('indirecta') || normalized.includes('mancomunidad') || normalized === 'associated') return 'associated';
   return 'primary';
 }
