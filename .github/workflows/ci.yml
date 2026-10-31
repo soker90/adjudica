@@ -79,8 +79,8 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: Tests
-        run: pnpm test
+      - name: Tests independientes de los datos de instancia
+        run: pnpm run test:ci
 
       - name: Build
         env:
