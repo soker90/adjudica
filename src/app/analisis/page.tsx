@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { getScopeLabel } from '@/lib/scope-presentation';
+import { getScopeLabel, getScopePresentationKey } from '@/lib/scope-presentation';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { Suspense } from 'react';
 import { getStats } from '@/lib/db';
 import { formatCurrency, formatNumber, formatCompactCurrency, formatNif } from '@/lib/format';
@@ -46,6 +47,8 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
   const anoRaw = ano ?? String(new Date().getFullYear());
   const anoEfectivo = anoRaw === 'todos' ? undefined : anoRaw;
   const stats = getStats(anoEfectivo, ambitoEfectivo);
+  const analysisScopeKey = getScopePresentationKey(stats.ambitoSeleccionado || rawAmbito);
+  const analysisScopeLabel = SITE_CONFIG.analysisPresentation?.scopeLabels?.[analysisScopeKey] ?? getScopeLabel(stats.ambitoSeleccionado || 'directa');
   const { concurrencia, menoresRecurrentes, tiempos, fraccionamiento, fraccionamientoTotal } = stats;
   const fraccionamientoRecurrenteAnual = fraccionamiento.filter((f) => f.patronContinuidad === 'recurrente_anual').length;
   const fraccionamientoRecurrenteMenores = fraccionamiento.filter((f) => f.patronContinuidad === 'recurrente_menores').length;
@@ -74,7 +77,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
         <p className="text-xs sm:text-sm text-[#64748b] mt-1">
           Auditoría basada al 100% en los registros oficiales de la Plataforma de Contratación del Sector Público (PLACSP)
           {anoEfectivo && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#ecfdf5] text-[#0d9373] font-bold border border-[#d1fae5] text-[11px]">Ejercicio {anoEfectivo}</span>}
-          {stats.ambitoSeleccionado && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#eff6ff] text-[#2563eb] font-bold border border-[#bfdbfe] text-[11px]">{getScopeLabel(stats.ambitoSeleccionado)}</span>}
+          {stats.ambitoSeleccionado && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#eff6ff] text-[#2563eb] font-bold border border-[#bfdbfe] text-[11px]">{analysisScopeLabel}</span>}
         </p>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
           <Suspense fallback={null}>
@@ -85,7 +88,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
             href="/metodologia"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#f8fafb] hover:bg-[#ecfdf5] text-slate-700 hover:text-[#0d9373] border border-[#e2e8f0] hover:border-[#d1fae5] text-xs font-semibold transition-all self-start sm:self-auto"
           >
-            <span>Criterios de clasificación de organismos y metodología</span>
+            <span>{SITE_CONFIG.analysisPresentation?.methodologyLinkLabel ?? 'Criterios de clasificación de organismos y metodología'}</span>
             <ChevronRight className="h-3.5 w-3.5 text-[#0d9373]" />
           </Link>
         </div>
@@ -104,7 +107,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
         {/* Metadatos metodológicos del análisis */}
         <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 font-mono flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span><strong>Ámbito:</strong> {getScopeLabel(stats.ambitoSeleccionado || 'directa')}</span>
+            <span><strong>Ámbito:</strong> {analysisScopeLabel}</span>
             <span><strong>Periodo:</strong> {anoEfectivo ? `Ejercicio ${anoEfectivo}` : 'Serie histórica (2018–2026)'}</span>
             <span><strong>Población total:</strong> {formatNumber(stats.totalLicitaciones)} contratos ({formatCompactCurrency(stats.totalImporte)})</span>
             <span><strong>Competitivos:</strong> n = {concurrencia.totalEvaluadas}</span>
