@@ -10,7 +10,7 @@ type ScopePresentationItemConfig = {
   noteLinkHref?: string;
 };
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix'> & {
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch'> & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
@@ -65,6 +65,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   footerCopyright?: string;
   homeLatestPublicationLabel?: string;
   headerBrandSuffix?: string;
+  associatedAuthorityNameMatch?: string;
 };
 
 export const SITE_CONFIG = siteConfig as SiteConfig;
