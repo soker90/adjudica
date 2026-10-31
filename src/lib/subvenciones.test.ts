@@ -9,7 +9,8 @@ describe('Integración BDNS - Subvenciones Públicas (Issue #17)', () => {
     it('detecta entes y convocatorias del organismo configurado', () => {
       expect(isTargetOrgan({ nivel3: 'AYUNTAMIENTO DE AMBITO CONFIGURADO' }, ['AYUNTAMIENTO DE AMBITO CONFIGURADO'])).toBe(true);
       expect(isTargetOrgan({ nivel2: 'AMBITO CONFIGURADO' }, ['AMBITO CONFIGURADO'])).toBe(true);
-      expect(isTargetOrgan({ nivel1: 'LOCAL', convocatoria: `Ayudas municipales directas del Ayuntamiento de ${SITE_CONFIG.localityName}` }, [`AYUNTAMIENTO DE ${normalizeMatchText(SITE_CONFIG.localityName)}`])).toBe(true);
+      const localityName = SITE_CONFIG.localityName || 'Municipio de Prueba';
+    expect(isTargetOrgan({ nivel1: 'LOCAL', convocatoria: `Ayudas municipales directas del Ayuntamiento de ${localityName}` }, [`AYUNTAMIENTO DE ${normalizeMatchText(localityName)}`])).toBe(true);
     });
 
     it('no clasifica entes externos como el ámbito configurado', () => {
@@ -20,8 +21,9 @@ describe('Integración BDNS - Subvenciones Públicas (Issue #17)', () => {
 
   describe('buildTargetPatterns', () => {
     it('deriva la nomenclatura municipal que usa BDNS desde las autoridades de PLACSP', () => {
-      const authorityName = `Concejalía Delegada de Contratación del Ayuntamiento de ${SITE_CONFIG.localityName}`;
-      const municipality = normalizeMatchText(SITE_CONFIG.localityName);
+      const localityName = SITE_CONFIG.localityName || 'Municipio de Prueba';
+      const authorityName = `Concejalía Delegada de Contratación del Ayuntamiento de ${localityName}`;
+      const municipality = normalizeMatchText(localityName);
       const patterns = buildTargetPatterns([{ name: authorityName }]);
 
       expect(patterns).toContain(normalizeMatchText(authorityName));
