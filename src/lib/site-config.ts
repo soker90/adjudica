@@ -1,6 +1,16 @@
 import siteConfig from '../../site.config.json';
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation'> & {
+type ScopePresentationItemConfig = {
+  label?: string;
+  shortLabel?: string;
+  description?: string;
+  tooltip?: string;
+  noteTitle?: string;
+  noteLinkLabel?: string;
+  noteLinkHref?: string;
+};
+
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix'> & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
@@ -13,6 +23,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     eyebrow?: string;
     title?: string;
     description?: string;
+    indexTitle?: string;
     sections?: Array<{ id?: string; title: string; paragraphs: string[] }>;
   };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
@@ -24,11 +35,36 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   }>;
   scopePresentation?: {
     selectorTitle?: string;
-    primary?: { label?: string; shortLabel?: string; description?: string; tooltip?: string };
-    associated?: { enabled?: boolean; label?: string; shortLabel?: string; description?: string; tooltip?: string };
-    all?: { label?: string; shortLabel?: string; description?: string; tooltip?: string };
+    primary?: ScopePresentationItemConfig;
+    associated?: ScopePresentationItemConfig & { enabled?: boolean };
+    all?: ScopePresentationItemConfig;
     methodologyLinkLabel?: string;
   };
+  organismsPresentation?: {
+    title?: string;
+    description?: string;
+    scopeNoteTitle?: string;
+    scopeNoteText?: string;
+    coverageNoteTitle?: string;
+    coverageNoteText?: string;
+    coverageNoteLinkLabel?: string;
+    coverageNoteLinkHref?: string;
+    directScopeLabel?: string;
+    associatedScopeLabel?: string;
+    summaryDirectLabel?: string;
+    summaryAssociatedLabel?: string;
+    summaryTotalLabel?: string;
+    summaryDirectDescription?: string;
+    summaryAssociatedDescription?: string;
+    summaryTotalDescription?: string;
+    associatedSummaryAuthorityMatch?: string;
+    defaultAuthorityBadge?: string;
+    authorityBadges?: Array<{ match: string; label: string }>;
+  };
+  footerDisclaimer?: string;
+  footerCopyright?: string;
+  homeLatestPublicationLabel?: string;
+  headerBrandSuffix?: string;
 };
 
 export const SITE_CONFIG = siteConfig as SiteConfig;
