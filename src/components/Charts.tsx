@@ -31,7 +31,7 @@ export function AnnualEvolutionChart({ data }: { data: YearData[] }) {
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1">
-            Volumen presupuestario adjudicado y número de contratos tramitados por año en el ámbito configurado
+            Volumen presupuestario adjudicado y número de contratos tramitados por año en {SITE_CONFIG.localityName}
           </p>
         </div>
 
