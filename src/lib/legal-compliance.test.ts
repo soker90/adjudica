@@ -367,13 +367,13 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('4. Cita textualmente el art. 99.2 LCSP consolidado en Metodología', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       const cita99_2 = 'No podrá fraccionarse un contrato con la finalidad de disminuir la cuantía del mismo y eludir así los requisitos de publicidad o los relativos al procedimiento de adjudicación que correspondan.';
       expect(metodo).toContain(cita99_2);
     });
 
     it('5. Cita el art. 29.8 LCSP para la prohibición legal de prórroga en contratos menores', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Los contratos menores no admiten prórroga (art. 29.8 LCSP)');
       expect(metodo).toContain('contratos menores se marcan como de ejecución única no prorrogable (art. 29.8 LCSP)');
       expect(metodo).not.toContain('no admiten prórroga (Art. 118.2 LCSP)');
@@ -381,7 +381,7 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('6. Incorpora en Metodología las definiciones de Cat. A-D, Plazo total real y Fases temporales', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Categorías Metodológicas de Indicios en Fichas de Alerta (Cat. A – Cat. D)');
       expect(metodo).toContain('Cat. A: Dato localizado');
       expect(metodo).toContain('Cat. B: Info no localizada');
@@ -408,7 +408,7 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('8. Documenta en Sección 20.1 minimización (RGPD 5.1.c), interés legítimo (6.1.f), 301 redirects y DA 7ª LOPDGDD', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('art. 5.1.c RGPD');
       expect(metodo).toContain('art. 6.1.f RGPD');
       expect(metodo).toContain('pf-[hash]');
@@ -446,14 +446,14 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('10. Metodología figura en Versión 2.1 unificada sin notas provisionales de borrador', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Versión 2.1 · Actualizado 2026');
       expect(metodo).not.toContain('Actualización metodológica');
       expect(metodo).not.toContain('v1.3');
     });
 
     it('11. Explica la reforma del RDL 3/2020 y declara la agregación como convención analítica sin anualidad', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Disposición final primera del Real Decreto-ley 3/2020, de 4 de febrero');
       expect(metodo).toContain('antiguo art. 118.3');
       expect(metodo).toContain('convención analítica propia del portal');
