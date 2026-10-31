@@ -11,9 +11,12 @@ import {
   ALERTAS_CSV_COLUMNS
 } from './export';
 import { LEGAL_CONFIG } from './config';
+import { SITE_CONFIG } from './site-config';
 
 describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', () => {
   const db = getDb();
+  const methodologyContent = JSON.stringify(SITE_CONFIG.methodology ?? {});
+  const methodologySections = SITE_CONFIG.methodology?.sections ?? [];
 
   // Test 1: Ausencia de expresiones prohibidas en alertas precalculadas en BD
   describe('Control de lenguaje prudente y ausencia de términos lesivos en BD', () => {
@@ -279,7 +282,7 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('acota la STS 1119/2025 estrictamente al caso BOSCO y sin atribuirle régimen general', () => {
-      const metodoContent = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodoContent = methodologyContent;
       expect(metodoContent).toContain('STS núm. 1119/2025, de 11 de septiembre de 2025, ECLI:ES:TS:2025:3826');
       expect(metodoContent).toContain('Resuelve una controversia sobre el acceso a la información relativa a la aplicación administrativa BOSCO y a su código fuente.');
       expect(metodoContent).not.toContain('deber de explicabilidad');
@@ -313,7 +316,6 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
   describe('Verificación de las 9 Correcciones Jurídico-Técnicas (Régimen de Menores post-RDL 3/2020)', () => {
     it('1. Ausencia total de la expresión "límite anual" en código, metodología y alertas', () => {
       const files = [
-        'src/app/metodologia/page.tsx',
         'src/components/ContractAlertsCard.tsx',
         'src/lib/fraccionamiento.ts',
         'scripts/build-db.js'
@@ -323,6 +325,8 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
         expect(content.toLowerCase()).not.toContain('límite anual');
         expect(content.toLowerCase()).not.toContain('limite anual');
       }
+      expect(methodologyContent.toLowerCase()).not.toContain('límite anual');
+      expect(methodologyContent.toLowerCase()).not.toContain('limite anual');
     });
 
     it('2. No cita el art. 118.3 para memorias ni justificaciones en el portal, acotándolo a la historia en 20.4', () => {
@@ -336,13 +340,16 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
         expect(content).not.toContain('118.3');
       }
 
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       const matches1183 = metodo.match(/118\.3/g) || [];
       expect(matches1183.length).toBeLessThanOrEqual(1);
       if (matches1183.length === 1) {
         expect(metodo).toContain('antiguo art. 118.3');
-        const sec8 = metodo.split('id="alertas"')[1]?.split('id="flujo"')[0] || '';
-        expect(sec8).not.toContain('118.3');
+        const auditSections = methodologySections
+          .filter((section) => ['banderas-rojas', 'factores-auditoria'].includes(section.id ?? ''))
+          .flatMap((section) => section.paragraphs)
+          .join('\n');
+        expect(auditSections).not.toContain('118.3');
       }
     });
 
@@ -360,13 +367,13 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('4. Cita textualmente el art. 99.2 LCSP consolidado en Metodología', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       const cita99_2 = 'No podrá fraccionarse un contrato con la finalidad de disminuir la cuantía del mismo y eludir así los requisitos de publicidad o los relativos al procedimiento de adjudicación que correspondan.';
       expect(metodo).toContain(cita99_2);
     });
 
     it('5. Cita el art. 29.8 LCSP para la prohibición legal de prórroga en contratos menores', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Los contratos menores no admiten prórroga (art. 29.8 LCSP)');
       expect(metodo).toContain('contratos menores se marcan como de ejecución única no prorrogable (art. 29.8 LCSP)');
       expect(metodo).not.toContain('no admiten prórroga (Art. 118.2 LCSP)');
@@ -374,7 +381,7 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('6. Incorpora en Metodología las definiciones de Cat. A-D, Plazo total real y Fases temporales', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Categorías Metodológicas de Indicios en Fichas de Alerta (Cat. A – Cat. D)');
       expect(metodo).toContain('Cat. A: Dato localizado');
       expect(metodo).toContain('Cat. B: Info no localizada');
@@ -401,7 +408,7 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('8. Documenta en Sección 20.1 minimización (RGPD 5.1.c), interés legítimo (6.1.f), 301 redirects y DA 7ª LOPDGDD', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('art. 5.1.c RGPD');
       expect(metodo).toContain('art. 6.1.f RGPD');
       expect(metodo).toContain('pf-[hash]');
@@ -439,18 +446,20 @@ describe('Verificación de Cumplimiento Legal y Metodológico (Fases 1 a 10)', (
     });
 
     it('10. Metodología figura en Versión 2.1 unificada sin notas provisionales de borrador', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Versión 2.1 · Actualizado 2026');
       expect(metodo).not.toContain('Actualización metodológica');
       expect(metodo).not.toContain('v1.3');
     });
 
     it('11. Explica la reforma del RDL 3/2020 y declara la agregación como convención analítica sin anualidad', () => {
-      const metodo = fs.readFileSync('src/app/metodologia/page.tsx', 'utf-8');
+      const metodo = methodologyContent;
       expect(metodo).toContain('Disposición final primera del Real Decreto-ley 3/2020, de 4 de febrero');
       expect(metodo).toContain('antiguo art. 118.3');
       expect(metodo).toContain('convención analítica propia del portal');
-      const sec20_4 = metodo.split('20.4. Régimen del Contrato Menor')[1]?.split('20.5.')[0] || '';
+      const section20 = methodologySections.find((section) => section.id === 'fuentes-juridicas');
+      const section20Content = section20?.paragraphs.join('\n') ?? '';
+      const sec20_4 = section20Content.split('20.4. Régimen del Contrato Menor')[1]?.split('20.5.')[0] || '';
       expect(sec20_4).not.toContain('en el ejercicio');
       expect(sec20_4).not.toContain('límite anual');
     });

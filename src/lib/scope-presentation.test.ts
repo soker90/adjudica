@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createScopePresentation, getScopeLabel, getScopePresentationKey, SCOPE_PRESENTATION } from './scope-presentation';
+import { createScopePresentation, getScopeLabel, getScopePresentationKey } from './scope-presentation';
 
 describe('scope presentation', () => {
   it.each([
@@ -14,7 +14,7 @@ describe('scope presentation', () => {
   });
 
   it('keeps the associated group visible by default', () => {
-    expect(SCOPE_PRESENTATION.associated.enabled).toBe(true);
+    expect(createScopePresentation().associated.enabled).toBe(true);
   });
 
   it('applies instance labels and can hide an unused associated group', () => {
@@ -30,9 +30,10 @@ describe('scope presentation', () => {
     expect(presentation.all.label).toBe('Toda la contratación');
   });
 
-  it('returns generic configured labels for each scope', () => {
-    expect(getScopeLabel('directa')).toBe('Organismos principales');
-    expect(getScopeLabel('mancomunidad')).toBe('Organismos asociados');
-    expect(getScopeLabel('todos')).toBe('Todos los organismos');
+  it('returns generic defaults when no instance overrides are supplied', () => {
+    const defaults = createScopePresentation();
+    expect(defaults.primary.label).toBe('Organismos principales');
+    expect(defaults.associated.label).toBe('Organismos asociados');
+    expect(defaults.all.label).toBe('Todos los organismos');
   });
 });

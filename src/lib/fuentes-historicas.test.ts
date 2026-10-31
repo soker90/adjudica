@@ -7,10 +7,11 @@ import {
 } from './fuentes-historicas';
 
 describe('fuentes históricas configurables por instancia', () => {
-  it('no incluye datos de una instancia si no se ha configurado un catálogo', () => {
-    expect(AUDITORIA_PERIODOS).toEqual([]);
-    expect(CONTRATOS_EXTERNOS_CATALOGO).toEqual([]);
-    expect(getAuditoriaFuentesStats().totalExternos).toBe(0);
+  it('carga el catálogo histórico configurado para la instancia sin mezclarlo con los contratos PLACSP', () => {
+    expect(Array.isArray(AUDITORIA_PERIODOS)).toBe(true);
+    expect(Array.isArray(CONTRATOS_EXTERNOS_CATALOGO)).toBe(true);
+    expect(getAuditoriaFuentesStats().totalExternos).toBe(CONTRATOS_EXTERNOS_CATALOGO.length);
+    expect(AUDITORIA_PERIODOS.every((periodo) => Boolean(periodo.periodo && periodo.estado))).toBe(true);
   });
 
   it('detecta duplicidades por número de expediente', () => {

@@ -29,7 +29,7 @@ export interface FeedItem {
   category: string;
 }
 
-export function getFeedItems(scope?: string | null, siteUrl = 'https://adjudica.es'): FeedItem[] {
+export function getFeedItems(scope?: string | null, siteUrl = SITE_URL): FeedItem[] {
   const db = getDb();
   const filterScope = parseScope(scope);
 

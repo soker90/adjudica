@@ -6,6 +6,7 @@ import { setDbForTests } from './db';
 import {
   parseScope,
   getStats,
+  getDb,
   getConcurrenciaStats,
   getFraccionamientoMenores,
 } from './db';
@@ -74,9 +75,12 @@ describe('getStats scope isolation (Issue #24)', () => {
     expect(statsDirecta.totalLicitaciones).toBe(statsConsolidado.desgloseAmbito.directa.contratos);
     expect(statsDirecta.totalImporte).toBeCloseTo(statsConsolidado.desgloseAmbito.directa.volumen, 1);
 
-    // Top Organismos should not contain organismo asociado
-    const hasAssociatedAuthority = statsDirecta.topOrganismos.some(o => o.organo.includes('organismo asociado'));
-    expect(hasAssociatedAuthority).toBe(false);
+    // Scope isolation is based on the authority catalogue, not on a display-name placeholder.
+    const associatedNames = new Set(
+      getDb().prepare("SELECT name FROM contracting_authorities WHERE scope = 'Indirecta (Mancomunidad)'")
+        .all().map((row: { name: string }) => row.name)
+    );
+    expect(statsDirecta.topOrganismos.every((org) => !associatedNames.has(org.organo))).toBe(true);
   });
 
   it('filters statistics correctly when Mancomunidad is selected', () => {
@@ -86,10 +90,14 @@ describe('getStats scope isolation (Issue #24)', () => {
     expect(statsMancomunidad.totalLicitaciones).toBe(statsConsolidado.desgloseAmbito.mancomunidad.contratos);
     expect(statsMancomunidad.totalImporte).toBeCloseTo(statsConsolidado.desgloseAmbito.mancomunidad.volumen, 1);
 
-    // All top organisms in mancomunidad should be organismo asociado
+    // Every top organism must belong to the configured associated-authority catalogue.
+    const associatedNames = new Set(
+      getDb().prepare("SELECT name FROM contracting_authorities WHERE scope = 'Indirecta (Mancomunidad)'")
+        .all().map((row: { name: string }) => row.name)
+    );
     expect(statsMancomunidad.topOrganismos.length).toBeGreaterThan(0);
     for (const org of statsMancomunidad.topOrganismos) {
-      expect(org.organo).toContain('organismo asociado');
+      expect(associatedNames.has(org.organo)).toBe(true);
     }
   });
 
