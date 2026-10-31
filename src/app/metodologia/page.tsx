@@ -56,7 +56,7 @@ const methodologyDescription = (methodology.description ?? DEFAULT_METHODOLOGY.d
 );
 
 export const metadata: Metadata = {
-  title: methodology.title ?? DEFAULT_METHODOLOGY.title,
+  title: `${methodology.title ?? DEFAULT_METHODOLOGY.title} | ${SITE_CONFIG.siteName}`,
   description: methodologyDescription,
 };
 

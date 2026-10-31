@@ -1,4 +1,4 @@
-import { getScopeLabel } from '@/lib/scope-presentation';
+import { getScopeLabel, getScopePresentationKey } from '@/lib/scope-presentation';
 import { SITE_CONFIG } from '@/lib/site-config';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -37,6 +37,8 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
   const currentAmbito = params.ambito || 'directa';
   const effectiveAmbito = currentAmbito === 'todos' ? undefined : currentAmbito;
   const stats = getStats(undefined, effectiveAmbito);
+  const currentScopeKey = getScopePresentationKey(currentAmbito);
+  const activeScopeLabel = SITE_CONFIG.dataPresentation?.scopeLabels?.[currentScopeKey] ?? getScopeLabel(currentAmbito);
   const totalAlertas = getAlertasExportData(effectiveAmbito).length;
 
   const datasets = [
@@ -143,7 +145,7 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
           <AmbitoSelector currentAmbito={currentAmbito} basePath="/datos" />
           <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 font-mono">
             <span>
-              Ámbito activo: <strong>{getScopeLabel(currentAmbito)}</strong>
+              Ámbito activo: <strong>{activeScopeLabel}</strong>
             </span>
             <span className="text-[#0d9373] font-bold">
               {formatNumber(stats.totalLicitaciones)} expedientes · {formatCompactCurrency(stats.totalImporte)} volumen económico del conjunto de datos
