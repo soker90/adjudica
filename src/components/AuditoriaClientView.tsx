@@ -1,3 +1,4 @@
+import { SITE_CONFIG } from '@/lib/site-config';
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -259,7 +260,7 @@ export default function AuditoriaClientView({
         <Scale className="h-5 w-5 text-[#b45309] shrink-0 mt-0.5" />
         <div className="text-xs text-slate-700 leading-relaxed space-y-1">
           <p>
-            <strong>Criterio de neutralidad e integridad:</strong> Las alertas de la plataforma son <strong>señales estadísticas y cuantitativas precalculadas</strong> conforme a los umbrales de la Ley 9/2017 de Contratos del Sector Público (LCSP).
+            <strong>Criterio de neutralidad e integridad:</strong> Las alertas de {SITE_CONFIG.siteName} son <strong>señales estadísticas y cuantitativas precalculadas</strong> conforme a los umbrales de la Ley 9/2017 de Contratos del Sector Público (LCSP).
           </p>
           <p className="text-slate-600">
             Una alerta orienta la labor de investigación cívica, periodística y análisis de datos abiertos; <strong>no constituye imputación de irregularidad, dolo ni infracción administrativa</strong>. Toda señal dispone de enlace directo al expediente canónico de la Plataforma de Contratación del Estado (PLACSP).
