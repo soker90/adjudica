@@ -326,7 +326,7 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Todos ({formatNumber(total)})
+            {getScopeLabel('todos')} ({formatNumber(total)})
           </button>
           <button
             onClick={() => handleFilterChange(setAmbito, 'Directa Municipal')}
@@ -336,7 +336,7 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Control Directo (Ayto. y OOAA)
+            {getScopeLabel('directa')}
           </button>
           <button
             onClick={() => handleFilterChange(setAmbito, 'Indirecta (Mancomunidad)')}
@@ -346,7 +346,7 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Control Indirecto (organismo asociado)
+            {getScopeLabel('mancomunidad')}
           </button>
         </div>
       </div>
