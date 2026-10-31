@@ -54,7 +54,10 @@ export default function MethodologyPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <header className="space-y-3 border-b border-slate-200 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700">{methodology.eyebrow ?? DEFAULT_METHODOLOGY.eyebrow}</p>
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700">{methodology.eyebrow ?? DEFAULT_METHODOLOGY.eyebrow}</p>
+          {methodology.version && <span className="font-mono text-xs px-2.5 py-1 rounded bg-slate-50 border border-slate-200 text-slate-600">{methodology.version}</span>}
+        </div>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">{methodology.title ?? DEFAULT_METHODOLOGY.title}</h1>
         <p className="max-w-3xl text-sm leading-6 text-slate-600">{methodologyDescription}</p>
       </header>
