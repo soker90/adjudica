@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getScopeLabel } from '@/lib/scope-presentation';
 import { Suspense } from 'react';
 import { getStats } from '@/lib/db';
 import { formatCurrency, formatNumber, formatCompactCurrency, formatNif } from '@/lib/format';
@@ -103,7 +104,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
         {/* Metadatos metodológicos del análisis */}
         <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 font-mono flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span><strong>Ámbito:</strong> {stats.ambitoSeleccionado || 'Directa Municipal'}</span>
+            <span><strong>Ámbito:</strong> {getScopeLabel(stats.ambitoSeleccionado || 'directa')}</span>
             <span><strong>Periodo:</strong> {anoEfectivo ? `Ejercicio ${anoEfectivo}` : 'Serie histórica (2018–2026)'}</span>
             <span><strong>Población total:</strong> {formatNumber(stats.totalLicitaciones)} contratos ({formatCompactCurrency(stats.totalImporte)})</span>
             <span><strong>Competitivos:</strong> n = {concurrencia.totalEvaluadas}</span>
