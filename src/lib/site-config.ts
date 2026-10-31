@@ -10,7 +10,7 @@ type ScopePresentationItemConfig = {
   noteLinkHref?: string;
 };
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeAuditDescription' | 'analysisPresentation' | 'dataPresentation' | 'homeAnnualEvolutionDescription' | 'homeTopCompaniesDescription'> & {
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeAuditDescription' | 'analysisPresentation' | 'dataPresentation' | 'homeAnnualEvolutionDescription' | 'homeTopCompaniesDescription' & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
@@ -24,7 +24,8 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     title?: string;
     description?: string;
     indexTitle?: string;
-    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>
+    indexLinks?: Array<{ id: string; title: string }>;
+    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>
   };
   homeAuditDescription?: string;
   homeAnnualEvolutionDescription?: string;
