@@ -377,7 +377,7 @@ export function BajaTemerariaSection({ data }: BajaTemerariaSectionProps) {
               Contratistas con Patrón Recurrente de Bajas Elevadas
             </p>
             <p className="text-slate-600 text-xs">
-              Muestra las empresas que presentan de forma habitual descuentos superiores al 25% o 40% respecto al Presupuesto Base de Licitación en concursos públicos en el ámbito configurado (señal estadística descriptiva; no constituye calificación de anormalidad, la cual compete en exclusiva al órgano de contratación conforme al art. 149 LCSP).
+              Muestra las empresas que presentan de forma habitual descuentos superiores al 25% o 40% respecto al Presupuesto Base de Licitación en concursos públicos en {SITE_CONFIG.localityName} (señal estadística descriptiva; no constituye calificación de anormalidad, la cual compete en exclusiva al órgano de contratación conforme al art. 149 LCSP).
             </p>
           </div>
 
