@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getScopeLabel, SCOPE_PRESENTATION } from '@/lib/scope-presentation';
+import { getScopeLabel, getScopePresentationKey } from '@/lib/scope-presentation';
 import { Suspense } from 'react';
 import { getStats } from '@/lib/db';
 import { getPlacspId } from '@/lib/placsp';
@@ -29,6 +29,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const rawAmbito = resolvedParams.scope || 'directa';
   const scope = rawAmbito === 'todos' ? undefined : rawAmbito;
   const stats = getStats(undefined, scope);
+  const selectedScope = getScopePresentationKey(stats.ambitoSeleccionado);
 
   const kpis = [
     {
@@ -43,9 +44,9 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
       title: 'Gasto Público Adjudicado',
       value: formatCompactCurrency(stats.gastoAdjudicado),
       subtitle: `Gasto adjudicado: ${getScopeLabel(stats.ambitoSeleccionado)}`,
-      badge: stats.ambitoSeleccionado === 'Directa Municipal'
+      badge: selectedScope === 'primary'
         ? `${formatPercent(stats.desgloseAmbito.directa.pctGasto, 1)} del gasto`
-        : stats.ambitoSeleccionado === 'Indirecta (Mancomunidad)'
+        : selectedScope === 'associated'
           ? `${formatPercent(stats.desgloseAmbito.mancomunidad.pctGasto, 1)} del gasto`
           : `-${formatPercent(stats.ahorroMedioPct, 1)} baja media s/máx`,
       icon: Coins,
@@ -55,7 +56,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
       title: 'Organismos Públicos',
       value: formatNumber(stats.totalOrganismos),
       subtitle: `Entidades incluidas en ${getScopeLabel(stats.ambitoSeleccionado)}`,
-      badge: stats.ambitoSeleccionado === 'Directa Municipal' ? 'Según configuración' : 'Entidades públicas',
+      badge: getScopeLabel(stats.ambitoSeleccionado),
       icon: Building2,
       iconBg: 'bg-[#ecfeff] text-[#0891b2] border-[#cffafe]',
     },
