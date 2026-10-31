@@ -212,7 +212,9 @@ export default function OrganismosPage() {
                       </span>
                     )}
                   </div>
-                  <span className="text-xs font-semibold text-[#0d9373] group-hover:translate-x-1 transition-transform flex items-center gap-1">\n                    {presentation?.profileLinkLabel ?? 'Ver perfil'} <ArrowRight className="h-3.5 w-3.5" />\n                  </span>
+                  <span className="text-xs font-semibold text-[#0d9373] group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                    {presentation?.profileLinkLabel ?? 'Ver perfil'} <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
                 </div>
               </Link>
             );
