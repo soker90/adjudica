@@ -82,7 +82,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
           </Suspense>
 
           <Link
-            href="/metodologia#organismo_asociado"
+            href="/metodologia"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#f8fafb] hover:bg-[#ecfdf5] text-slate-700 hover:text-[#0d9373] border border-[#e2e8f0] hover:border-[#d1fae5] text-xs font-semibold transition-all self-start sm:self-auto"
           >
             <span>Criterios de clasificación de organismos y metodología</span>
