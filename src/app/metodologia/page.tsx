@@ -67,7 +67,7 @@ export default function MethodologyPage() {
             {methodology.indexTitle ?? 'Índice de secciones'}
           </span>
           <div className="flex flex-wrap gap-2">
-            {methodology.sections.map((section, index) => (
+            {methodology.sections.filter((section) => section.showInIndex !== false).map((section, index) => (
               <a
                 key={section.id ?? section.title}
                 href={`#${section.id ?? `section-${index + 1}`}`}
