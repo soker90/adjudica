@@ -1,6 +1,6 @@
 import siteConfig from '../../site.config.json';
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation'> & {
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology'> & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
@@ -8,6 +8,12 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   fraccionamientoStopWords: string[];
   flujoStopWords: string[];
   legacyResponseOmitContractFields: string[];
+  methodology?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    sections?: Array<{ id?: string; title: string; paragraphs: string[] }>;
+  };
   scopePresentation?: {
     selectorTitle?: string;
     primary?: { label?: string; shortLabel?: string; description?: string; tooltip?: string };
