@@ -1,5 +1,6 @@
 'use client';
 
+import { getScopeLabel, SCOPE_PRESENTATION } from '@/lib/scope-presentation';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -325,7 +326,7 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Todos ({formatNumber(total)})
+            {getScopeLabel('todos')} ({formatNumber(total)})
           </button>
           <button
             onClick={() => handleFilterChange(setAmbito, 'Directa Municipal')}
@@ -335,8 +336,9 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Control Directo (Ayto. y OOAA)
+            {getScopeLabel('directa')}
           </button>
+          {SCOPE_PRESENTATION.associated.enabled && (
           <button
             onClick={() => handleFilterChange(setAmbito, 'Indirecta (Mancomunidad)')}
             className={`px-3 py-2 rounded-lg transition-all font-semibold whitespace-nowrap cursor-pointer ${
@@ -345,8 +347,9 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Control Indirecto (organismo asociado)
+            {getScopeLabel('mancomunidad')}
           </button>
+          )}
         </div>
       </div>
 

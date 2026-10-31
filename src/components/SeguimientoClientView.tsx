@@ -444,7 +444,7 @@ export default function SeguimientoClientView({
                   Seguimiento y Control de Prórrogas (Art. 29 LCSP):
                 </p>
                 <p className="text-amber-800">
-                  Esta herramienta calcula la fecha de finalización registrada o vencimiento estimado a partir de la duración oficial publicada en PLACSP para los contratos formalizados por el Ayuntamiento y organismo asociado. Permite anticipar cuándo deben licitarse de nuevo los servicios para asegurar la libre concurrencia. Advertencia: las prórrogas formalizadas o modificaciones contractuales pueden constar en el expediente o publicarse con posterioridad en la plataforma.
+                  Esta herramienta calcula la fecha de finalización registrada o vencimiento estimado a partir de la duración oficial publicada en PLACSP para los contratos formalizados por los organismos incluidos en este portal. Permite anticipar cuándo deben licitarse de nuevo los servicios para asegurar la libre concurrencia. Advertencia: las prórrogas formalizadas o modificaciones contractuales pueden constar en el expediente o publicarse con posterioridad en la plataforma.
                 </p>
               </div>
             </div>

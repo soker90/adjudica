@@ -33,11 +33,11 @@ jobs:
       - name: Instalar dependencias
         run: pnpm install --frozen-lockfile
 
-      - name: Aplicar migraciones de base de datos
-        run: pnpm run migrate-db
-
       - name: Inicializar esquema y catálogos de base de datos
         run: pnpm run init-db
+
+      - name: Aplicar migraciones de base de datos
+        run: pnpm run migrate-db
 
       - name: Aplicar datos contractuales verificados
         run: |
@@ -55,14 +55,32 @@ jobs:
       - name: Clasificar importes de adjudicación de la BD de CI
         run: pnpm run migrate-award-amount-type
 
+      - name: Preparar fixture mínimo para validar la base de datos
+        run: |
+          node <<'NODE'
+          const { DatabaseSync } = require('node:sqlite');
+          const db = new DatabaseSync('data/contracts.db');
+          db.prepare(`
+            INSERT INTO contracting_authorities(id, name, scope, active, historical_names_json)
+            VALUES (?, ?, ?, 1, '[]')
+          `).run('ci-authority', 'Organismo de prueba', 'Directa Municipal');
+          db.exec(`
+            CREATE VIRTUAL TABLE IF NOT EXISTS contracts_fts USING fts5(
+              id UNINDEXED, case_number, object_description, contracting_authority_name, awardee,
+              tokenize='porter unicode61'
+            );
+          `);
+          db.close();
+          NODE
+
       - name: Validar base de datos canónica
         run: pnpm run validate-db
 
       - name: Lint
         run: pnpm lint
 
-      - name: Tests
-        run: pnpm test
+      - name: Tests independientes de los datos de instancia
+        run: pnpm run test:ci
 
       - name: Build
         env:

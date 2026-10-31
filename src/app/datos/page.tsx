@@ -1,3 +1,4 @@
+import { getScopeLabel } from '@/lib/scope-presentation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { 
@@ -141,7 +142,7 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
           <AmbitoSelector currentAmbito={currentAmbito} basePath="/datos" />
           <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 font-mono">
             <span>
-              Ámbito activo: <strong>{currentAmbito === 'directa' ? 'Directa Municipal (Ayto, Aguas, Patronato, IMD)' : currentAmbito === 'mancomunidad' ? 'Indirecta (Mancomunidad organismo asociado)' : 'Todos los entes consolidados'}</strong>
+              Ámbito activo: <strong>{getScopeLabel(currentAmbito)}</strong>
             </span>
             <span className="text-[#0d9373] font-bold">
               {formatNumber(stats.totalLicitaciones)} expedientes · {formatCompactCurrency(stats.totalImporte)} volumen económico del conjunto de datos
@@ -188,7 +189,7 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
         <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
           <span>Catálogo de Conjuntos de Datos Disponibles</span>
           <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-normal">
-            Ámbito actual: {currentAmbito === 'directa' ? 'Solo Ayuntamiento' : currentAmbito === 'mancomunidad' ? 'organismo asociado' : 'Total Consolidado'}
+            Ámbito actual: {getScopeLabel(currentAmbito)}
           </span>
         </h2>
 

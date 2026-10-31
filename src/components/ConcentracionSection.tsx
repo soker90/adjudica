@@ -1,5 +1,6 @@
 'use client';
 
+import { getScopeLabel } from '@/lib/scope-presentation';
 import { useState } from 'react';
 import Link from 'next/link';
 import { ConcentracionStats } from '@/lib/db';
@@ -88,7 +89,7 @@ export default function ConcentracionSection({
         <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto shrink-0">
           {effectiveScope && (
             <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#eff6ff] text-[#2563eb] border border-[#bfdbfe]">
-              {effectiveScope === 'directa' ? 'Directa Municipal' : effectiveScope === 'mancomunidad' ? 'Mancomunidad' : effectiveScope}
+              {getScopeLabel(effectiveScope)}
             </span>
           )}
           {effectiveYear && (
