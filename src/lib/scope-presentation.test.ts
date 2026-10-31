@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getScopeLabel, getScopePresentationKey } from './scope-presentation';
+import { getScopeLabel, getScopePresentationKey, SCOPE_PRESENTATION } from './scope-presentation';
 
 describe('scope presentation', () => {
   it.each([
@@ -11,6 +11,10 @@ describe('scope presentation', () => {
     ['', 'all'],
   ] as const)('maps %s to %s', (scope, expected) => {
     expect(getScopePresentationKey(scope)).toBe(expected);
+  });
+
+  it('keeps the associated group visible by default', () => {
+    expect(SCOPE_PRESENTATION.associated.enabled).toBe(true);
   });
 
   it('returns generic configured labels for each scope', () => {
