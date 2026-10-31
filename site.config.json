@@ -36,5 +36,27 @@
   "localIndividualSeatLabel": "",
   "outsideLocalityLabel": "localidad",
   "localBusinessDiagnosisTemplate": "",
-  "legacyResponseOmitContractFields": []
+  "legacyResponseOmitContractFields": [],
+  "scopePresentation": {
+    "selectorTitle": "Filtrar por organismo:",
+    "primary": {
+      "label": "Organismos principales",
+      "shortLabel": "Principal",
+      "description": "Contratación de los organismos principales incluidos en la configuración.",
+      "tooltip": "Contratación gestionada por los organismos principales configurados."
+    },
+    "associated": {
+      "label": "Organismos asociados",
+      "shortLabel": "Asociados",
+      "description": "Contratación de los organismos asociados incluidos en la configuración.",
+      "tooltip": "Contratación de los organismos asociados incluidos en la configuración."
+    },
+    "all": {
+      "label": "Todos los organismos",
+      "shortLabel": "Total",
+      "description": "Contratación de todos los organismos incluidos en la configuración.",
+      "tooltip": "Suma de la contratación de todos los organismos incluidos en la configuración."
+    },
+    "methodologyLinkLabel": "Consultar metodología"
+  }
 }
