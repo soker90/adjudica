@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { Suspense } from 'react';
 import { getEmpresasList, getFilterValues } from '@/lib/db';
 import EmpresasClientView, { EmpresaItem, GrupoItem } from '@/components/EmpresasClientView';
 
 export const metadata: Metadata = {
-  title: 'Directorio de Empresas y Grupos Adjudicatarios | la plataforma',
+  title: `Directorio de Empresas y Grupos Adjudicatarios | ${SITE_CONFIG.siteName}`,
   description:
     'Trazabilidad e inteligencia corporativa de contratistas del ámbito configurado. Unificación de cambios de denominación, cruce de DNIs y holdings empresariales.',
 };
