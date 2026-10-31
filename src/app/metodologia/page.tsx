@@ -40,6 +40,13 @@ const methodology = {
   sections: SITE_CONFIG.methodology?.sections ?? DEFAULT_METHODOLOGY.sections,
 };
 
+const methodologyIndexItems = SITE_CONFIG.methodology?.indexItems?.length
+  ? SITE_CONFIG.methodology.indexItems
+  : methodology.sections.map((section, index) => ({
+      id: section.id ?? `section-${index + 1}`,
+      label: section.title,
+    }));
+
 const methodologyDescription = (methodology.description ?? DEFAULT_METHODOLOGY.description).replace(
   '{geographicLabel}',
   SITE_CONFIG.geographicLabel,
@@ -67,13 +74,13 @@ export default function MethodologyPage() {
             {methodology.indexTitle ?? 'Índice de secciones'}
           </span>
           <div className="flex flex-wrap gap-2">
-            {methodology.sections.map((section, index) => (
+            {methodologyIndexItems.map((item) => (
               <a
-                key={section.id ?? section.title}
-                href={`#${section.id ?? `section-${index + 1}`}`}
+                key={item.id}
+                href={`#${item.id}`}
                 className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
               >
-                {section.title}
+                {item.label}
               </a>
             ))}
           </div>
@@ -83,7 +90,12 @@ export default function MethodologyPage() {
         <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="space-y-3 scroll-mt-20">
           <h2 className="text-xl font-bold text-slate-900">{section.title}</h2>
           {section.paragraphs.map((paragraph, paragraphIndex) => (
-            <p key={paragraphIndex} className="text-sm leading-6 text-slate-700">{paragraph}</p>
+            <div key={paragraphIndex}>
+              {section.anchors?.filter((anchor) => anchor.paragraphIndex === paragraphIndex).map((anchor) => (
+                <span key={anchor.id} id={anchor.id} className="block scroll-mt-20" />
+              ))}
+              <p className="text-sm leading-6 text-slate-700">{paragraph}</p>
+            </div>
           ))}
         </section>
       ))}
