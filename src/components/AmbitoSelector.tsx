@@ -50,7 +50,7 @@ export default function AmbitoSelector({
         </div>
 
         <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
-          {/* Opción 1: Solo Ayuntamiento */}
+          {/* Primary contracting group */}
           <button
             type="button"
             onClick={() => handleChange('directa')}
@@ -70,7 +70,7 @@ export default function AmbitoSelector({
             ) : null}
           </button>
 
-          {/* Opción 2: organismo asociado (21 municipios) */}
+          {/* Associated contracting group */}
           <button
             type="button"
             onClick={() => handleChange('mancomunidad')}
@@ -90,7 +90,7 @@ export default function AmbitoSelector({
             ) : null}
           </button>
 
-          {/* Opción 3: Total */}
+          {/* All configured contracting groups */}
           <button
             type="button"
             onClick={() => handleChange('todos')}
