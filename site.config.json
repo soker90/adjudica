@@ -35,5 +35,7 @@
   "regionalBusinessLabel": "",
   "localBusinessSeatLabel": "",
   "localIndividualSeatLabel": "",
-  "outsideLocalityLabel": "localidad"
+  "outsideLocalityLabel": "localidad",
+  "localBusinessDiagnosisTemplate": "",
+  "legacyResponseOmitContractFields": []
 }

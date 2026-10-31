@@ -5509,13 +5509,18 @@ export function getStats(year?: number | string, scope?: string): GlobalStats {
   `).all(...params) as any[];
 
   // Últimas Licitaciones
-  const ultimasLicitaciones = db.prepare(`
+  const contractResponseOmitFields = new Set(SITE_CONFIG.legacyResponseOmitContractFields || []);
+  const ultimasLicitaciones = (db.prepare(`
     SELECT *
     FROM contracts
     ${wherePlain}
     ORDER BY coalesce(publication_date, award_date) DESC
     LIMIT 8;
-  `).all(...params) as any[];
+  `).all(...params) as any[]).map((contract) => {
+    const result = { ...contract };
+    for (const field of contractResponseOmitFields) delete result[field];
+    return result;
+  });
 
   const concurrencia = getConcurrenciaStats(year, scope);
   const menoresRecurrentes = getMenoresRecurrentes(year, undefined, scope);

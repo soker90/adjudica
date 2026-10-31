@@ -507,7 +507,10 @@ export function getEmpresasLocalesStats(year?: number | string, scope?: string):
   const totalEmpresasLocales = conteosAmbito.local.empresas.size;
   const totalEmpresasExternas = Object.values(empresasMap).filter((e) => e.ambito !== 'local').length;
   const localidad = SITE_CONFIG.localityName || 'el ámbito local';
-  const diagnostico = `El ${pctContratosLocales}% de los expedientes adjudicados corresponden a empresas y profesionales con domicilio registral en ${localidad} (${pctGastoLocal}% del volumen económico). Por su parte, el ${pctGastoNacTotal}% del volumen licitado se adjudicó a entidades con sede social fuera de ${SITE_CONFIG.outsideLocalityLabel || 'la localidad'}. El domicilio registral clasifica la sede de la razón social adjudicataria, sin prejuzgar la contratación de empleo, delegaciones o subcontratación en el ámbito local.`;
+  const diagnosticoBase = `El ${pctContratosLocales}% de los expedientes adjudicados corresponden a empresas y profesionales con domicilio registral en ${localidad} (${pctGastoLocal}% del volumen económico). Por su parte, el ${pctGastoNacTotal}% del volumen licitado se adjudicó a entidades con sede social fuera de ${SITE_CONFIG.outsideLocalityLabel || 'la localidad'}. El domicilio registral clasifica la sede de la razón social adjudicataria, sin prejuzgar la contratación de empleo, delegaciones o subcontratación en el ámbito local.`;
+  const diagnostico = SITE_CONFIG.localBusinessDiagnosisTemplate
+    ? SITE_CONFIG.localBusinessDiagnosisTemplate.replace(/\{(\w+)\}/g, (_, key: string) => String(({ pctContratosLocales, localityName: localidad, pctGastoLocal, pctGastoNacionalTotal: pctGastoNacTotal } as Record<string, string | number>)[key] ?? ''))
+    : diagnosticoBase;
 
   return {
     resumen: {
