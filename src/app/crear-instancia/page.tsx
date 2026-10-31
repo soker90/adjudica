@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { ArrowUpRight, Check, GitFork, ShieldCheck } from 'lucide-react';
 
 const templateUrl = 'https://github.com/soker90/adjudica-starter/generate';
@@ -30,6 +32,8 @@ ADJUDICA_INSTANCE_ROOT=.. ADJUDICA_INSTANCE_DB_PATH=../data/contracts.db pnpm pr
 pnpm dev`;
 
 export default function CrearInstanciaPage() {
+  if (!SITE_CONFIG.instanceCreationGuide) notFound();
+
   return (
     <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="space-y-8">

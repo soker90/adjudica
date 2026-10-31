@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 import Link from 'next/link';
 import { getSeguimientoData } from '@/lib/seguimiento';
 import SeguimientoClientView from '@/components/SeguimientoClientView';
@@ -8,7 +9,7 @@ import { CalendarClock, ChevronRight } from 'lucide-react';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Licitaciones y Contratos en Curso | la plataforma',
+  title: `Licitaciones y Contratos en Curso | ${SITE_CONFIG.siteName}`,
   description:
     'Monitoreo en tiempo real de licitaciones abiertas en plazo de presentación de ofertas y contratos públicos con fecha de fin o vencimiento estimado próximo en el ámbito configurado.',
 };

@@ -5,7 +5,7 @@ import { LEGAL_CONFIG } from '@/lib/config';
 import { SITE_CONFIG } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Procedimiento de Rectificación y Ejercicio de Derechos | la plataforma',
+  title: `Procedimiento de Rectificación y Ejercicio de Derechos | ${SITE_CONFIG.siteName}`,
   description: 'Ruta y canal previsto en la aplicación para la comunicación de rectificaciones, condicionado a que el titular configure y atienda los datos de contacto.',
 };
 

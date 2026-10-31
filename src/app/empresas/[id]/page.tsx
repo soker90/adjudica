@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getEmpresaDetail, getAlertasForEmpresa } from '@/lib/db';
 import { formatCurrency, formatCompactCurrency, formatNumber, formatDate, formatNif } from '@/lib/format';
@@ -31,11 +32,11 @@ export async function generateMetadata({
   const { id } = await params;
   const decodedId = decodeURIComponent(id);
   const emp = getEmpresaDetail(decodedId);
-  if (!emp) return { title: 'Empresa no encontrada · la plataforma' };
+  if (!emp) return { title: `Empresa no encontrada · ${SITE_CONFIG.siteName}` };
 
   const isCanonical = emp.id === decodedId;
   return {
-    title: `${emp.nombre} · Dossier de Proveedor · la plataforma`,
+    title: `${emp.nombre} · Dossier de Proveedor · ${SITE_CONFIG.siteName}`,
     description: `Perfil de contratación municipal de ${emp.nombre} en el ámbito configurado.`,
     robots: {
       index: isCanonical,
