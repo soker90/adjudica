@@ -1,5 +1,6 @@
-import { SITE_CONFIG } from '@/lib/site-config';
 'use client';
+
+import { SITE_CONFIG } from '@/lib/site-config';
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
