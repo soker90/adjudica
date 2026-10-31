@@ -31,15 +31,27 @@ const DEFAULT_SCOPE_PRESENTATION = {
   methodologyLinkLabel: 'Consultar metodología',
 };
 
-const configured = SITE_CONFIG.scopePresentation ?? {};
+export interface ScopePresentationConfig {
+  selectorTitle?: string;
+  primary?: Partial<ScopePresentationItem>;
+  associated?: Partial<ScopePresentationItem> & { enabled?: boolean };
+  all?: Partial<ScopePresentationItem>;
+  methodologyLinkLabel?: string;
+}
 
-export const SCOPE_PRESENTATION: typeof DEFAULT_SCOPE_PRESENTATION = {
-  selectorTitle: configured.selectorTitle ?? DEFAULT_SCOPE_PRESENTATION.selectorTitle,
-  primary: { ...DEFAULT_SCOPE_PRESENTATION.primary, ...(configured.primary ?? {}) },
-  associated: { ...DEFAULT_SCOPE_PRESENTATION.associated, ...(configured.associated ?? {}) },
-  all: { ...DEFAULT_SCOPE_PRESENTATION.all, ...(configured.all ?? {}) },
-  methodologyLinkLabel: configured.methodologyLinkLabel ?? DEFAULT_SCOPE_PRESENTATION.methodologyLinkLabel,
-};
+export function createScopePresentation(
+  configured: ScopePresentationConfig = {},
+): typeof DEFAULT_SCOPE_PRESENTATION {
+  return {
+    selectorTitle: configured.selectorTitle ?? DEFAULT_SCOPE_PRESENTATION.selectorTitle,
+    primary: { ...DEFAULT_SCOPE_PRESENTATION.primary, ...(configured.primary ?? {}) },
+    associated: { ...DEFAULT_SCOPE_PRESENTATION.associated, ...(configured.associated ?? {}) },
+    all: { ...DEFAULT_SCOPE_PRESENTATION.all, ...(configured.all ?? {}) },
+    methodologyLinkLabel: configured.methodologyLinkLabel ?? DEFAULT_SCOPE_PRESENTATION.methodologyLinkLabel,
+  };
+}
+
+export const SCOPE_PRESENTATION = createScopePresentation(SITE_CONFIG.scopePresentation);
 
 export function getScopePresentationKey(scope?: string | null): 'primary' | 'associated' | 'all' {
   const normalized = (scope ?? '').trim().toLowerCase();
