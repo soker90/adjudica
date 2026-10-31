@@ -204,11 +204,11 @@ export default function OrganismosPage() {
                   <div>
                     <span className="text-[10px] text-slate-400 block uppercase font-semibold">Gasto Adjudicado</span>
                     <span className="font-bold font-mono text-[#0a0a0a] text-base sm:text-lg">
-                      {formatCompactCurrency(authority.gasto_adjudicado)}
+                      {formatCompactCurrency(authority.gasto_adjudicado ?? 0)}
                     </span>
                     {(authority.ingresos_adjudicados ?? 0) > 0 && (
                       <span className="block text-[10px] font-mono text-emerald-700 mt-1">
-                        Ingresos: +{formatCompactCurrency(authority.ingresos_adjudicados)}
+                        Ingresos: +{formatCompactCurrency(authority.ingresos_adjudicados ?? 0)}
                       </span>
                     )}
                   </div>
