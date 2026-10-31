@@ -24,7 +24,8 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     title?: string;
     description?: string;
     indexTitle?: string;
-    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>
+    indexLinks?: Array<{ id: string; title: string }>;
+    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>
   };
   homeAuditDescription?: string;
   analysisPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>; methodologyLinkLabel?: string };

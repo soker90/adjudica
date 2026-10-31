@@ -50,6 +50,10 @@ const methodology = {
   sections: SITE_CONFIG.methodology?.sections ?? DEFAULT_METHODOLOGY.sections,
 };
 
+const methodologyIndex = SITE_CONFIG.methodology?.indexLinks ?? methodology.sections
+  .filter((section) => section.showInIndex !== false)
+  .map((section, index) => ({ id: section.id ?? `section-${index + 1}`, title: section.title }));
+
 const methodologyDescription = (methodology.description ?? DEFAULT_METHODOLOGY.description).replace(
   '{geographicLabel}',
   SITE_CONFIG.geographicLabel,
@@ -77,13 +81,13 @@ export default function MethodologyPage() {
             {methodology.indexTitle ?? 'Índice de secciones'}
           </span>
           <div className="flex flex-wrap gap-2">
-            {methodology.sections.filter((section) => section.showInIndex !== false).map((section, index) => (
+            {methodologyIndex.map((item) => (
               <a
-                key={section.id ?? section.title}
-                href={`#${section.id ?? `section-${index + 1}`}`}
+                key={item.id}
+                href={`#${item.id}`}
                 className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
               >
-                {section.title}
+                {item.title}
               </a>
             ))}
           </div>
@@ -96,7 +100,7 @@ export default function MethodologyPage() {
             <div className="space-y-3">
               {section.blocks.map((block, blockIndex) => {
                 if (block.type === 'heading') {
-                  return <h3 key={blockIndex} className="pt-2 text-base font-semibold text-slate-800">{block.text}</h3>;
+                  return <h3 key={blockIndex} id={block.id} className="pt-2 text-base font-semibold text-slate-800">{block.text}</h3>;
                 }
                 if (block.type === 'listItem') {
                   return <div key={blockIndex} className="flex gap-2 pl-3 text-sm leading-6 text-slate-700"><span aria-hidden="true">•</span><p>{block.text}</p></div>;
