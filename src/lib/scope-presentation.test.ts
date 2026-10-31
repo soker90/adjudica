@@ -30,6 +30,22 @@ describe('scope presentation', () => {
     expect(presentation.all.label).toBe('Toda la contratación');
   });
 
+  it('supports a scope-specific note title, text and methodology link', () => {
+    const presentation = createScopePresentation({
+      primary: {
+        noteTitle: 'Estás consultando: Solo Ayuntamiento de Alcázar de San Juan.',
+        description: 'Muestra el gasto municipal propio.',
+        noteLinkLabel: 'Ver explicación metodológica',
+        noteLinkHref: '/metodologia#comsermancha',
+      },
+    });
+
+    expect(presentation.primary.noteTitle).toContain('Solo Ayuntamiento');
+    expect(presentation.primary.description).toBe('Muestra el gasto municipal propio.');
+    expect(presentation.primary.noteLinkLabel).toBe('Ver explicación metodológica');
+    expect(presentation.primary.noteLinkHref).toBe('/metodologia#comsermancha');
+  });
+
   it('returns generic defaults when no instance overrides are supplied', () => {
     const defaults = createScopePresentation();
     expect(defaults.primary.label).toBe('Organismos principales');
