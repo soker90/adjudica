@@ -19,6 +19,10 @@ En la plantilla se configuran el nombre y el logotipo del portal, los perfiles d
 
 Consulta [`data/contracting-authorities.example.json`](data/contracting-authorities.example.json) para ver el formato de cada perfil.
 
+## Pruebas
+
+El repositorio común ejecuta en CI las pruebas independientes de los datos de cada portal mediante `pnpm run test:ci`. Las pruebas de integración que necesitan una base de datos poblada se ejecutan en el repositorio de cada instancia, donde están disponibles su SQLite y sus catálogos. Para ejecutar localmente toda la batería se utiliza `pnpm test`.
+
 ## Desarrollo local
 
 Requisitos: Node.js 22 o posterior y pnpm 11.
