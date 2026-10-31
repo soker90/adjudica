@@ -1,3 +1,4 @@
+import { SITE_CONFIG } from '@/lib/site-config';
 'use client';
 
 import React, { useState, useMemo } from 'react';
@@ -281,7 +282,7 @@ export default function DiscrepanciasClientView({
                     href={`/licitaciones/${item.slug}`}
                     className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-[#0d9373] hover:text-[#065f46] hover:underline"
                   >
-                    <span>Ver expediente en la plataforma</span>
+                    <span>Ver expediente en {SITE_CONFIG.siteName}</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
