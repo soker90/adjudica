@@ -74,7 +74,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
         <p className="text-xs sm:text-sm text-[#64748b] mt-1">
           Auditoría basada al 100% en los registros oficiales de la Plataforma de Contratación del Sector Público (PLACSP)
           {anoEfectivo && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#ecfdf5] text-[#0d9373] font-bold border border-[#d1fae5] text-[11px]">Ejercicio {anoEfectivo}</span>}
-          {stats.ambitoSeleccionado && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#eff6ff] text-[#2563eb] font-bold border border-[#bfdbfe] text-[11px]">{stats.ambitoSeleccionado}</span>}
+          {stats.ambitoSeleccionado && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#eff6ff] text-[#2563eb] font-bold border border-[#bfdbfe] text-[11px]">{getScopeLabel(stats.ambitoSeleccionado)}</span>}
         </p>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
           <Suspense fallback={null}>
