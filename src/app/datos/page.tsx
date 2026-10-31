@@ -1,4 +1,5 @@
 import { getScopeLabel } from '@/lib/scope-presentation';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { 
@@ -20,9 +21,9 @@ import { getAlertasExportData } from '@/lib/export';
 import { formatNumber, formatCompactCurrency } from '@/lib/format';
 
 export const metadata: Metadata = {
-  title: 'Portal de Datos Abiertos y Exportaciones | la plataforma',
+  title: `Portal de Datos Abiertos y Exportaciones | ${SITE_CONFIG.siteName}`,
   description:
-    'Descarga directa de los conjuntos de datos de licitaciones, empresas y auditoría cívica del ámbito configurado en formatos abiertos CSV y JSON.',
+    `Descarga directa de los conjuntos de datos de licitaciones, empresas y auditoría cívica de ${SITE_CONFIG.localityName} en formatos abiertos CSV y JSON.`,
 };
 
 interface DatosPageProps {
