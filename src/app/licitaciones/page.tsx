@@ -338,6 +338,7 @@ function LicitacionesContent() {
           >
             {getScopeLabel('directa')}
           </button>
+          {SCOPE_PRESENTATION.associated.enabled && (
           <button
             onClick={() => handleFilterChange(setAmbito, 'Indirecta (Mancomunidad)')}
             className={`px-3 py-2 rounded-lg transition-all font-semibold whitespace-nowrap cursor-pointer ${
@@ -348,6 +349,7 @@ function LicitacionesContent() {
           >
             {getScopeLabel('mancomunidad')}
           </button>
+          )}
         </div>
       </div>
 
