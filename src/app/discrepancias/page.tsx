@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/site-config';
 import Link from 'next/link';
 import { ChevronRight, AlertOctagon, HelpCircle, Sparkles } from 'lucide-react';
 import { getDiscrepancias } from '@/lib/discrepancias';
@@ -7,9 +8,9 @@ import DiscrepanciasClientView from '@/components/DiscrepanciasClientView';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Buzón de Discrepancias e Inconsistencias Registrales | la plataforma',
+  title: `Buzón de Discrepancias e Inconsistencias Registrales | ${SITE_CONFIG.siteName}`,
   description:
-    'Monitor de incidencias cronológicas, registrales y metodológicas detectadas en los expedientes de contratación pública del ámbito configurado para revisión manual y asistida por IA.',
+    `Monitor de incidencias cronológicas, registrales y metodológicas detectadas en los expedientes de contratación pública de ${SITE_CONFIG.localityName} para revisión manual y asistida por IA.`,
 };
 
 export default function DiscrepanciasPage() {
