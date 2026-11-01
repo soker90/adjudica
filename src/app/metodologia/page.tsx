@@ -147,14 +147,14 @@ export default function MethodologyPage() {
                   return <h3 key={blockIndex} id={block.id} className="pt-2 text-base font-semibold text-slate-800">{renderInlineText(block.text)}</h3>;
                 }
                 if (block.type === 'listItem') {
-                  if (blockIndex > 0 && section.blocks[blockIndex - 1]?.type === 'listItem') {
+                  if (blockIndex > 0 && section.blocks?.[blockIndex - 1]?.type === 'listItem') {
                     return null;
                   }
 
                   const listItems = [];
-                  for (let itemIndex = blockIndex; itemIndex < section.blocks.length; itemIndex += 1) {
-                    const item = section.blocks[itemIndex];
-                    if (item.type !== 'listItem') break;
+                  for (let itemIndex = blockIndex; itemIndex < (section.blocks?.length ?? 0); itemIndex += 1) {
+                    const item = section.blocks?.[itemIndex];
+                    if (!item || item.type !== 'listItem') break;
                     listItems.push(item);
                   }
 
