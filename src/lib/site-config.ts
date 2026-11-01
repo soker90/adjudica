@@ -25,7 +25,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     description?: string;
     indexTitle?: string;
     indexLinks?: Array<{ id: string; title: string }>;
-    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string }> }>
+    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string } | { id?: string; type: 'table'; headers: string[]; rows: string[][] }> }>
   };
   homeAuditDescription?: string;
   homeAnnualEvolutionDescription?: string;

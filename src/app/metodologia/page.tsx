@@ -44,6 +44,22 @@ const DEFAULT_METHODOLOGY = {
   ],
 };
 
+function renderInlineText(text: string) {
+  const tokens = text.split(/(\*\*[^*]+\*\*|(?<!\*)\*[^*]+\*(?!\*)|`[^`]+`)/g);
+  return tokens.map((token, index) => {
+    if (token.startsWith('**') && token.endsWith('**')) {
+      return <strong key={index}>{token.slice(2, -2)}</strong>;
+    }
+    if (token.startsWith('`') && token.endsWith('`')) {
+      return <code key={index} className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[0.9em] text-slate-800">{token.slice(1, -1)}</code>;
+    }
+    if (token.startsWith('*') && token.endsWith('*')) {
+      return <em key={index}>{token.slice(1, -1)}</em>;
+    }
+    return token;
+  });
+}
+
 const methodology = {
   ...DEFAULT_METHODOLOGY,
   ...SITE_CONFIG.methodology,
@@ -99,13 +115,41 @@ export default function MethodologyPage() {
           {section.blocks?.length ? (
             <div className="space-y-3">
               {section.blocks.map((block, blockIndex) => {
+                if (block.type === 'table') {
+                  return (
+                    <div key={blockIndex} className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                      <table className="min-w-full border-collapse text-left text-xs">
+                        <thead className="bg-slate-100 text-slate-700">
+                          <tr>
+                            {block.headers.map((header, headerIndex) => (
+                              <th key={headerIndex} scope="col" className="border-b border-r border-slate-200 p-2.5 font-semibold last:border-r-0">
+                                {renderInlineText(header)}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200 text-slate-600">
+                          {block.rows.map((row, rowIndex) => (
+                            <tr key={rowIndex} className="align-top">
+                              {row.map((cell, cellIndex) => (
+                                <td key={cellIndex} className="border-r border-slate-100 p-2.5 last:border-r-0">
+                                  {renderInlineText(cell)}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                }
                 if (block.type === 'heading') {
-                  return <h3 key={blockIndex} id={block.id} className="pt-2 text-base font-semibold text-slate-800">{block.text}</h3>;
+                  return <h3 key={blockIndex} id={block.id} className="pt-2 text-base font-semibold text-slate-800">{renderInlineText(block.text)}</h3>;
                 }
                 if (block.type === 'listItem') {
-                  return <div key={blockIndex} className="flex gap-2 pl-3 text-sm leading-6 text-slate-700"><span aria-hidden="true">•</span><p>{block.text}</p></div>;
+                  return <div key={blockIndex} className="flex gap-2 pl-3 text-sm leading-6 text-slate-700"><span aria-hidden="true">•</span><p>{renderInlineText(block.text)}</p></div>;
                 }
-                return <p key={blockIndex} className="text-sm leading-6 text-slate-700">{block.text}</p>;
+                return <p key={blockIndex} className="text-sm leading-6 text-slate-700">{renderInlineText(block.text)}</p>;
               })}
             </div>
           ) : section.paragraphs.map((paragraph, paragraphIndex) => (
