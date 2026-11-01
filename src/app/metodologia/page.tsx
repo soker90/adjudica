@@ -45,7 +45,7 @@ const DEFAULT_METHODOLOGY = {
 };
 
 function renderInlineText(text: string) {
-  const tokens = text.split(/(\\*\\*[^*]+\\*\\*|(?<!\\*)\\*[^*]+\\*(?!\\*)|`[^`]+`)/g);
+  const tokens = text.split(/(\*\*[^*]+\*\*|(?<!\*)\*[^*]+\*(?!\*)|`[^`]+`)/g);
   return tokens.map((token, index) => {
     if (token.startsWith('**') && token.endsWith('**')) {
       return <strong key={index}>{token.slice(2, -2)}</strong>;
