@@ -559,6 +559,27 @@ describe('corporate awarded volume', () => {
     expect(profile.denominacionesRegistradas[0].volumen).toBe(resolution.volumen);
   });
 
+  it('resolves canonical group identifiers returned by the company directory', () => {
+    const db = createGeneratedTestDb(31005, 1);
+    databases.push(db);
+    db.exec(`
+      INSERT INTO corporate_groups(group_id, group_name, associated_nifs_json, scope, description)
+      VALUES ('group-test', 'Grupo de prueba', '["B00000005"]', 'Nacional', 'Prueba');
+      UPDATE contracts
+      SET awardee = 'Empresa Grupo', awardee_nif = 'B00000005',
+          award_amount_type = 'total'
+      WHERE id = 'generated-31005-1'
+    `);
+
+    refreshCorporateResolutionTable(db);
+    const byCif = getCorporateProfile(db, 'B00000005');
+    const byCanonicalGroupId = getCorporateProfile(db, 'grupo:group-test');
+
+    expect(byCanonicalGroupId.denominacionesRegistradas).toEqual(byCif.denominacionesRegistradas);
+    expect(byCanonicalGroupId.grupoCorporativo?.id).toBe('group-test');
+    expect(byCanonicalGroupId.denominacionesRegistradas).toHaveLength(1);
+  });
+
   it('does not include lot PBLs in consolidated group volume', () => {
     const db = createGeneratedTestDb(31005, 1);
     databases.push(db);

@@ -480,8 +480,9 @@ export function getCorporateProfile(db: DatabaseSync, canonicalId: string): Cruc
   // 0. Detectar si canonicalId es un grupo o pertenece a un grupo empresarial
   const cleanId = (canonicalId || '').trim();
   const catalog = loadCorporateResolutionCatalog(db);
+  const groupId = cleanId.startsWith('grupo:') ? cleanId.slice('grupo:'.length) : cleanId;
   const normCleanCif = normalizeCif(cleanId, catalog.cifCorrections);
-  let detectedGroupDef: CorporateGroup | undefined = catalog.corporateGroups[cleanId] || (normCleanCif ? getCorporateGroupForCif(normCleanCif, catalog.corporateGroups) || undefined : undefined);
+  let detectedGroupDef: CorporateGroup | undefined = catalog.corporateGroups[groupId] || (normCleanCif ? getCorporateGroupForCif(normCleanCif, catalog.corporateGroups) || undefined : undefined);
 
   if (!detectedGroupDef) {
     const row = db.prepare(`
