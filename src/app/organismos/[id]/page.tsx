@@ -5,7 +5,7 @@ import { getContractingAuthorityDetail } from '@/lib/db';
 import { formatCompactCurrency, formatNumber } from '@/lib/format';
 import { getOpaqueEmpresaId } from '@/lib/corporate';
 import { AnnualEvolutionChart, HorizontalBarList } from '@/components/Charts';
-import { ArrowLeft, Briefcase, Building2, CalendarClock, ChevronRight, FileText, Info } from 'lucide-react';
+import { ArrowLeft, Briefcase, CalendarClock, ChevronRight, FileText, Info } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
@@ -56,6 +56,16 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
           <p className="text-xs sm:text-sm text-[#64748b]">
             Actividad contractual registrada entre {authority.primer_ano || 2018} y {authority.ultimo_ano || new Date().getFullYear()}
           </p>
+          {authority.placsp_id && (
+            <a
+              className="mt-2 inline-block text-xs text-[#0d9373] hover:underline"
+              href={`https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/${encodeURIComponent(authority.placsp_id)}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Perfil en PLACSP
+            </a>
+          )}
         </div>
         <Link
           href={`/licitaciones?organo=${encodeURIComponent(authority.id)}`}
@@ -103,31 +113,36 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
         </section>
       )}
 
-      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="rounded-xl p-6 border border-[#d1fae5] bg-[#ecfdf5] shadow-xs">
-          <span className="text-xs text-[#0d9373] font-bold uppercase tracking-wider block mb-1">Gasto adjudicado</span>
-          <span className="text-2xl sm:text-3xl font-extrabold font-mono text-[#0a0a0a]">{formatCompactCurrency(authority.gasto_adjudicado)}</span>
-          <p className="text-[11px] text-[#0d9373] font-medium mt-1">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mint-card p-4">
+          <span className="text-xs text-slate-500">Licitaciones</span>
+          <strong className="mt-1 block text-xl">{formatNumber(authority.total_contratos)}</strong>
+        </div>
+        <div className="mint-card p-4">
+          <span className="text-xs text-slate-500">Proveedores</span>
+          <strong className="mt-1 block text-xl">{formatNumber(authority.total_adjudicatarios)}</strong>
+        </div>
+        <div className="mint-card p-4 border border-[#d1fae5] bg-[#ecfdf5]">
+          <span className="text-xs text-[#0d9373]">Gasto adjudicado</span>
+          <strong className="mt-1 block text-xl">{formatCompactCurrency(authority.gasto_adjudicado)}</strong>
+          <span className="mt-1 block text-[11px] text-[#0d9373]">
             {authority.ingresos_adjudicados > 0
               ? `+${formatCompactCurrency(authority.ingresos_adjudicados)} en ingresos/cánones`
               : 'Gasto público adjudicado'}
-          </p>
+          </span>
         </div>
-        <div className="mint-card p-6">
-          <span className="text-xs text-slate-500 font-bold uppercase tracking-wider block mb-1">Licitaciones y contratos</span>
-          <span className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-800">{formatNumber(authority.total_contratos)}</span>
-          <p className="text-[11px] text-slate-400 mt-1">Expedientes tramitados</p>
-        </div>
-        <div className="mint-card p-6">
-          <span className="text-xs text-slate-500 font-bold uppercase tracking-wider block mb-1">Empresas adjudicatarias</span>
-          <span className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-800">{formatNumber(authority.total_adjudicatarios)}</span>
-          <p className="text-[11px] text-slate-400 mt-1">Proveedores contratados</p>
+        <div className="mint-card p-4">
+          <span className="text-xs text-slate-500">Importe total</span>
+          <strong className="mt-1 block text-xl">{formatCompactCurrency(authority.volumen_total)}</strong>
         </div>
       </section>
 
       {authority.evolucion?.length > 0 && (
         <section className="space-y-2">
-          <AnnualEvolutionChart data={authority.evolucion} />
+          <div className="mint-card p-6 space-y-5">
+            <h2 className="font-bold text-slate-900">Evolución anual</h2>
+            <AnnualEvolutionChart data={authority.evolucion} />
+          </div>
           {history?.detail && (
             <div className="px-4 py-3 rounded-xl bg-[#f8fafb] border border-[#e2e8f0] text-xs text-slate-600 flex items-start gap-2.5">
               <Info className="h-4 w-4 text-[#0d9373] shrink-0 mt-0.5" />
@@ -151,8 +166,9 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
               <span>Principales proveedores adjudicatarios</span>
             </h2>
           </div>
-          <div className="divide-y divide-[#e2e8f0]">
-            {authority.topAdjudicatarios.map((supplier: any, index: number) => {
+          {authority.topAdjudicatarios?.length ? (
+            <div className="divide-y divide-[#e2e8f0]">
+              {authority.topAdjudicatarios.map((supplier: any, index: number) => {
               const supplierId = getOpaqueEmpresaId(supplier.nif, supplier.adjudicatario);
               return (
                 <div key={`${supplier.nif}-${index}`} className="py-3 flex items-center justify-between text-xs gap-3">
@@ -170,8 +186,11 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
                   </div>
                 </div>
               );
-            })}
-          </div>
+              })}
+            </div>
+          ) : (
+            <p className="text-sm text-slate-500">Todavía no hay adjudicaciones registradas.</p>
+          )}
         </div>
       </section>
     </main>
