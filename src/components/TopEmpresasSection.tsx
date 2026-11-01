@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { formatCompactCurrency, formatNumber, formatNif } from '@/lib/format';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { Trophy, ArrowRight, ChevronRight } from 'lucide-react';
 
 interface EmpresaItem {
@@ -38,7 +39,7 @@ export default function TopEmpresasSection({
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1">
-            Principales contratistas y proveedores por volumen presupuestario adjudicado en el ámbito configurado
+            {SITE_CONFIG.homeTopCompaniesDescription ?? 'Principales contratistas y proveedores por volumen presupuestario adjudicado en el ámbito configurado'}
           </p>
         </div>
 

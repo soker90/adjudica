@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { formatCurrency, formatCompactCurrency, formatNumber } from '@/lib/format';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { TrendingUp, ArrowUpRight } from 'lucide-react';
 
 interface YearData {
@@ -31,7 +32,7 @@ export function AnnualEvolutionChart({ data }: { data: YearData[] }) {
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1">
-            Volumen presupuestario adjudicado y número de contratos tramitados por año en el ámbito configurado
+            {SITE_CONFIG.homeAnnualEvolutionDescription ?? 'Volumen presupuestario adjudicado y número de contratos tramitados por año en el ámbito configurado'}
           </p>
         </div>
 
