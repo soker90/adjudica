@@ -4,27 +4,34 @@ import { SITE_CONFIG } from './site-config';
  * Central application configuration and environment settings.
  */
 
-function resolveSiteUrl(): string {
-  // 1. Explicitly configured public site URL
-  if (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim().length > 0) {
-    return process.env.NEXT_PUBLIC_SITE_URL.trim().replace(/\/+$/, '');
+export function resolveSiteUrl(siteUrl: string, env: NodeJS.ProcessEnv = process.env): string {
+  // 1. Explicit environment override, when an operator intentionally configures one.
+  const explicitSiteUrl = env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicitSiteUrl) {
+    return explicitSiteUrl.replace(/\/+$/, '');
   }
 
-  // 2. Vercel production deployment URL (provided by Vercel environment)
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL.trim()}`;
+  // 2. The instance's configured URL is its canonical public domain.
+  const configuredSiteUrl = siteUrl.trim().replace(/\/+$/, '');
+  if (configuredSiteUrl) {
+    return configuredSiteUrl;
   }
 
-  // 3. Vercel deployment preview / current URL
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL.trim()}`;
+  // 3. Vercel URLs are only fallbacks when the instance has no canonical URL.
+  const productionUrl = env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (productionUrl) {
+    return `https://${productionUrl}`;
   }
 
-  // 4. Default canonical production domain
-  return SITE_CONFIG.siteUrl;
+  const deploymentUrl = env.VERCEL_URL?.trim();
+  if (deploymentUrl) {
+    return `https://${deploymentUrl}`;
+  }
+
+  return siteUrl;
 }
 
-export const SITE_URL = resolveSiteUrl();
+export const SITE_URL = resolveSiteUrl(SITE_CONFIG.siteUrl);
 
 export type LegalConfigStatus = 'configured' | 'incomplete';
 
