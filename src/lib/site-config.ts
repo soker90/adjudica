@@ -10,7 +10,7 @@ type ScopePresentationItemConfig = {
   noteLinkHref?: string;
 };
 
-type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeAuditDescription' | 'analysisPresentation' | 'dataPresentation' | 'homeAnnualEvolutionDescription' | 'homeTopCompaniesDescription' & {
+type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs' | 'heroQuickFilters' | 'metadataKeywords' | 'fraccionamientoStopWords' | 'flujoStopWords' | 'legacyResponseOmitContractFields' | 'scopePresentation' | 'methodology' | 'homePresentation' | 'organismsPresentation' | 'footerDisclaimer' | 'footerCopyright' | 'homeLatestPublicationLabel' | 'headerBrandSuffix' | 'associatedAuthorityNameMatch' | 'homeAuditDescription' | 'analysisPresentation' | 'dataPresentation' | 'homeAnnualEvolutionDescription' | 'homeTopCompaniesDescription'> & {
   localityAliases: string[];
   localSupplierNifs: string[];
   metadataKeywords: string[];
