@@ -60,5 +60,10 @@
     "vitest": "^5.0.0"
   },
   "packageManager": "pnpm@11.3.0",
-  "description": "Configurable public procurement transparency and analysis application."
+  "description": "Configurable public procurement transparency and analysis application.",
+  "pnpm": {
+    "overrides": {
+      "next>postcss": "^8.5.30"
+    }
+  }
 }
