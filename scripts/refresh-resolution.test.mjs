@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -272,6 +273,20 @@ describe('refresh-resolution catalog source', () => {
       });
     }
     db.close();
+  });
+
+
+  it('loads the SQLite-backed corporate resolver with Node 24 type stripping', () => {
+    const result = spawnSync(
+      process.execPath,
+      ['--experimental-strip-types', '--input-type=module', '-e', "await import('./src/lib/db-corporate.ts')"],
+      {
+        cwd: path.resolve(import.meta.dirname, '..'),
+        encoding: 'utf8',
+      },
+    );
+
+    expect(result.status, result.stderr || result.stdout).toBe(0);
   });
 
 });
