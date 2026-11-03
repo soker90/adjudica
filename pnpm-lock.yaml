@@ -10,16 +10,16 @@ importers:
     dependencies:
       lucide-react:
         specifier: 1.40.0
-        version: 1.40.0(react@19.1.0)
+        version: 1.40.0(react@19.1.10)
       next:
         specifier: 15.5.28
-        version: 15.5.28(@types/node@20.19.43)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.5.28(@types/node@20.19.43)(react-dom@19.1.10(react@19.1.10))(react@19.1.10)
       react:
-        specifier: 19.1.0
+        specifier: 19.1.10
         version: 19.1.0
       react-dom:
-        specifier: 19.1.0
-        version: 19.1.0(react@19.1.0)
+        specifier: 19.1.10
+        version: 19.1.0(react@19.1.10)
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -1836,18 +1836,16 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  react-dom@19.1.0:
-    resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
+  react-dom@19.1.10:
+    resolution: {integrity: sha512-EDzJj/XjpSk+4biljInEj7y4f1qb+Hnl3kYvSqArStcAAgTHAj9pJM03Hi69JJZmVsyN/de2hOAouPxLMYEDbA==}
     peerDependencies:
-      react: ^19.1.0
-
+      react: ^19.1.10
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  react@19.1.0:
-    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
+  react@19.1.10:
+    resolution: {integrity: sha512-xLes4RnWjC02mmkdHO2GPNjO0le6RMBPLYWKMaMf4jUIMFjTqrYBobxWAh8rU0pjfefJ6OLdef9zbYj+7iXH9Q==}
     engines: {node: '>=0.10.0'}
-
   reflect.getprototypeof@1.0.10:
     resolution: {integrity: sha512-00o4I+DVrefhv+nX0ulyi3biSHCPDe+yLv5o/p6d/UVlirijB8E16FtfwSAi4g3tcqrQ4lRAqQSoFEZJehYEcw==}
     engines: {node: '>= 0.4'}
@@ -3779,7 +3777,7 @@ snapshots:
     dependencies:
       js-tokens: 4.0.0
 
-  lucide-react@1.40.0(react@19.1.0):
+  lucide-react@1.40.0(react@19.1.10):
     dependencies:
       react: 19.1.0
 
@@ -3820,15 +3818,15 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next@15.5.28(@types/node@20.19.43)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  next@15.5.28(@types/node@20.19.43)(react-dom@19.1.10(react@19.1.10))(react@19.1.10):
     dependencies:
       '@next/env': 15.5.28
       '@swc/helpers': 0.5.15
-      caniuse-lite: 1.0.30001816
-      postcss: 8.5.30
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      styled-jsx: 5.1.6(react@19.1.0)
+      caniuse-lite: 1.0.30001819
+      postcss: 8.4.31
+      react: 19.1.10
+      react-dom: 19.1.10(react@19.1.10)
+      styled-jsx: 5.1.6(react@19.1.10)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.5.28
       '@next/swc-darwin-x64': 15.5.28
@@ -3966,15 +3964,13 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  react-dom@19.1.0(react@19.1.0):
+  react-dom@19.1.10(react@19.1.10):
     dependencies:
-      react: 19.1.0
+      react: 19.1.10
       scheduler: 0.26.0
-
   react-is@16.13.1: {}
 
-  react@19.1.0: {}
-
+  react@19.1.10: {}
   reflect.getprototypeof@1.0.10:
     dependencies:
       call-bind: 1.0.9
@@ -4222,7 +4218,7 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-jsx@5.1.6(react@19.1.0):
+  styled-jsx@5.1.6(react@19.1.10):
     dependencies:
       client-only: 0.0.1
       react: 19.1.0
