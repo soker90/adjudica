@@ -3782,7 +3782,7 @@ snapshots:
 
   lucide-react@1.40.0(react@19.1.10):
     dependencies:
-      react: 19.1.0
+      react: 19.1.10
 
   magic-string@0.30.21:
     dependencies:
@@ -4224,7 +4224,7 @@ snapshots:
   styled-jsx@5.1.6(react@19.1.10):
     dependencies:
       client-only: 0.0.1
-      react: 19.1.0
+      react: 19.1.10
 
   supports-color@7.2.0:
     dependencies:
