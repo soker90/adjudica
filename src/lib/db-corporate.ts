@@ -1,5 +1,5 @@
 import { eligibleAwardLotStatusSql, eligibleAwardResultStateSql, excludeAwardWhenLegacyLotTerminalSql, excludeLegacyLotWhenStructuredTerminalResultSql } from './lot-status.js';
-import { canceledContractStatusSql, desertedContractStatusSql } from './contract-status-sql';
+import { canceledContractStatusSql, desertedContractStatusSql } from './contract-status-sql.ts';
 import { DatabaseSync } from 'node:sqlite';
 import {
   resolveEntity,
