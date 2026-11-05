@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { escapeXml, toRfc822Date, getFeedItems, generateRssFeed } from './feed';
 import { createGeneratedTestDb } from './test-db';
 import { SITE_URL } from './config';
+import { SITE_CONFIG } from './site-config';
 import { setDbForTests } from './db';
 
 describe('RSS Feed - Utils', () => {
@@ -58,7 +59,8 @@ describe('RSS Feed - Generación', () => {
     expect(xml.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).toBe(true);
     expect(xml).toContain('<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">');
     expect(xml).toContain('<channel>');
-    expect(xml).toContain('<title>la plataforma · Licitaciones y Alertas');
+    expect(xml).toContain(`<title>${SITE_CONFIG.siteName} · Licitaciones y Alertas`);
+    expect(xml).toContain(`Ver ficha y cronometría en ${SITE_CONFIG.siteName}`);
     expect(xml).toContain(SITE_URL);
     expect(xml).not.toContain('localhost:3000');
     expect(xml).not.toContain('adjudica.es');
@@ -71,5 +73,7 @@ describe('RSS Feed - Generación', () => {
   it('soporta filtrado por ámbito', () => {
     const xmlDirecta = generateRssFeed({ ambito: 'directa' });
     expect(xmlDirecta).toContain('directa');
+    expect(xmlDirecta).toContain('/feed.xml?ambito=directa');
+    expect(xmlDirecta).not.toContain('/feed.xml?scope=');
   });
 });
