@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Landmark, FileText } from 'lucide-react';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export default function NotFoundPage() {
   return (
@@ -13,7 +14,7 @@ export default function NotFoundPage() {
             Página o expediente no encontrado
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            El recurso solicitado no existe en la base de datos de la plataforma o el identificador del expediente ha sido modificado.
+            El recurso solicitado no existe en la base de datos de {SITE_CONFIG.siteName} o el identificador del expediente ha sido modificado.
           </p>
         </div>
 
