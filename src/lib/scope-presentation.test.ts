@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createScopePresentation, getScopeLabel, getScopePresentationKey } from './scope-presentation';
+import { createScopePresentation, getScopePresentationKey } from './scope-presentation';
 
 describe('scope presentation', () => {
   it.each([
