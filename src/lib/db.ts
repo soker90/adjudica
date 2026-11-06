@@ -7,8 +7,7 @@ import {
   ensureCorporateResolutionTable, 
   getCorporateProfile,
   getCorporateContractSource,
-  resolveEntityFromDb,
-  UNIFIED_CONTRACT_SOURCE
+  resolveEntityFromDb
 } from './db-corporate';
 import {
   getClusterKey,
@@ -3349,7 +3348,6 @@ export function getEvolucionAnualStats(scope?: string): EvolucionAnualItem[] {
   const filterScope = parseScope(scope);
 
   const andScope = filterScope ? 'AND scope = ?' : '';
-  const andScopeL = filterScope ? 'AND l.scope = ?' : '';
   const params = filterScope ? [filterScope] : [];
 
   const hasLotAwardsTable = Boolean(db.prepare(

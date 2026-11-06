@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -60,7 +61,7 @@ export default function Navbar() {
             className="flex items-center gap-2.5 group shrink-0 transition-opacity hover:opacity-90"
             title={`Ir al inicio de ${SITE_CONFIG.siteName}`}
           >
-            <img src={SITE_CONFIG.logoPath} alt={SITE_CONFIG.logoAlt} className="h-8 w-8 rounded-lg object-contain" />
+            <Image src={SITE_CONFIG.logoPath} alt={SITE_CONFIG.logoAlt} width={32} height={32} unoptimized className="h-8 w-8 rounded-lg object-contain" />
             <span className="font-extrabold tracking-tight text-base sm:text-lg text-slate-900 font-sans">
               {SITE_CONFIG.siteName}
             </span>

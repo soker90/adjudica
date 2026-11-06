@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { createGeneratedTestDb } from './test-db';
 import { setDbForTests } from './db';
 import { getDiscrepancias } from './discrepancias';
