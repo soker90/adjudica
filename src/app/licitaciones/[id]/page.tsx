@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import { getLicitacionById, getAlertasForContract } from '@/lib/db';
 import { getPlacspUrl, getPlacspId, getContractSlug } from '@/lib/placsp';
 import { SITE_URL } from '@/lib/config';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { formatCurrency, formatDate, formatNumber, formatNif, formatUrgencia } from '@/lib/format';
 import { getOpaqueEmpresaId } from '@/lib/corporate';
 import { isEligibleAwardLotStatus } from '@/lib/lot-status.js';
@@ -50,12 +51,12 @@ export async function generateMetadata({
 
   if (!lic) {
     return {
-      title: 'Licitación no encontrada · la plataforma',
+      title: `Licitación no encontrada · ${SITE_CONFIG.siteName}`,
     };
   }
 
   const canonicalSlug = getContractSlug(lic.id);
-  const title = `${lic.expediente} · ${lic.objeto.slice(0, 65)} · la plataforma`;
+  const title = `${lic.expediente} · ${lic.objeto.slice(0, 65)} · ${SITE_CONFIG.siteName}`;
   const description = `Dossier oficial de contratación del expediente ${lic.expediente} (${lic.contracting_authority_name}). Presupuesto: ${formatCurrency(lic.importe_sin_iva)}. Auditoría y cronometría cívica.`;
 
   return {

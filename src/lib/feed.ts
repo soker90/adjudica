@@ -2,6 +2,7 @@ import { getDb, parseScope } from './db';
 import { getContractSlug } from './placsp';
 import { formatCurrency } from './format';
 import { SITE_URL } from './config';
+import { SITE_CONFIG } from './site-config';
 import { inCourseContractStatusSql } from './contract-status-sql';
 
 export function escapeXml(str: string | null | undefined): string {
@@ -76,7 +77,7 @@ export function getFeedItems(scope?: string | null, siteUrl = SITE_URL): FeedIte
       <p><strong>Tipo:</strong> ${escapeXml(lic.tipo_contrato)} · <strong>Procedimiento:</strong> ${escapeXml(lic.procedimiento)}</p>
       <p><strong>Presupuesto Base:</strong> ${escapeXml(importeTxt)} (sin IVA)</p>
       ${lic.deadline_date ? `<p><strong>Fecha límite de presentación:</strong> ${escapeXml(lic.deadline_date)}</p>` : ''}
-      <p><a href="${escapeXml(internalUrl)}">Ver ficha y cronometría en la plataforma</a> | <a href="${escapeXml(lic.url_placsp)}">Pliegos en PLACSP</a></p>
+      <p><a href="${escapeXml(internalUrl)}">Ver ficha y cronometría en ${escapeXml(SITE_CONFIG.siteName)}</a> | <a href="${escapeXml(lic.url_placsp)}">Pliegos en PLACSP</a></p>
     `.trim();
 
     items.push({
@@ -151,13 +152,13 @@ export function generateRssFeed(options: { scope?: string | null; ambito?: strin
   const items = getFeedItems(scope, siteUrl);
 
   const feedTitle = scope
-    ? `la plataforma · Licitaciones y Alertas (${scope})`
-    : 'la plataforma · Licitaciones y Alertas de Contratación Pública';
+    ? `${SITE_CONFIG.siteName} · Licitaciones y Alertas (${scope})`
+    : `${SITE_CONFIG.siteName} · Licitaciones y Alertas de Contratación Pública`;
 
   const feedDescription =
     'Sindicación cívica en tiempo real de licitaciones públicas, convocatorias abiertas y señales de auditoría en el ámbito configurado.';
 
-  const feedLink = `${siteUrl}/feed.xml${scope ? `?scope=${scope}` : ''}`;
+  const feedLink = `${siteUrl}/feed.xml${scope ? `?ambito=${encodeURIComponent(scope)}` : ''}`;
   const nowRfc822 = new Date().toUTCString();
 
   const itemsXml = items
