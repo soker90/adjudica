@@ -193,12 +193,10 @@ export default function MethodologyPage() {
                     </div>
                   );
                 }
-                if (block.type !== 'table') {
-                  for (let previousIndex = blockIndex - 1; previousIndex >= 0; previousIndex -= 1) {
-                    const previousBlock = section.blocks?.[previousIndex];
-                    if (!previousBlock || previousBlock.type === 'table') break;
-                    if (previousBlock.type === 'heading') return null;
-                  }
+                for (let previousIndex = blockIndex - 1; previousIndex >= 0; previousIndex -= 1) {
+                  const previousBlock = section.blocks?.[previousIndex];
+                  if (!previousBlock || previousBlock.type === 'table') break;
+                  if (previousBlock.type === 'heading') return null;
                 }
                 if (block.type === 'listItem') {
                   if (blockIndex > 0 && section.blocks?.[blockIndex - 1]?.type === 'listItem') {
