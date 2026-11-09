@@ -63,6 +63,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     summaryDirectDescription?: string;
     summaryAssociatedDescription?: string;
     associatedIncomeLabel?: string;
+    profileLinkLabel?: string;
     summaryTotalDescription?: string;
     associatedSummaryAuthorityMatch?: string;
     defaultAuthorityBadge?: string;
