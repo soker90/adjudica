@@ -4,7 +4,7 @@ import { SITE_CONFIG } from '@/lib/site-config';
 import { Suspense } from 'react';
 import { getStats } from '@/lib/db';
 import { getPlacspId } from '@/lib/placsp';
-import { formatCurrency, formatNumber, formatDate, formatCompactCurrency, formatPercent } from '@/lib/format';
+import { formatCurrency, formatNumber, formatDate, formatCompactCurrency, formatDecimal, formatPercent } from '@/lib/format';
 import { getContractAmountPresentation } from '@/lib/importe-presentacion';
 import HomeHero from '@/components/HomeHero';
 import HomeAuditoriaSection from '@/components/HomeAuditoriaSection';
@@ -45,7 +45,9 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     {
       title: 'Gasto Público Adjudicado',
       value: formatCompactCurrency(stats.gastoAdjudicado),
-      subtitle: homeCopy?.spendSubtitle ?? `Gasto adjudicado: ${getScopeLabel(stats.ambitoSeleccionado)}`,
+      subtitle: (homeCopy?.spendSubtitle ?? `Gasto adjudicado: ${getScopeLabel(stats.ambitoSeleccionado)}`)
+        .replace('{direct}', formatDecimal(stats.desgloseAmbito.directa.gastoAdjudicado / 1e6, 1))
+        .replace('{associated}', formatDecimal(stats.desgloseAmbito.mancomunidad.gastoAdjudicado / 1e6, 1)),
       badge: selectedScope === 'primary'
         ? `${formatPercent(stats.desgloseAmbito.directa.pctGasto, 1)} del gasto`
         : selectedScope === 'associated'
