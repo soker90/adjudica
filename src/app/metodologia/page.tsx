@@ -175,18 +175,19 @@ export default function MethodologyPage() {
                     blue: { border: 'border-l-[#2563eb]', eyebrow: 'text-[#2563eb]', badge: 'border-[#dbeafe] bg-[#eff6ff] text-[#2563eb]' },
                     red: { border: 'border-l-[#dc2626]', eyebrow: 'text-[#991b1b]', badge: 'border-[#fecaca] bg-[#fef2f2] text-[#991b1b]' },
                   };
-                  const tone = toneClasses[block.card?.tone ?? 'emerald'];
-                  const featured = block.card?.layout === 'featured';
+                  const card = block.card ?? {};
+                  const tone = toneClasses[card.tone ?? 'emerald'];
+                  const featured = card.layout === 'featured';
 
                   return (
                     <div
                       key={blockIndex}
                       className={`rounded-xl border border-[#e2e8f0] border-l-4 ${tone.border} bg-white ${featured ? 'md:col-span-2 p-6 space-y-4' : 'p-5 space-y-2'}`}
                     >
-                      {(block.card?.eyebrow || block.card?.badge) && (
+                      {(card.eyebrow || card.badge) && (
                         <div className="flex items-center justify-between gap-3">
-                          {block.card.eyebrow && <span className={`font-mono text-xs font-bold uppercase tracking-wider ${tone.eyebrow}`}>{block.card.eyebrow}</span>}
-                          {block.card.badge && <span className={`rounded border px-2 py-0.5 text-[10px] font-bold ${tone.badge}`}>{block.card.badge}</span>}
+                          {card.eyebrow && <span className={`font-mono text-xs font-bold uppercase tracking-wider ${tone.eyebrow}`}>{card.eyebrow}</span>}
+                          {card.badge && <span className={`rounded border px-2 py-0.5 text-[10px] font-bold ${tone.badge}`}>{card.badge}</span>}
                         </div>
                       )}
                       <h3
@@ -218,7 +219,7 @@ export default function MethodologyPage() {
                         if (item.type === 'subcard' || item.type === 'miniCard') {
                           const cardType = item.type;
                           if (itemIndex > 0 && groupedBlocks[itemIndex - 1]?.type === cardType) return null;
-                          const cards = [];
+                          const cards: Array<Extract<MethodologyTextBlock, { type: 'subcard' | 'miniCard' }>> = [];
                           for (let cardIndex = itemIndex; cardIndex < groupedBlocks.length; cardIndex += 1) {
                             const candidate = groupedBlocks[cardIndex];
                             if (!candidate || candidate.type !== cardType) break;
