@@ -295,6 +295,21 @@ export default function MethodologyPage() {
                   return <div key={blockIndex} className="rounded border border-[#e2e8f0] bg-[#f8fafb] p-2 font-mono text-[11px] leading-5 text-slate-700">{renderInlineText(block.text)}</div>;
                 }
                 if (block.type === 'subcard' || block.type === 'miniCard') {
+                  const cardType = block.type;
+                  if (blockIndex > 0 && section.blocks?.[blockIndex - 1]?.type === cardType) return null;
+                  const cards: Array<Extract<MethodologyTextBlock, { type: 'subcard' | 'miniCard' }>> = [];
+                  for (let cardIndex = blockIndex; cardIndex < (section.blocks?.length ?? 0); cardIndex += 1) {
+                    const candidate = section.blocks?.[cardIndex];
+                    if (!candidate || candidate.type !== cardType) break;
+                    cards.push(candidate);
+                  }
+                  const columns = block.columns ?? (cardType === 'miniCard' ? 3 : 2);
+                  const gridClasses = {
+                    2: 'grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs',
+                    3: 'grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs',
+                    4: 'grid grid-cols-1 sm:grid-cols-4 gap-2 pt-2 text-xs',
+                    5: 'grid grid-cols-1 sm:grid-cols-5 gap-2 pt-2 text-xs',
+                  };
                   const nestedToneClasses = {
                     amber: 'border-amber-200 bg-amber-50/70',
                     emerald: 'border-emerald-200 bg-emerald-50/70',
@@ -305,12 +320,20 @@ export default function MethodologyPage() {
                     slate: 'border-slate-200 bg-slate-50',
                   };
                   return (
-                    <div key={blockIndex} className={`rounded-lg border p-3.5 space-y-1.5 ${nestedToneClasses[block.tone ?? 'slate']}`}>
-                      <div className="flex items-center justify-between gap-2">
-                        <strong className="block text-xs font-bold text-slate-800">{block.title}</strong>
-                        {block.badge && <span className="shrink-0 rounded border border-white/70 bg-white/70 px-1.5 py-0.5 font-mono text-[9px] font-bold text-slate-600">{block.badge}</span>}
-                      </div>
-                      <p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(block.text)}</p>
+                    <div key={blockIndex} className={gridClasses[columns]}>
+                      {cards.map((card, cardIndex) => {
+                        const toneClass = nestedToneClasses[card.tone ?? 'slate'];
+                        const spanClass = card.span === 'full' ? (columns === 2 ? 'sm:col-span-2' : columns === 3 ? 'sm:col-span-3' : columns === 4 ? 'sm:col-span-4' : 'sm:col-span-5') : '';
+                        return (
+                          <div key={cardIndex} className={`rounded-lg border p-3.5 space-y-1.5 ${toneClass} ${spanClass}`}>
+                            <div className="flex items-center justify-between gap-2">
+                              <strong className="block text-xs font-bold text-slate-800">{card.title}</strong>
+                              {card.badge && <span className="shrink-0 rounded border border-white/70 bg-white/70 px-1.5 py-0.5 font-mono text-[9px] font-bold text-slate-600">{card.badge}</span>}
+                            </div>
+                            <p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(card.text)}</p>
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 }
