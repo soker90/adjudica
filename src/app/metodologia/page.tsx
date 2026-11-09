@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/site-config';
 
@@ -53,8 +54,16 @@ const DEFAULT_METHODOLOGY = {
 };
 
 function renderInlineText(text: string) {
-  const tokens = text.split(/(\*\*[^*]+\*\*|(?<!\*)\*[^*]+\*(?!\*)|`[^`]+`)/g);
+  const tokens = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|(?<!\*)\*[^*]+\*(?!\*)|`[^`]+`)/g);
   return tokens.map((token, index) => {
+    const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <Link key={index} href={linkMatch[2]} className="font-semibold text-[#0d9373] underline-offset-2 hover:underline">
+          {linkMatch[1]}
+        </Link>
+      );
+    }
     if (token.startsWith('**') && token.endsWith('**')) {
       return <strong key={index}>{token.slice(2, -2)}</strong>;
     }
