@@ -84,6 +84,7 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
           <div className="space-y-1 text-xs sm:text-sm text-slate-700">
             {history.title && <p className="font-bold text-[#1e293b]">{history.title}</p>}
             <p className="leading-relaxed text-slate-600 text-xs">{history.description}</p>
+            {history.detail && <p className="leading-relaxed text-slate-600 text-xs">{history.detail}</p>}
             <Link href="/metodologia#cobertura-temporal" className="inline-flex items-center gap-1 font-semibold text-[#0d9373] hover:underline text-xs">
               <span>Consultar marco temporal y metodología de cobertura</span>
               <ChevronRight className="h-3 w-3" />
