@@ -48,50 +48,52 @@ export default function OrganismosPage() {
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-white">
-      <header className="border-b border-[#e2e8f0] pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="rounded-lg border border-[#d1fae5] bg-[#ecfdf5] p-1.5 text-[#0d9373]"><Landmark className="h-4 w-4" /></span>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#1e293b]">
+      <header className="border-b border-[#e2e8f0] pb-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="p-1.5 rounded-lg border border-[#d1fae5] bg-[#ecfdf5] text-[#0d9373]"><Landmark className="h-4 w-4" /></span>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1e293b]">
               {presentation?.title ?? 'Organismos contratantes'}
             </h1>
           </div>
-          <p className="text-sm text-[#64748b]">
-            {presentation?.description ?? 'Entidades configuradas para este portal y sus indicadores de contratación.'}
-          </p>
-        </div>
-        <CsvExportButton
-          filename={`${presentation?.csvFilenamePrefix ?? 'organismos'}_${new Date().toISOString().slice(0, 10)}.csv`}
-          headers={['Organismo', 'Ámbito', 'Licitaciones', 'Proveedores Distintos', 'Gasto Adjudicado (€)', 'Ingresos / Cánones (€)', 'Volumen Total (€)', 'Último Contrato']}
-          rows={contractingAuthorities.map((authority) => [
-            authority.name, authority.scope, authority.total_contratos, authority.total_adjudicatarios,
-            authority.gasto_adjudicado, authority.ingresos_adjudicados, authority.volumen_total, authority.ultimo_contrato,
-          ])}
-        />
-      </header>
-
-      {presentation?.scopeNoteTitle && presentation.scopeNoteText && (
-        <section className="rounded-xl border border-[#bfdbfe] bg-[#eff6ff] p-4 flex items-start gap-3">
-          <Info className="h-4 w-4 text-[#2563eb] shrink-0 mt-0.5" />
-          <div className="space-y-2 text-xs leading-relaxed text-slate-700">
-            <p>
-              <strong className="text-slate-900">{presentation.scopeNoteTitle}</strong>{' '}
-              {presentation.scopeNoteText}
-            </p>
-            {presentation.coverageNoteTitle && presentation.coverageNoteText && (
-              <p className="text-slate-600">
-                <strong className="text-slate-800">{presentation.coverageNoteTitle}</strong>{' '}
-                {presentation.coverageNoteText}{' '}
-                {presentation.coverageNoteLinkHref && (
-                  <Link href={presentation.coverageNoteLinkHref} className="font-semibold text-blue-700 underline hover:text-blue-900">
-                    {presentation.coverageNoteLinkLabel ?? 'Ver detalle en metodología'}
-                  </Link>
-                )}
-              </p>
-            )}
+          <div className="self-start sm:self-auto">
+            <CsvExportButton
+              filename={`${presentation?.csvFilenamePrefix ?? 'organismos'}_${new Date().toISOString().slice(0, 10)}.csv`}
+              headers={['Organismo', 'Ámbito', 'Licitaciones', 'Proveedores Distintos', 'Gasto Adjudicado (€)', 'Ingresos / Cánones (€)', 'Volumen Total (€)', 'Último Contrato']}
+              rows={contractingAuthorities.map((authority) => [
+                authority.name, authority.scope, authority.total_contratos, authority.total_adjudicatarios,
+                authority.gasto_adjudicado, authority.ingresos_adjudicados, authority.volumen_total, authority.ultimo_contrato,
+              ])}
+            />
           </div>
-        </section>
-      )}
+        </div>
+        <p className="text-xs sm:text-sm text-[#64748b] mt-1">
+          {presentation?.description ?? 'Entidades configuradas para este portal y sus indicadores de contratación.'}
+        </p>
+
+        {presentation?.scopeNoteTitle && presentation.scopeNoteText && (
+          <div className="p-4 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-start gap-3">
+            <Info className="h-4 w-4 text-[#2563eb] shrink-0 mt-0.5" />
+            <div className="text-xs text-slate-700 leading-relaxed space-y-1">
+              <p>
+                <strong className="text-[#1e293b]">{presentation.scopeNoteTitle}</strong>{' '}
+                {presentation.scopeNoteText}
+              </p>
+              {presentation.coverageNoteTitle && presentation.coverageNoteText && (
+                <p className="text-slate-600">
+                  <strong className="text-slate-800">{presentation.coverageNoteTitle}</strong>{' '}
+                  {presentation.coverageNoteText}{' '}
+                  {presentation.coverageNoteLinkHref && (
+                    <Link href={presentation.coverageNoteLinkHref} className="font-semibold text-[#2563eb] underline hover:text-blue-800">
+                      {presentation.coverageNoteLinkLabel ?? 'Ver detalle en metodología'}
+                    </Link>
+                  )}.
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+      </header>
 
       {presentation ? (
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -194,7 +196,7 @@ export default function OrganismosPage() {
                       <span className="font-extrabold font-mono text-slate-800 text-sm mt-0.5 block">{formatNumber(authority.total_contratos)}</span>
                     </div>
                     <div className="p-3 rounded-lg bg-[#f8fafb] border border-[#e2e8f0]">
-                      <span className="text-slate-400 text-[10px] uppercase font-semibold tracking-wider block">Proveedores Distintos</span>
+                      <span className="text-slate-400 text-[10px] uppercase font-semibold tracking-wider block">{presentation?.providersLabel ?? 'Proveedores'}</span>
                       <span className="font-extrabold font-mono text-slate-800 text-sm mt-0.5 block">{formatNumber(authority.total_adjudicatarios)}</span>
                     </div>
                   </div>
@@ -208,11 +210,13 @@ export default function OrganismosPage() {
                     </span>
                     {(authority.ingresos_adjudicados ?? 0) > 0 && (
                       <span className="block text-[10px] font-mono text-emerald-700 mt-1">
-                        Ingresos: +{formatCompactCurrency(authority.ingresos_adjudicados ?? 0)}
+                        +{formatCompactCurrency(authority.ingresos_adjudicados ?? 0)} ingresos
                       </span>
                     )}
                   </div>
-                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#0d9373] transition-colors" />
+                  <span className="text-xs font-semibold text-[#0d9373] group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                    {presentation?.profileLinkLabel ?? 'Ver perfil'} <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
                 </div>
               </Link>
             );
