@@ -61,7 +61,7 @@ export default function OrganismosPage() {
           </p>
         </div>
         <CsvExportButton
-          filename={`organismos_${new Date().toISOString().slice(0, 10)}.csv`}
+          filename={`${presentation?.csvFilenamePrefix ?? 'organismos'}_${new Date().toISOString().slice(0, 10)}.csv`}
           headers={['Organismo', 'Ámbito', 'Licitaciones', 'Proveedores Distintos', 'Gasto Adjudicado (€)', 'Ingresos / Cánones (€)', 'Volumen Total (€)', 'Último Contrato']}
           rows={contractingAuthorities.map((authority) => [
             authority.name, authority.scope, authority.total_contratos, authority.total_adjudicatarios,

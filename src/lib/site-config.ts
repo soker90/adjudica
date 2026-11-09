@@ -30,7 +30,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   homeAuditDescription?: string;
   homeAnnualEvolutionDescription?: string;
   homeTopCompaniesDescription?: string;
-  analysisPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>; methodologyLinkLabel?: string };
+  analysisPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>; methodologyLinkLabel?: string; methodologyLinkHref?: string };
   dataPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>> };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
     contractsSubtitle?: string;
@@ -66,6 +66,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     associatedSummaryAuthorityMatch?: string;
     defaultAuthorityBadge?: string;
     authorityBadges?: Array<{ match: string; label: string }>;
+    csvFilenamePrefix?: string;
   };
   authorityHistory?: Array<{ match: string; badge?: string; title?: string; description?: string; detail?: string }>;
   authorityScopeNotices?: Array<{ match: string; title: string; badge?: string; text: string; linkLabel?: string; linkHref?: string }>;
