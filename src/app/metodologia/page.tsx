@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 import { ShieldCheck } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/site-config';
 
-type MethodologyTextBlock = { id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string };
+type MethodologyTone = 'amber' | 'emerald' | 'orange' | 'blue' | 'red';
+
+type MethodologyTextBlock =
+  | { id?: string; type: 'heading'; text: string; card?: { eyebrow?: string; badge?: string; tone?: MethodologyTone; layout?: 'compact' | 'featured' } }
+  | { id?: string; type: 'paragraph' | 'listItem' | 'formula'; text: string }
+  | { id?: string; type: 'subcard' | 'miniCard'; title: string; text: string };
 
 const DEFAULT_METHODOLOGY = {
   eyebrow: 'Transparencia metodológica',
@@ -125,7 +130,7 @@ export default function MethodologyPage() {
         <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="scroll-mt-20 space-y-4">
           <h2 className="text-xl font-bold tracking-tight text-[#1e293b] sm:text-2xl">{section.title}</h2>
           {section.blocks?.length ? (
-            <div className="mint-card p-6 space-y-4">
+            <div className={section.id === 'banderas-rojas' ? 'grid grid-cols-1 md:grid-cols-2 gap-4' : 'mint-card p-6 space-y-4'}>
               {section.blocks.map((block, blockIndex) => {
                 if (block.type === 'table') {
                   return (
@@ -163,11 +168,31 @@ export default function MethodologyPage() {
                     groupedBlocks.push(item);
                   }
 
+                  const toneClasses = {
+                    amber: { border: 'border-l-[#d97706]', eyebrow: 'text-[#b45309]', badge: 'border-[#fef3c7] bg-[#fffbeb] text-[#b45309]' },
+                    emerald: { border: 'border-l-[#0d9373]', eyebrow: 'text-[#0d9373]', badge: 'border-[#d1fae5] bg-[#ecfdf5] text-[#0d9373]' },
+                    orange: { border: 'border-l-[#ea580c]', eyebrow: 'text-[#ea580c]', badge: 'border-[#ffedd5] bg-[#fff7ed] text-[#c2410c]' },
+                    blue: { border: 'border-l-[#2563eb]', eyebrow: 'text-[#2563eb]', badge: 'border-[#dbeafe] bg-[#eff6ff] text-[#2563eb]' },
+                    red: { border: 'border-l-[#dc2626]', eyebrow: 'text-[#991b1b]', badge: 'border-[#fecaca] bg-[#fef2f2] text-[#991b1b]' },
+                  };
+                  const card = block.card ?? {};
+                  const tone = toneClasses[card.tone ?? 'emerald'];
+                  const featured = card.layout === 'featured';
+
                   return (
-                    <div key={blockIndex} className="rounded-xl border border-[#e2e8f0] border-l-4 border-l-[#0d9373] bg-white p-4 space-y-3">
+                    <div
+                      key={blockIndex}
+                      className={`rounded-xl border border-[#e2e8f0] border-l-4 ${tone.border} bg-white ${featured ? 'md:col-span-2 p-6 space-y-4' : 'p-5 space-y-2'}`}
+                    >
+                      {(card.eyebrow || card.badge) && (
+                        <div className="flex items-center justify-between gap-3">
+                          {card.eyebrow && <span className={`font-mono text-xs font-bold uppercase tracking-wider ${tone.eyebrow}`}>{card.eyebrow}</span>}
+                          {card.badge && <span className={`rounded border px-2 py-0.5 text-[10px] font-bold ${tone.badge}`}>{card.badge}</span>}
+                        </div>
+                      )}
                       <h3
                         id={block.id ?? (/Descuento Significativo o Baja Acusada/i.test(block.text) ? 'baja-temeraria' : /Concentración de Mercado: Índice Herfindahl-Hirschman/i.test(block.text) ? 'hhi' : undefined)}
-                        className="text-sm font-bold leading-6 text-slate-900"
+                        className={`${featured ? 'text-base' : 'text-sm'} font-bold leading-6 text-slate-900`}
                       >
                         {renderInlineText(block.text)}
                       </h3>
@@ -186,6 +211,30 @@ export default function MethodologyPage() {
                                 <li key={listIndex}>{renderInlineText(listItem.text)}</li>
                               ))}
                             </ul>
+                          );
+                        }
+                        if (item.type === 'formula') {
+                          return <div key={itemIndex} className="rounded border border-[#e2e8f0] bg-[#f8fafb] p-2 font-mono text-[11px] leading-5 text-slate-700">{renderInlineText(item.text)}</div>;
+                        }
+                        if (item.type === 'subcard' || item.type === 'miniCard') {
+                          const cardType = item.type;
+                          if (itemIndex > 0 && groupedBlocks[itemIndex - 1]?.type === cardType) return null;
+                          const cards: Array<Extract<MethodologyTextBlock, { type: 'subcard' | 'miniCard' }>> = [];
+                          for (let cardIndex = itemIndex; cardIndex < groupedBlocks.length; cardIndex += 1) {
+                            const candidate = groupedBlocks[cardIndex];
+                            if (!candidate || candidate.type !== cardType) break;
+                            cards.push(candidate);
+                          }
+                          const gridClass = cardType === 'miniCard' ? 'grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs' : 'grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-xs';
+                          return (
+                            <div key={itemIndex} className={gridClass}>
+                              {cards.map((card, cardIndex) => (
+                                <div key={cardIndex} className="rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-3.5 space-y-1.5">
+                                  <strong className="block text-xs font-bold text-slate-800">{card.title}</strong>
+                                  <p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(card.text)}</p>
+                                </div>
+                              ))}
+                            </div>
                           );
                         }
                         return <p key={itemIndex} className="text-sm leading-6 text-slate-700">{renderInlineText(item.text)}</p>;
@@ -218,7 +267,13 @@ export default function MethodologyPage() {
                     </ul>
                   );
                 }
-                return <p key={blockIndex} className="text-sm leading-6 text-slate-700">{renderInlineText(block.text)}</p>;
+                if (block.type === 'formula') {
+                  return <div key={blockIndex} className="rounded border border-[#e2e8f0] bg-[#f8fafb] p-2 font-mono text-[11px] leading-5 text-slate-700">{renderInlineText(block.text)}</div>;
+                }
+                if (block.type === 'subcard' || block.type === 'miniCard') {
+                  return <div key={blockIndex} className="rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-3.5"><strong className="block text-xs font-bold text-slate-800">{block.title}</strong><p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(block.text)}</p></div>;
+                }
+                return <p key={blockIndex} className={`${section.id === 'banderas-rojas' ? 'md:col-span-2' : ''} text-sm leading-6 text-slate-700`}>{renderInlineText(block.text)}</p>;
               })}
             </div>
           ) : (
