@@ -115,7 +115,6 @@ export default function MethodologyPage() {
       )}
       {methodology.sections.map((section, index) => (
         <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="scroll-mt-20 space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-          {section.id === 'banderas-rojas' && <span id="baja-temeraria" className="block scroll-mt-20" aria-hidden="true" />}
           <h2 className="border-b border-slate-100 pb-3 text-xl font-bold tracking-tight text-slate-900">{section.title}</h2>
           {section.blocks?.length ? (
             <div className="space-y-3">
@@ -149,7 +148,7 @@ export default function MethodologyPage() {
                   );
                 }
                 if (block.type === 'heading') {
-                  return <h3 key={blockIndex} id={block.id} className="rounded-r-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-4 py-3 text-sm font-bold leading-6 text-slate-800">{renderInlineText(block.text)}</h3>;
+                  return <h3 key={blockIndex} id={block.id ?? (/Descuento Significativo o Baja Acusada/i.test(block.text) ? 'baja-temeraria' : undefined)} className="rounded-r-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-4 py-3 text-sm font-bold leading-6 text-slate-800">{renderInlineText(block.text)}</h3>;
                 }
                 if (block.type === 'listItem') {
                   if (blockIndex > 0 && section.blocks?.[blockIndex - 1]?.type === 'listItem') {
