@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ShieldCheck } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/site-config';
 
 const DEFAULT_METHODOLOGY = {
@@ -82,38 +83,47 @@ export const metadata: Metadata = {
 
 export default function MethodologyPage() {
   return (
-    <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-      <header className="space-y-3 border-b border-slate-200 pb-6">
+    <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-12 bg-white text-slate-800">
+      <header className="space-y-4 border-b border-[#e2e8f0] pb-8">
         <div className="flex flex-wrap items-center gap-2">
-          <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700">{methodology.eyebrow ?? DEFAULT_METHODOLOGY.eyebrow}</p>
-          {methodology.version && <span className="font-mono text-xs px-2.5 py-1 rounded bg-slate-50 border border-slate-200 text-slate-600">{methodology.version}</span>}
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">{methodology.title ?? DEFAULT_METHODOLOGY.title}</h1>
-        <p className="max-w-3xl text-sm leading-6 text-slate-600">{methodologyDescription}</p>
-      </header>
-      {methodology.sections.length > 0 && (
-        <nav aria-label="Índice de secciones" className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
-          <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">
-            {methodology.indexTitle ?? 'Índice de secciones'}
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#d1fae5] bg-[#ecfdf5] px-3 py-1 text-xs font-semibold text-[#0d9373]">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            {methodology.eyebrow ?? DEFAULT_METHODOLOGY.eyebrow}
           </span>
-          <div className="flex flex-wrap gap-2">
-            {methodologyIndex.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
-              >
-                {item.title}
-              </a>
-            ))}
-          </div>
-        </nav>
-      )}
+          {methodology.version && (
+            <span className="rounded border border-[#e2e8f0] bg-[#f8fafb] px-2.5 py-1 font-mono text-xs text-slate-600">
+              {methodology.version}
+            </span>
+          )}
+        </div>
+        <h1 className="text-3xl font-extrabold tracking-tight text-[#1e293b] sm:text-4xl">
+          {methodology.title ?? DEFAULT_METHODOLOGY.title}
+        </h1>
+        <p className="max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">{methodologyDescription}</p>
+        {methodology.sections.length > 0 && (
+          <nav aria-label="Índice de secciones" className="pt-3">
+            <span className="mb-2 block font-mono text-xs font-bold uppercase tracking-wider text-slate-400">
+              {methodology.indexTitle ?? 'Índice de secciones'}
+            </span>
+            <div className="flex flex-wrap gap-2 text-xs">
+              {methodologyIndex.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="rounded-lg border border-[#e2e8f0] bg-[#f8fafb] px-3 py-1.5 font-medium transition-colors hover:border-[#d1fae5] hover:bg-[#ecfdf5] hover:text-[#0d9373]"
+                >
+                  {item.title}
+                </a>
+              ))}
+            </div>
+          </nav>
+        )}
+      </header>
       {methodology.sections.map((section, index) => (
-        <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="scroll-mt-20 space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-          <h2 className="border-b border-slate-100 pb-3 text-xl font-bold tracking-tight text-slate-900">{section.title}</h2>
+        <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="scroll-mt-20 space-y-4">
+          <h2 className="text-xl font-bold tracking-tight text-[#1e293b] sm:text-2xl">{section.title}</h2>
           {section.blocks?.length ? (
-            <div className="space-y-3">
+            <div className="mint-card p-6 space-y-4">
               {section.blocks.map((block, blockIndex) => {
                 if (block.type === 'table') {
                   return (
@@ -169,9 +179,13 @@ export default function MethodologyPage() {
                 return <p key={blockIndex} className="text-sm leading-6 text-slate-700">{renderInlineText(block.text)}</p>;
               })}
             </div>
-          ) : section.paragraphs.map((paragraph, paragraphIndex) => (
-            <p key={paragraphIndex} className="text-sm leading-6 text-slate-700">{paragraph}</p>
-          ))}
+          ) : (
+            <div className="mint-card p-6 space-y-4">
+              {section.paragraphs.map((paragraph, paragraphIndex) => (
+                <p key={paragraphIndex} className="text-sm leading-6 text-slate-700">{paragraph}</p>
+              ))}
+            </div>
+          )}
         </section>
       ))}
     </main>
