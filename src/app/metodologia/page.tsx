@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { ShieldCheck } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/site-config';
 
-type MethodologyTone = 'amber' | 'emerald' | 'orange' | 'blue' | 'red';
+type MethodologyTone = 'amber' | 'emerald' | 'orange' | 'blue' | 'red' | 'purple' | 'slate';
 
 type MethodologyTextBlock =
   | { id?: string; type: 'heading'; text: string; card?: { eyebrow?: string; badge?: string; tone?: MethodologyTone; layout?: 'compact' | 'featured' } }
   | { id?: string; type: 'paragraph' | 'listItem' | 'formula'; text: string }
-  | { id?: string; type: 'subcard' | 'miniCard'; title: string; text: string };
+  | { id?: string; type: 'subcard' | 'miniCard'; title: string; text: string; tone?: MethodologyTone; badge?: string; columns?: 2 | 3 | 4 | 5; span?: 'full' };
 
 const DEFAULT_METHODOLOGY = {
   eyebrow: 'Transparencia metodológica',
@@ -174,6 +174,8 @@ export default function MethodologyPage() {
                     orange: { border: 'border-l-[#ea580c]', eyebrow: 'text-[#ea580c]', badge: 'border-[#ffedd5] bg-[#fff7ed] text-[#c2410c]' },
                     blue: { border: 'border-l-[#2563eb]', eyebrow: 'text-[#2563eb]', badge: 'border-[#dbeafe] bg-[#eff6ff] text-[#2563eb]' },
                     red: { border: 'border-l-[#dc2626]', eyebrow: 'text-[#991b1b]', badge: 'border-[#fecaca] bg-[#fef2f2] text-[#991b1b]' },
+                    purple: { border: 'border-l-purple-600', eyebrow: 'text-purple-700', badge: 'border-purple-200 bg-purple-50 text-purple-700' },
+                    slate: { border: 'border-l-slate-400', eyebrow: 'text-slate-600', badge: 'border-slate-200 bg-slate-100 text-slate-700' },
                   };
                   const card = block.card ?? {};
                   const tone = toneClasses[card.tone ?? 'emerald'];
@@ -225,15 +227,37 @@ export default function MethodologyPage() {
                             if (!candidate || candidate.type !== cardType) break;
                             cards.push(candidate);
                           }
-                          const gridClass = cardType === 'miniCard' ? 'grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs' : 'grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-xs';
+                          const columns = item.columns ?? (cardType === 'miniCard' ? 3 : 2);
+                          const gridClasses = {
+                            2: 'grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs',
+                            3: 'grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs',
+                            4: 'grid grid-cols-1 sm:grid-cols-4 gap-2 pt-2 text-xs',
+                            5: 'grid grid-cols-1 sm:grid-cols-5 gap-2 pt-2 text-xs',
+                          };
+                          const nestedToneClasses = {
+                            amber: 'border-amber-200 bg-amber-50/70',
+                            emerald: 'border-emerald-200 bg-emerald-50/70',
+                            orange: 'border-orange-200 bg-orange-50/70',
+                            blue: 'border-blue-200 bg-blue-50/70',
+                            red: 'border-rose-200 bg-rose-50/70',
+                            purple: 'border-purple-200 bg-purple-50/70',
+                            slate: 'border-slate-200 bg-slate-50',
+                          };
                           return (
-                            <div key={itemIndex} className={gridClass}>
-                              {cards.map((card, cardIndex) => (
-                                <div key={cardIndex} className="rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-3.5 space-y-1.5">
-                                  <strong className="block text-xs font-bold text-slate-800">{card.title}</strong>
-                                  <p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(card.text)}</p>
-                                </div>
-                              ))}
+                            <div key={itemIndex} className={gridClasses[columns]}>
+                              {cards.map((card, cardIndex) => {
+                                const toneClass = nestedToneClasses[card.tone ?? 'slate'];
+                                const spanClass = card.span === 'full' ? (columns === 2 ? 'sm:col-span-2' : columns === 3 ? 'sm:col-span-3' : columns === 4 ? 'sm:col-span-4' : 'sm:col-span-5') : '';
+                                return (
+                                  <div key={cardIndex} className={`rounded-lg border p-3.5 space-y-1.5 ${toneClass} ${spanClass}`}>
+                                    <div className="flex items-center justify-between gap-2">
+                                      <strong className="block text-xs font-bold text-slate-800">{card.title}</strong>
+                                      {card.badge && <span className="shrink-0 rounded border border-white/70 bg-white/70 px-1.5 py-0.5 font-mono text-[9px] font-bold text-slate-600">{card.badge}</span>}
+                                    </div>
+                                    <p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(card.text)}</p>
+                                  </div>
+                                );
+                              })}
                             </div>
                           );
                         }
@@ -271,7 +295,24 @@ export default function MethodologyPage() {
                   return <div key={blockIndex} className="rounded border border-[#e2e8f0] bg-[#f8fafb] p-2 font-mono text-[11px] leading-5 text-slate-700">{renderInlineText(block.text)}</div>;
                 }
                 if (block.type === 'subcard' || block.type === 'miniCard') {
-                  return <div key={blockIndex} className="rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-3.5"><strong className="block text-xs font-bold text-slate-800">{block.title}</strong><p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(block.text)}</p></div>;
+                  const nestedToneClasses = {
+                    amber: 'border-amber-200 bg-amber-50/70',
+                    emerald: 'border-emerald-200 bg-emerald-50/70',
+                    orange: 'border-orange-200 bg-orange-50/70',
+                    blue: 'border-blue-200 bg-blue-50/70',
+                    red: 'border-rose-200 bg-rose-50/70',
+                    purple: 'border-purple-200 bg-purple-50/70',
+                    slate: 'border-slate-200 bg-slate-50',
+                  };
+                  return (
+                    <div key={blockIndex} className={`rounded-lg border p-3.5 space-y-1.5 ${nestedToneClasses[block.tone ?? 'slate']}`}>
+                      <div className="flex items-center justify-between gap-2">
+                        <strong className="block text-xs font-bold text-slate-800">{block.title}</strong>
+                        {block.badge && <span className="shrink-0 rounded border border-white/70 bg-white/70 px-1.5 py-0.5 font-mono text-[9px] font-bold text-slate-600">{block.badge}</span>}
+                      </div>
+                      <p className="text-[11px] leading-relaxed text-slate-600">{renderInlineText(block.text)}</p>
+                    </div>
+                  );
                 }
                 return <p key={blockIndex} className={`${section.id === 'banderas-rojas' ? 'md:col-span-2' : ''} text-sm leading-6 text-slate-700`}>{renderInlineText(block.text)}</p>;
               })}
