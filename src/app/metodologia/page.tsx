@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { ShieldCheck } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/site-config';
 
+type MethodologyTextBlock = { id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string };
+
 const DEFAULT_METHODOLOGY = {
   eyebrow: 'Transparencia metodológica',
   title: 'Metodología y fuentes',
@@ -154,7 +156,47 @@ export default function MethodologyPage() {
                   );
                 }
                 if (block.type === 'heading') {
-                  return <h3 key={blockIndex} id={block.id ?? (/Descuento Significativo o Baja Acusada/i.test(block.text) ? 'baja-temeraria' : /Concentración de Mercado: Índice Herfindahl-Hirschman/i.test(block.text) ? 'hhi' : undefined)} className="rounded-r-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-4 py-3 text-sm font-bold leading-6 text-slate-800">{renderInlineText(block.text)}</h3>;
+                  const groupedBlocks: MethodologyTextBlock[] = [];
+                  for (let itemIndex = blockIndex + 1; itemIndex < (section.blocks?.length ?? 0); itemIndex += 1) {
+                    const item = section.blocks?.[itemIndex];
+                    if (!item || item.type === 'heading' || item.type === 'table') break;
+                    groupedBlocks.push(item);
+                  }
+
+                  return (
+                    <div key={blockIndex} className="rounded-xl border border-[#e2e8f0] border-l-4 border-l-[#0d9373] bg-white p-4 space-y-3">
+                      <h3
+                        id={block.id ?? (/Descuento Significativo o Baja Acusada/i.test(block.text) ? 'baja-temeraria' : /Concentración de Mercado: Índice Herfindahl-Hirschman/i.test(block.text) ? 'hhi' : undefined)}
+                        className="text-sm font-bold leading-6 text-slate-900"
+                      >
+                        {renderInlineText(block.text)}
+                      </h3>
+                      {groupedBlocks.map((item, itemIndex) => {
+                        if (item.type === 'listItem') {
+                          if (itemIndex > 0 && groupedBlocks[itemIndex - 1]?.type === 'listItem') return null;
+                          const listItems: MethodologyTextBlock[] = [];
+                          for (let listIndex = itemIndex; listIndex < groupedBlocks.length; listIndex += 1) {
+                            const listItem = groupedBlocks[listIndex];
+                            if (!listItem || listItem.type !== 'listItem') break;
+                            listItems.push(listItem);
+                          }
+                          return (
+                            <ul key={itemIndex} className="list-disc space-y-1 pl-6 text-sm leading-6 text-slate-700">
+                              {listItems.map((listItem, listIndex) => (
+                                <li key={listIndex}>{renderInlineText(listItem.text)}</li>
+                              ))}
+                            </ul>
+                          );
+                        }
+                        return <p key={itemIndex} className="text-sm leading-6 text-slate-700">{renderInlineText(item.text)}</p>;
+                      })}
+                    </div>
+                  );
+                }
+                for (let previousIndex = blockIndex - 1; previousIndex >= 0; previousIndex -= 1) {
+                  const previousBlock = section.blocks?.[previousIndex];
+                  if (!previousBlock || previousBlock.type === 'table') break;
+                  if (previousBlock.type === 'heading') return null;
                 }
                 if (block.type === 'listItem') {
                   if (blockIndex > 0 && section.blocks?.[blockIndex - 1]?.type === 'listItem') {
