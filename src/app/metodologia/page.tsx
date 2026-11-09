@@ -154,7 +154,7 @@ export default function MethodologyPage() {
                   );
                 }
                 if (block.type === 'heading') {
-                  const groupedBlocks = [];
+                  const groupedBlocks: NonNullable<typeof section.blocks> = [];
                   for (let itemIndex = blockIndex + 1; itemIndex < (section.blocks?.length ?? 0); itemIndex += 1) {
                     const item = section.blocks?.[itemIndex];
                     if (!item || item.type === 'heading' || item.type === 'table') break;
@@ -172,7 +172,7 @@ export default function MethodologyPage() {
                       {groupedBlocks.map((item, itemIndex) => {
                         if (item.type === 'listItem') {
                           if (itemIndex > 0 && groupedBlocks[itemIndex - 1]?.type === 'listItem') return null;
-                          const listItems = [];
+                          const listItems: Extract<NonNullable<typeof section.blocks>[number], { type: 'listItem' }>[] = [];
                           for (let listIndex = itemIndex; listIndex < groupedBlocks.length; listIndex += 1) {
                             const listItem = groupedBlocks[listIndex];
                             if (!listItem || listItem.type !== 'listItem') break;
