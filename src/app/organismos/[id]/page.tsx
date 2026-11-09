@@ -56,7 +56,6 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
           <p className="text-xs sm:text-sm text-[#64748b]">
             Actividad contractual registrada entre {authority.primer_ano || 2018} y {authority.ultimo_ano || new Date().getFullYear()}
           </p>
-}
         </div>
         <Link
           href={`/licitaciones?organo=${encodeURIComponent(authority.id)}`}
