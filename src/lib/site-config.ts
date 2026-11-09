@@ -67,6 +67,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     defaultAuthorityBadge?: string;
     authorityBadges?: Array<{ match: string; label: string }>;
     csvFilenamePrefix?: string;
+    providersLabel?: string;
   };
   authorityHistory?: Array<{ match: string; badge?: string; title?: string; description?: string; detail?: string }>;
   authorityScopeNotices?: Array<{ match: string; title: string; badge?: string; text: string; linkLabel?: string; linkHref?: string }>;
