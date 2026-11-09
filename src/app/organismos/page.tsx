@@ -51,7 +51,7 @@ export default function OrganismosPage() {
       <header className="border-b border-[#e2e8f0] pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <Landmark className="h-5 w-5 text-[#0d9373]" />
+            <span className="rounded-lg border border-[#d1fae5] bg-[#ecfdf5] p-1.5 text-[#0d9373]"><Landmark className="h-4 w-4" /></span>
             <h1 className="text-2xl sm:text-3xl font-bold text-[#1e293b]">
               {presentation?.title ?? 'Organismos contratantes'}
             </h1>
@@ -62,7 +62,7 @@ export default function OrganismosPage() {
         </div>
         <CsvExportButton
           filename={`organismos_${new Date().toISOString().slice(0, 10)}.csv`}
-          headers={['Organismo', 'Ámbito', 'Licitaciones', 'Proveedores', 'Gasto adjudicado (€)', 'Ingresos (€)', 'Volumen total (€)', 'Último contrato']}
+          headers={['Organismo', 'Ámbito', 'Licitaciones', 'Proveedores Distintos', 'Gasto Adjudicado (€)', 'Ingresos / Cánones (€)', 'Volumen Total (€)', 'Último Contrato']}
           rows={contractingAuthorities.map((authority) => [
             authority.name, authority.scope, authority.total_contratos, authority.total_adjudicatarios,
             authority.gasto_adjudicado, authority.ingresos_adjudicados, authority.volumen_total, authority.ultimo_contrato,
@@ -71,8 +71,8 @@ export default function OrganismosPage() {
       </header>
 
       {presentation?.scopeNoteTitle && presentation.scopeNoteText && (
-        <section className="rounded-xl border border-blue-200 bg-blue-50 p-4 flex items-start gap-3">
-          <Info className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
+        <section className="rounded-xl border border-[#bfdbfe] bg-[#eff6ff] p-4 flex items-start gap-3">
+          <Info className="h-4 w-4 text-[#2563eb] shrink-0 mt-0.5" />
           <div className="space-y-2 text-xs leading-relaxed text-slate-700">
             <p>
               <strong className="text-slate-900">{presentation.scopeNoteTitle}</strong>{' '}
@@ -194,7 +194,7 @@ export default function OrganismosPage() {
                       <span className="font-extrabold font-mono text-slate-800 text-sm mt-0.5 block">{formatNumber(authority.total_contratos)}</span>
                     </div>
                     <div className="p-3 rounded-lg bg-[#f8fafb] border border-[#e2e8f0]">
-                      <span className="text-slate-400 text-[10px] uppercase font-semibold tracking-wider block">Proveedores</span>
+                      <span className="text-slate-400 text-[10px] uppercase font-semibold tracking-wider block">Proveedores Distintos</span>
                       <span className="font-extrabold font-mono text-slate-800 text-sm mt-0.5 block">{formatNumber(authority.total_adjudicatarios)}</span>
                     </div>
                   </div>

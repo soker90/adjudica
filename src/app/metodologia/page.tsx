@@ -66,9 +66,13 @@ const methodology = {
   sections: SITE_CONFIG.methodology?.sections ?? DEFAULT_METHODOLOGY.sections,
 };
 
-const methodologyIndex = SITE_CONFIG.methodology?.indexLinks ?? methodology.sections
+const configuredMethodologyIndex = SITE_CONFIG.methodology?.indexLinks ?? methodology.sections
   .filter((section) => section.showInIndex !== false)
   .map((section, index) => ({ id: section.id ?? `section-${index + 1}`, title: section.title }));
+const methodologyIndex = configuredMethodologyIndex.some((item) => item.id === 'baja-temeraria')
+  || !methodology.sections.some((section) => section.id === 'banderas-rojas')
+  ? configuredMethodologyIndex
+  : [...configuredMethodologyIndex, { id: 'baja-temeraria', title: 'Indicadores de baja temeraria' }];
 
 const methodologyDescription = (methodology.description ?? DEFAULT_METHODOLOGY.description).replace(
   '{geographicLabel}',
@@ -110,8 +114,9 @@ export default function MethodologyPage() {
         </nav>
       )}
       {methodology.sections.map((section, index) => (
-        <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="space-y-3 scroll-mt-20">
-          <h2 className="text-xl font-bold text-slate-900">{section.title}</h2>
+        <section key={section.id ?? section.title} id={section.id ?? `section-${index + 1}`} className="scroll-mt-20 space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          {section.id === 'banderas-rojas' && <span id="baja-temeraria" className="block scroll-mt-20" aria-hidden="true" />}
+          <h2 className="border-b border-slate-100 pb-3 text-xl font-bold tracking-tight text-slate-900">{section.title}</h2>
           {section.blocks?.length ? (
             <div className="space-y-3">
               {section.blocks.map((block, blockIndex) => {
@@ -144,7 +149,7 @@ export default function MethodologyPage() {
                   );
                 }
                 if (block.type === 'heading') {
-                  return <h3 key={blockIndex} id={block.id} className="pt-2 text-base font-semibold text-slate-800">{renderInlineText(block.text)}</h3>;
+                  return <h3 key={blockIndex} id={block.id} className="rounded-r-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-4 py-3 text-sm font-bold leading-6 text-slate-800">{renderInlineText(block.text)}</h3>;
                 }
                 if (block.type === 'listItem') {
                   if (blockIndex > 0 && section.blocks?.[blockIndex - 1]?.type === 'listItem') {
