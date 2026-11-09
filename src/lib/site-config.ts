@@ -33,7 +33,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
       blocks?: Array<
         | { id?: string; type: 'heading'; text: string; card?: { eyebrow?: string; badge?: string; tone?: 'amber' | 'emerald' | 'orange' | 'blue' | 'red'; layout?: 'compact' | 'featured' } }
         | { id?: string; type: 'paragraph' | 'listItem' | 'formula'; text: string }
-        | { id?: string; type: 'subcard' | 'miniCard'; title: string; text: string }
+        | { id?: string; type: 'subcard' | 'miniCard'; title: string; text: string; tone?: 'amber' | 'emerald' | 'orange' | 'blue' | 'red' | 'purple' | 'slate'; badge?: string; columns?: 2 | 3 | 4 | 5; span?: 'full' }
         | { id?: string; type: 'table'; headers: string[]; rows: string[][] }
       >
     }>
