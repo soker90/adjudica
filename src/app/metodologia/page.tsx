@@ -66,13 +66,9 @@ const methodology = {
   sections: SITE_CONFIG.methodology?.sections ?? DEFAULT_METHODOLOGY.sections,
 };
 
-const configuredMethodologyIndex = SITE_CONFIG.methodology?.indexLinks ?? methodology.sections
+const methodologyIndex = SITE_CONFIG.methodology?.indexLinks ?? methodology.sections
   .filter((section) => section.showInIndex !== false)
   .map((section, index) => ({ id: section.id ?? `section-${index + 1}`, title: section.title }));
-const methodologyIndex = configuredMethodologyIndex.some((item) => item.id === 'baja-temeraria')
-  || !methodology.sections.some((section) => section.id === 'banderas-rojas')
-  ? configuredMethodologyIndex
-  : [...configuredMethodologyIndex, { id: 'baja-temeraria', title: 'Indicadores de baja temeraria' }];
 
 const methodologyDescription = (methodology.description ?? DEFAULT_METHODOLOGY.description).replace(
   '{geographicLabel}',
