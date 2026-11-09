@@ -119,7 +119,7 @@ export default function OrganismosPage() {
             </div>
             <p className="text-[11px] text-slate-500">
               {presentation.summaryAssociatedDescription ?? 'Gasto adjudicado del ámbito asociado'}
-              {associatedIncome > 0 ? ` (+${formatCompactCurrency(associatedIncome)} ingresos)` : ''}
+              {associatedIncome > 0 ? ` (+${formatCompactCurrency(associatedIncome)} ${presentation.associatedIncomeLabel ?? 'ingresos'})` : ''}
             </p>
           </div>
 
