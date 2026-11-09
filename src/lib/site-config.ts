@@ -25,7 +25,18 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     description?: string;
     indexTitle?: string;
     indexLinks?: Array<{ id: string; title: string }>;
-    sections?: Array<{ id?: string; title: string; paragraphs: string[]; showInIndex?: boolean; blocks?: Array<{ id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string } | { id?: string; type: 'table'; headers: string[]; rows: string[][] }> }>
+    sections?: Array<{
+      id?: string;
+      title: string;
+      paragraphs: string[];
+      showInIndex?: boolean;
+      blocks?: Array<
+        | { id?: string; type: 'heading'; text: string; card?: { eyebrow?: string; badge?: string; tone?: 'amber' | 'emerald' | 'orange' | 'blue' | 'red'; layout?: 'compact' | 'featured' } }
+        | { id?: string; type: 'paragraph' | 'listItem' | 'formula'; text: string }
+        | { id?: string; type: 'subcard' | 'miniCard'; title: string; text: string }
+        | { id?: string; type: 'table'; headers: string[]; rows: string[][] }
+      >
+    }>
   };
   homeAuditDescription?: string;
   homeAnnualEvolutionDescription?: string;
