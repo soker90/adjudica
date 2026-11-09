@@ -172,7 +172,7 @@ export default function MethodologyPage() {
                       {groupedBlocks.map((item, itemIndex) => {
                         if (item.type === 'listItem') {
                           if (itemIndex > 0 && groupedBlocks[itemIndex - 1]?.type === 'listItem') return null;
-                          const listItems: Extract<NonNullable<typeof section.blocks>[number], { type: 'listItem' }>[] = [];
+                          const listItems: NonNullable<typeof section.blocks> = [];
                           for (let listIndex = itemIndex; listIndex < groupedBlocks.length; listIndex += 1) {
                             const listItem = groupedBlocks[listIndex];
                             if (!listItem || listItem.type !== 'listItem') break;
