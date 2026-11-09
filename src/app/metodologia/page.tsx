@@ -144,7 +144,7 @@ export default function MethodologyPage() {
                   );
                 }
                 if (block.type === 'heading') {
-                  return <h3 key={blockIndex} id={block.id ?? (/Descuento Significativo o Baja Acusada/i.test(block.text) ? 'baja-temeraria' : undefined)} className="rounded-r-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-4 py-3 text-sm font-bold leading-6 text-slate-800">{renderInlineText(block.text)}</h3>;
+                  return <h3 key={blockIndex} id={block.id ?? (/Descuento Significativo o Baja Acusada/i.test(block.text) ? 'baja-temeraria' : /Concentración de Mercado: Índice Herfindahl-Hirschman/i.test(block.text) ? 'hhi' : undefined)} className="rounded-r-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-4 py-3 text-sm font-bold leading-6 text-slate-800">{renderInlineText(block.text)}</h3>;
                 }
                 if (block.type === 'listItem') {
                   if (blockIndex > 0 && section.blocks?.[blockIndex - 1]?.type === 'listItem') {
