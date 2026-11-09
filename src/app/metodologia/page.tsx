@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { ShieldCheck } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/site-config';
 
+type MethodologyTextBlock = { id?: string; type: 'heading' | 'paragraph' | 'listItem'; text: string };
+
 const DEFAULT_METHODOLOGY = {
   eyebrow: 'Transparencia metodológica',
   title: 'Metodología y fuentes',
@@ -154,7 +156,7 @@ export default function MethodologyPage() {
                   );
                 }
                 if (block.type === 'heading') {
-                  const groupedBlocks: NonNullable<typeof section.blocks> = [];
+                  const groupedBlocks: MethodologyTextBlock[] = [];
                   for (let itemIndex = blockIndex + 1; itemIndex < (section.blocks?.length ?? 0); itemIndex += 1) {
                     const item = section.blocks?.[itemIndex];
                     if (!item || item.type === 'heading' || item.type === 'table') break;
@@ -172,7 +174,7 @@ export default function MethodologyPage() {
                       {groupedBlocks.map((item, itemIndex) => {
                         if (item.type === 'listItem') {
                           if (itemIndex > 0 && groupedBlocks[itemIndex - 1]?.type === 'listItem') return null;
-                          const listItems: NonNullable<typeof section.blocks> = [];
+                          const listItems: MethodologyTextBlock[] = [];
                           for (let listIndex = itemIndex; listIndex < groupedBlocks.length; listIndex += 1) {
                             const listItem = groupedBlocks[listIndex];
                             if (!listItem || listItem.type !== 'listItem') break;
