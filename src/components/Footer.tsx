@@ -12,7 +12,7 @@ export default function Footer() {
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#00d4a4] to-[#0d9373] text-sm font-black text-slate-950 shadow-xs">{SITE_CONFIG.brandMark || SITE_CONFIG.siteName.slice(0, 1)}</span>
               <span className="font-bold text-[#1e293b] text-lg tracking-tight">{SITE_CONFIG.siteName}</span>
               <span className="text-[10px] uppercase font-semibold tracking-wider bg-[#ecfdf5] text-[#0d9373] border border-[#d1fae5] px-2.5 py-0.5 rounded-full">
-                {SITE_CONFIG.geographicLabel}
+                {SITE_CONFIG.localityName || SITE_CONFIG.geographicLabel}
               </span>
             </div>
             <p className="text-[#64748b] leading-relaxed max-w-md text-xs">{SITE_CONFIG.footerDescription || SITE_CONFIG.siteDescription}</p>
