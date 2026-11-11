@@ -37,7 +37,7 @@ export async function generateMetadata({
   const isCanonical = emp.id === decodedId;
   return {
     title: `${emp.nombre} · Dossier de Proveedor · ${SITE_CONFIG.siteName}`,
-    description: `Perfil de contratación municipal de ${emp.nombre} en ${SITE_CONFIG.localityName}. `,
+    description: `Perfil de contratación municipal de ${emp.nombre} en ${SITE_CONFIG.localityName}.`,
     robots: {
       index: isCanonical,
       follow: true,
@@ -151,7 +151,7 @@ export default async function EmpresaDetailPage({
         {tieneVariasFiliales && cruce.grupoCorporativo && (
           <p className="text-xs sm:text-sm text-slate-600">
             Entidad perteneciente al <strong className="text-slate-900">{cruce.grupoCorporativo.nombre}</strong>
-             . Facturación consolidada en {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName} de todas las filiales del grupo:{' '}
+            . Facturación consolidada en {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName} de todas las filiales del grupo:{' '}
             <strong className="font-mono text-[#0d9373] font-bold">{formatCurrency(cruce.grupoCorporativo.volumenConsolidadoGrupo)}</strong>
             {' '}({cruce.grupoCorporativo.contratosConsolidadoGrupo} contratos).
           </p>
