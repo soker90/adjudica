@@ -41,6 +41,9 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   homeAuditDescription?: string;
   homeAnnualEvolutionDescription?: string;
   homeTopCompaniesDescription?: string;
+  homeTopCompaniesTitle?: string;
+  homeAuthoritiesDescription?: string;
+  homeRecentContractsDescription?: string;
   analysisPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>; methodologyLinkLabel?: string; methodologyLinkHref?: string };
   dataPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>> };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
