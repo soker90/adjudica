@@ -89,6 +89,8 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   homeLatestPublicationLabel?: string;
   headerBrandSuffix?: string;
   associatedAuthorityNameMatch?: string;
+  brandPrefix?: string;
+  brandAccent?: string;
 };
 
 export const SITE_CONFIG = siteConfig as SiteConfig;
