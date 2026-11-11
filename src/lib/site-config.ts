@@ -92,6 +92,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   homeLatestPublicationLabel?: string;
   headerBrandSuffix?: string;
   associatedAuthorityNameMatch?: string;
+  localityShortName?: string;
   brandPrefix?: string;
   brandAccent?: string;
 };

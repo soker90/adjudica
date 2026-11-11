@@ -37,7 +37,7 @@ export async function generateMetadata({
   const isCanonical = emp.id === decodedId;
   return {
     title: `${emp.nombre} · Dossier de Proveedor · ${SITE_CONFIG.siteName}`,
-    description: `Perfil de contratación municipal de ${emp.nombre} en el ámbito configurado.`,
+    description: `Perfil de contratación municipal de ${emp.nombre} en ${SITE_CONFIG.localityName}.`,
     robots: {
       index: isCanonical,
       follow: true,
@@ -140,7 +140,7 @@ export default async function EmpresaDetailPage({
           )}
 
           <span className="text-xs text-slate-500 font-mono w-full sm:w-auto sm:ml-auto mt-1 sm:mt-0">
-            Actividad en el ámbito configurado: {emp.primer_ano || 2018} - {emp.ultimo_ano || 2026}
+            Actividad en {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName}: {emp.primer_ano || 2018} - {emp.ultimo_ano || 2026}
           </span>
         </div>
 
@@ -151,7 +151,7 @@ export default async function EmpresaDetailPage({
         {tieneVariasFiliales && cruce.grupoCorporativo && (
           <p className="text-xs sm:text-sm text-slate-600">
             Entidad perteneciente al <strong className="text-slate-900">{cruce.grupoCorporativo.nombre}</strong>
-            . Facturación consolidada en el ámbito configurado de todas las filiales del grupo:{' '}
+            . Facturación consolidada en {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName} de todas las filiales del grupo:{' '}
             <strong className="font-mono text-[#0d9373] font-bold">{formatCurrency(cruce.grupoCorporativo.volumenConsolidadoGrupo)}</strong>
             {' '}({cruce.grupoCorporativo.contratosConsolidadoGrupo} contratos).
           </p>
@@ -407,7 +407,7 @@ export default async function EmpresaDetailPage({
               <div className="flex items-center justify-between">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
                   <Building2 className="h-3.5 w-3.5 text-[#2563eb]" />
-                  <span>Filiales y Empresas del {cruce.grupoCorporativo.nombre} en el ámbito configurado</span>
+                  <span>Filiales y Empresas del {cruce.grupoCorporativo.nombre} en {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName}</span>
                 </h4>
                 <span className="text-xs font-mono font-semibold text-[#2563eb]">
                   Consolidado: {formatCompactCurrency(cruce.grupoCorporativo.volumenConsolidadoGrupo)}
@@ -612,7 +612,7 @@ export default async function EmpresaDetailPage({
         <div className="mint-card p-6 sm:p-7 space-y-4">
           <h3 className="font-bold text-[#1e293b] text-base flex items-center gap-2">
             <Building2 className="h-4 w-4 text-[#0891b2]" />
-            <span>Organismos Públicos con los que ha contratado en el ámbito configurado</span>
+            <span>Organismos Públicos con los que ha contratado en {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName}</span>
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-1">
