@@ -208,7 +208,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
                 </h3>
               </div>
               <p className="text-xs text-[#64748b] mt-1">
-                Gasto público acumulado por organismo
+                {SITE_CONFIG.homeAuthoritiesDescription ?? 'Gasto público acumulado por organismo'}
               </p>
             </div>
             <Link
@@ -288,7 +288,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
                 </h3>
               </div>
               <p className="text-xs text-[#64748b] mt-1">
-                Expedientes de contratación y adjudicaciones más recientes
+                {SITE_CONFIG.homeRecentContractsDescription ?? 'Expedientes de contratación y adjudicaciones más recientes'}
               </p>
             </div>
             <Link
