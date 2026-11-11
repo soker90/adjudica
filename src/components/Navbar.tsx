@@ -64,7 +64,11 @@ export default function Navbar() {
               {SITE_CONFIG.brandMark || SITE_CONFIG.siteName.slice(0, 1)}
             </span>
             <span className="font-extrabold tracking-tight text-base sm:text-lg text-slate-900 font-sans">
-              {SITE_CONFIG.siteName}
+              {SITE_CONFIG.brandPrefix && SITE_CONFIG.brandAccent ? (
+                <>
+                  {SITE_CONFIG.brandPrefix}<span className="text-[#0d9373]">{SITE_CONFIG.brandAccent}</span>
+                </>
+              ) : SITE_CONFIG.siteName}
             </span>
             {SITE_CONFIG.headerBrandSuffix && (
               <span className="hidden sm:inline-block text-[10px] font-mono font-medium text-slate-400">
