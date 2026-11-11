@@ -9,8 +9,14 @@ export default function Footer() {
         <div className={`grid grid-cols-1 ${SITE_CONFIG.instanceCreationGuide ? 'md:grid-cols-5' : 'md:grid-cols-4'} gap-8`}>
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#00d4a4] to-[#0d9373] text-sm font-black text-slate-950 shadow-xs">{SITE_CONFIG.brandMark || SITE_CONFIG.siteName.slice(0, 1)}</span>
-              <span className="font-bold text-[#1e293b] text-lg tracking-tight">{SITE_CONFIG.siteName}</span>
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#00d4a4] text-slate-950 font-extrabold text-sm shadow-xs">{SITE_CONFIG.brandMark || SITE_CONFIG.siteName.slice(0, 1)}</span>
+              <span className="font-bold text-[#1e293b] text-lg tracking-tight">
+                {SITE_CONFIG.brandPrefix && SITE_CONFIG.brandAccent ? (
+                  <>
+                    {SITE_CONFIG.brandPrefix}<span className="text-[#0d9373]">{SITE_CONFIG.brandAccent}</span>
+                  </>
+                ) : SITE_CONFIG.siteName}
+              </span>
               <span className="text-[10px] uppercase font-semibold tracking-wider bg-[#ecfdf5] text-[#0d9373] border border-[#d1fae5] px-2.5 py-0.5 rounded-full">
                 {SITE_CONFIG.localityName || SITE_CONFIG.geographicLabel}
               </span>
