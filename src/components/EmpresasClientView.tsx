@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { formatCompactCurrency, formatNumber, formatDate, formatCurrency, formatNif } from '@/lib/format';
+import { SITE_CONFIG } from '@/lib/site-config';
 import CsvExportButton from '@/components/CsvExportButton';
 import { 
   Briefcase, 
@@ -143,7 +144,7 @@ export default function EmpresasClientView({
           </h1>
         </div>
         <p className="text-xs sm:text-sm text-[#64748b] mt-1">
-          Trazabilidad e inteligencia corporativa de todos los contratistas del ámbito configurado, con unificación de cambios de denominación, cruce de DNIs y holdings empresariales
+          Trazabilidad e inteligencia corporativa de todos los contratistas de {SITE_CONFIG.localityName}, con unificación de cambios de denominación, cruce de DNIs y holdings empresariales
         </p>
       </div>
 
@@ -318,7 +319,7 @@ export default function EmpresasClientView({
         /* VISTA DE GRUPOS EMPRESARIALES */
         <div className="space-y-4">
           <div className="text-xs text-slate-500">
-            Se muestran los <strong className="text-slate-900">{gruposData.length}</strong> principales grupos y conglomerados corporativos con filiales activas en el ámbito configurado
+            Se muestran los <strong className="text-slate-900">{gruposData.length}</strong> principales grupos y conglomerados corporativos con filiales activas en {SITE_CONFIG.localityName}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -333,7 +334,7 @@ export default function EmpresasClientView({
                       {grupo.ambito}
                     </span>
                     <span className="text-xs font-mono text-slate-500">
-                      {grupo.num_filiales} filial(es) en el ámbito configurado
+                      {grupo.num_filiales} filial(es) en {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName}
                     </span>
                   </div>
 
