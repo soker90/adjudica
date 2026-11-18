@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { getPlacspId } from '@/lib/placsp';
 import { RenovacionMercadoStats } from '@/lib/db';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/format';
@@ -47,11 +48,11 @@ export default function RenovacionMercadoSection({ data, ano }: RenovacionMercad
               <Users className="h-5 w-5" />
             </span>
             <h3 className="font-bold text-[#1e293b] text-base sm:text-lg tracking-tight">
-              Renovación de proveedores: empresas nuevas frente a veteranas
+              Renovación de Proveedores: Empresas Nuevas vs. Veteranas
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1.5 max-w-2xl">
-            Seguimiento del primer contrato histórico de cada adjudicatario y tasa de rotación anual frente a proveedores recurrentes en el municipio.
+            Seguimiento del primer contrato histórico de cada adjudicatario y tasa de rotación anual frente a proveedores recurrentes en {SITE_CONFIG.localityName}.
           </p>
         </div>
 
@@ -151,7 +152,7 @@ export default function RenovacionMercadoSection({ data, ano }: RenovacionMercad
               En este ejercicio, los proveedores con contratos en ejercicios anteriores concentran la mayor parte de las adjudicaciones.
             </p>
             <p className="leading-relaxed text-[#78350f] text-[11px] bg-white/60 p-2 rounded-lg border border-[#fde68a]">
-              <strong>Aviso metodológico:</strong> Este indicador describe un patrón de concentración y no demuestra por sí solo falta de competencia, favoritismo, dependencia económica o irregularidad. Los criterios aplicados (rotación &lt; 50% y peso de veteranas &gt; 75%) constituyen un <strong>umbral analítico propio utilizado por la plataforma</strong> y no un umbral establecido por la legislación. Corresponde al investigador comprobar si los pliegos contienen requisitos de solvencia desproporcionados o si la división en lotes permitiría una mayor concurrencia de PYMEs.
+              <strong>Aviso metodológico:</strong> Este indicador describe un patrón de concentración y no demuestra por sí solo falta de competencia, favoritismo, dependencia económica o irregularidad. Los criterios aplicados (rotación &lt; 50% y peso de veteranas &gt; 75%) constituyen un <strong>umbral analítico propio utilizado por {SITE_CONFIG.siteName}</strong> y no un umbral establecido por la legislación. Corresponde al investigador comprobar si los pliegos contienen requisitos de solvencia desproporcionados o si la división en lotes permitiría una mayor concurrencia de PYMEs.
             </p>
           </div>
         </div>
@@ -321,7 +322,7 @@ export default function RenovacionMercadoSection({ data, ano }: RenovacionMercad
         {activeTab === 'veteranas' && (
           <div className="space-y-3">
             <div className="text-xs text-slate-600 pb-1">
-              Empresas con mayor continuidad histórica en el ámbito configurado (activas en 5 o más ejercicios anuales):
+              Empresas con mayor continuidad histórica en {SITE_CONFIG.localityName} (activas en 5 o más ejercicios anuales):
             </div>
 
             <div className="overflow-x-auto rounded-xl border border-[#e2e8f0]">
