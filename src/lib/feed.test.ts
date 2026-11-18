@@ -61,6 +61,7 @@ describe('RSS Feed - Generación', () => {
     expect(xml).toContain('<channel>');
     expect(xml).toContain(`<title>${SITE_CONFIG.siteName} · Licitaciones y Alertas`);
     expect(xml).toContain(`Ver ficha y cronometría en ${SITE_CONFIG.siteName}`);
+    expect(xml).toContain(`señales de auditoría en ${SITE_CONFIG.localityName} (${SITE_CONFIG.provinceName})`);
     expect(xml).toContain(SITE_URL);
     expect(xml).not.toContain('localhost:3000');
     expect(xml).not.toContain('adjudica.es');
