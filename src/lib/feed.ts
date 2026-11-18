@@ -156,7 +156,7 @@ export function generateRssFeed(options: { scope?: string | null; ambito?: strin
     : `${SITE_CONFIG.siteName} · Licitaciones y Alertas de Contratación Pública`;
 
   const feedDescription =
-    'Sindicación cívica en tiempo real de licitaciones públicas, convocatorias abiertas y señales de auditoría en el ámbito configurado.';
+    `Sindicación cívica en tiempo real de licitaciones públicas, convocatorias abiertas y señales de auditoría en ${SITE_CONFIG.localityName} (${SITE_CONFIG.provinceName}).`;
 
   const feedLink = `${siteUrl}/feed.xml${scope ? `?ambito=${encodeURIComponent(scope)}` : ''}`;
   const nowRfc822 = new Date().toUTCString();
