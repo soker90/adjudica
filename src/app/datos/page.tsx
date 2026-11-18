@@ -23,7 +23,7 @@ import { formatNumber, formatCompactCurrency } from '@/lib/format';
 export const metadata: Metadata = {
   title: `Portal de Datos Abiertos y Exportaciones | ${SITE_CONFIG.siteName}`,
   description:
-    'Descarga directa de los conjuntos de datos de licitaciones, empresas y auditoría cívica del ámbito configurado en formatos abiertos CSV y JSON.',
+    `Descarga directa de los conjuntos de datos de licitaciones, empresas y auditoría cívica de ${SITE_CONFIG.localityName} en formatos abiertos CSV y JSON.`,
 };
 
 interface DatosPageProps {
@@ -46,7 +46,7 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
       id: 'licitaciones',
       title: 'Catálogo de Contratos y Licitaciones Municipales',
       description:
-        'Registro íntegro de todos los expedientes de contratación tramitados por el organismo configurado y entes asociados, extraídos de la Plataforma de Contratación del Sector Público (PLACSP).',
+        `Registro íntegro de todos los expedientes de contratación tramitados por el Ayuntamiento de ${SITE_CONFIG.localityName} y entes asociados, extraídos de la Plataforma de Contratación del Sector Público (PLACSP).`,
       registrosAprox: `${formatNumber(stats.totalLicitaciones)} expedientes`,
       periodo: '2018 – 2026',
       icon: FileText,
@@ -92,7 +92,7 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
       id: 'alertas',
       title: 'Señales y Factores del Centro de Análisis de Riesgos (V2)',
       description:
-        'Conjunto estructurado de señales analíticas precomputadas por la plataforma para el análisis cívico y periodístico de la contratación, con su nivel de consistencia analítica y factores ponderados.',
+        `Conjunto estructurado de señales analíticas precomputadas por ${SITE_CONFIG.siteName} para el análisis cívico y periodístico de la contratación, con su nivel de consistencia analítica y factores ponderados.`,
       registrosAprox: `${formatNumber(totalAlertas)} señales analíticas`,
       periodo: 'Algoritmo V2 (LCSP)',
       icon: ShieldAlert,
