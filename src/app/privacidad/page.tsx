@@ -189,7 +189,7 @@ export default function PrivacidadPage() {
             5. Evaluaciones y Obligaciones Documentales Pendientes del Responsable
           </h2>
           <p className="text-xs text-amber-900 leading-relaxed">
-            Para la completa conformidad con el RGPD y la LOPDGDD, el responsable de la explotación de {SITE_CONFIG.siteName} debe mantener documentadas las siguientes actuaciones:
+            Para la completa conformidad con el RGPD y la LOPDGDD, el responsable de la explotación de la plataforma debe mantener documentadas las siguientes actuaciones:
           </p>
           <ul className="list-disc list-inside space-y-1 text-xs text-amber-900 ml-2">
             <li>Elaborar y conservar una prueba documentada de ponderación del interés legítimo (art. 6.1.f RGPD) para cada finalidad del tratamiento.</li>
