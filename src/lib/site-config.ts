@@ -96,6 +96,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   legalMunicipalInterventionLabel?: string;
   legalMunicipalSecretaryLabel?: string;
   legalRegionalAuditBodyLabel?: string;
+  exportFilenamePrefixes?: { contracts?: string; companies?: string; audit?: string; defaultScope?: string };
   brandPrefix?: string;
   brandAccent?: string;
 };
