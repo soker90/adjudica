@@ -162,7 +162,7 @@ export default function ConcentracionSection({
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-mono">
-                Cuota de las cinco principales (CR5)
+                Cuota Top 5 (CR5)
               </span>
               <span className="p-1.5 rounded-lg bg-[#eff6ff] text-[#2563eb]">
                 <PieChart className="h-3.5 w-3.5" />
@@ -226,7 +226,7 @@ export default function ConcentracionSection({
         <div className="p-5 rounded-xl border border-[#e2e8f0] bg-white space-y-3">
           <div className="flex items-center justify-between text-xs text-slate-600 pb-1">
             <span className="font-bold text-[#1e293b] uppercase tracking-wider font-mono">
-              Cinco adjudicatarios con mayor cuota de mercado ({effectiveYear ? `Ejercicio ${effectiveYear}` : 'Consolidado histórico'})
+              Top 5 Adjudicatarios y Cuota de Mercado ({effectiveYear ? `Ejercicio ${effectiveYear}` : 'Consolidado Histórico'})
             </span>
             <span className="font-mono text-[11px] text-slate-500">
               Suma CR5: <strong>{global.cr5}%</strong>
@@ -425,8 +425,8 @@ export default function ConcentracionSection({
                     <th className="p-3.5 font-semibold text-right">Empresas</th>
                     <th className="p-3.5 font-semibold text-right">Índice HHI</th>
                     <th className="p-3.5 font-semibold text-center">Nivel</th>
-                    <th className="p-3.5 font-semibold text-right">CR5 (% cinco principales)</th>
-                    <th className="p-3.5 font-semibold text-right">CR1 (% principal)</th>
+                    <th className="p-3.5 font-semibold text-right">CR5 (% Top 5)</th>
+                    <th className="p-3.5 font-semibold text-right">CR1 (% Top 1)</th>
                     <th className="p-3.5 font-semibold">Empresa Líder del Año</th>
                   </tr>
                 </thead>
