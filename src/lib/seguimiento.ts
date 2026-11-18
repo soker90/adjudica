@@ -1,4 +1,5 @@
 import { getDb, parseScope } from './db';
+import { SITE_CONFIG } from './site-config';
 import { getContratosVivosStats, ContratosVivosStats } from './contratos-vivos';
 import { inCourseContractStatusSql } from './contract-status-sql';
 
@@ -185,7 +186,7 @@ export function getLicitacionesAbiertas(
       object_description: r.object_description,
       tipoContrato: r.contract_type || 'Otros',
       procedimiento: r.procedimiento || 'Abierto',
-      organo: r.contracting_authority_name || 'organismo configurado',
+      organo: r.contracting_authority_name || `Ayuntamiento de ${SITE_CONFIG.localityName}`,
       scope: r.scope,
       importeSinIva: r.amount_excl_vat,
       importeConIva: r.amount_incl_vat,
