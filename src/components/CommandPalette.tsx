@@ -16,6 +16,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { formatCurrency, formatNumber, formatNif } from '@/lib/format';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 interface QuickSearchResult {
   licitaciones: {
@@ -92,7 +93,7 @@ const QUICK_ACTIONS: PaletteItem[] = [
   {
     type: 'action',
     id: 'act-empresas',
-    title: 'Principales empresas adjudicatarias del ámbito configurado',
+    title: `Top Empresas Adjudicatarias de ${SITE_CONFIG.localityName}`,
     subtitle: 'Ranking de proveedores por volumen total y número de contratos',
     meta: 'Directorio',
     href: '/empresas',

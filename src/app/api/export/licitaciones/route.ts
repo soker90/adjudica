@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getLicitacionesExportData, toCsv, LICITACIONES_CSV_COLUMNS } from '@/lib/export';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,7 +11,7 @@ export async function GET(req: NextRequest) {
     const ambito = searchParams.get('ambito') || undefined;
 
     const data = getLicitacionesExportData(ambito);
-    const filenameBase = ambito ? `licitaciones_${ambito}` : 'licitaciones_organismo_objetivo';
+    const filenameBase = `${SITE_CONFIG.exportFilenamePrefixes?.contracts ?? 'licitaciones'}_${ambito || SITE_CONFIG.exportFilenamePrefixes?.defaultScope || 'organismo_objetivo'}`;
 
     if (format === 'json') {
       return new NextResponse(JSON.stringify(data, null, 2), {
