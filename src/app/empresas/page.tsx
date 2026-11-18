@@ -7,7 +7,7 @@ import EmpresasClientView, { EmpresaItem, GrupoItem } from '@/components/Empresa
 export const metadata: Metadata = {
   title: `Directorio de Empresas y Grupos Adjudicatarios | ${SITE_CONFIG.siteName}`,
   description:
-    'Trazabilidad e inteligencia corporativa de contratistas del ámbito configurado. Unificación de cambios de denominación, cruce de DNIs y holdings empresariales.',
+    `Trazabilidad e inteligencia corporativa de contratistas de ${SITE_CONFIG.localityName}. Unificación de cambios de denominación, cruce de DNIs y holdings empresariales.`,
 };
 
 interface EmpresasPageProps {
