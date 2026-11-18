@@ -2,6 +2,7 @@
 
 import { useState, useId } from 'react';
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { EvolucionAnualItem } from '@/lib/db';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/format';
 import { 
@@ -197,7 +198,7 @@ export default function EvolucionTemporalSection({ data }: EvolucionTemporalSect
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1.5 max-w-2xl">
-            Tendencia interanual multiserie en el ámbito configurado. Selecciona 2 o más indicadores para analizar la asociación descriptiva observada en los datos entre concurrencia, nivel de baja y tiempos de resolución (correlación no implica causalidad).
+            Tendencia interanual multiserie en {SITE_CONFIG.localityName}. Selecciona 2 o más indicadores para analizar la asociación descriptiva observada en los datos entre concurrencia, nivel de baja y tiempos de resolución (correlación no implica causalidad).
           </p>
         </div>
 
