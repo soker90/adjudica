@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: `Licitaciones y Contratos en Curso | ${SITE_CONFIG.siteName}`,
   description:
-    'Monitoreo en tiempo real de licitaciones abiertas en plazo de presentación de ofertas y contratos públicos con fecha de fin o vencimiento estimado próximo en el ámbito configurado.',
+    `Monitoreo en tiempo real de licitaciones abiertas en plazo de presentación de ofertas y contratos públicos con fecha de fin o vencimiento estimado próximo en ${SITE_CONFIG.localityName}.`,
 };
 
 interface SeguimientoPageProps {
