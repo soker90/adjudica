@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { getPlacspId } from '@/lib/placsp';
 import { 
   Clock, 
@@ -88,7 +89,7 @@ export function DuracionEfectivaSection({ data }: DuracionEfectivaSectionProps) 
             </div>
             <div>
               <h2 className="text-xl font-bold text-[#1e293b] flex items-center gap-2">
-                <span>Duración registrada frente a la prevista: prórrogas y desviaciones</span>
+                <span>Duración registrada vs. prevista: Prórrogas y desvíos registrales</span>
                 <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-[#eff6ff] border border-[#bfdbfe] text-[#1d4ed8]">
                   Art. 29 y 195 LCSP
                 </span>
