@@ -1,5 +1,6 @@
 import { eligibleAwardLotStatusSql, eligibleAwardResultStateSql, excludeAwardWhenLegacyLotTerminalSql, lotAwardsAmountCoverageSql, eligibleLegacyLotAwardAmountSql, allowParentAwardAmountFallbackSql, excludeLegacyLotWhenStructuredTerminalResultSql } from './lot-status.js';
 import { getDb } from './db';
+import { SITE_CONFIG } from './site-config';
 import { getContractSlug } from './placsp';
 
 export type CategoriaDiscrepancia = 'TEMPORAL' | 'REGISTRAL' | 'ECONOMICA' | 'PROCEDIMENTAL' | 'DOCUMENTAL';
@@ -201,7 +202,7 @@ export function getDiscrepancias(options?: {
         : `La document_date de formalización del contrato (${fForm}) figura anterior a la document_date del decreto o acuerdo de adjudicación (${fAdj}).`;
       const accionRecomendada = 'Revisar actas oficiales y decreto de adjudicación en PLACSP para verificar la document_date real.';
       const promptIa = isAdjBeforeLim
-        ? `Examina el case_number "${case_number}" del ámbito configurado (${urlOficial}). La document_date de adjudicación figura como ${fAdj} y el cierre de ofertas como ${fLim}. Analiza los documentos adjuntos para verificar si la adjudicación real fue posterior o si se trata de un error tipográfico en el año/mes registrado en PLACSP.`
+        ? `Examina el case_number "${case_number}" de ${SITE_CONFIG.localityName} (${urlOficial}). La document_date de adjudicación figura como ${fAdj} y el cierre de ofertas como ${fLim}. Analiza los documentos adjuntos para verificar si la adjudicación real fue posterior o si se trata de un error tipográfico en el año/mes registrado en PLACSP.`
         : `Examina el case_number "${case_number}" del ámbito configurado (${urlOficial}). La formalización figura el ${fForm} y la adjudicación el ${fAdj}. Comprueba las fechas de firma de los documentos oficiales para verificar el orden cronológico real.`;
 
       items.push({
@@ -211,7 +212,7 @@ export function getDiscrepancias(options?: {
         case_number,
         object_description: r.object_description || '',
         procedimiento,
-        organo: r.organo || 'organismo configurado',
+        organo: r.organo || `Ayuntamiento de ${SITE_CONFIG.localityName}`,
         awardee: r.awardee || null,
         amount: r.amount === null || r.amount === undefined ? null : Number(r.amount),
         category: 'REGISTRAL',
