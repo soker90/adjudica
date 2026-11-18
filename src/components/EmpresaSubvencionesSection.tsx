@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { formatCurrency, formatCompactCurrency, formatDate, formatNumber } from '@/lib/format';
 import type { SubvencionesResumen } from '@/lib/db';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 interface EmpresaSubvencionesSectionProps {
   subvenciones?: SubvencionesResumen | null;
@@ -162,7 +163,7 @@ export default function EmpresaSubvencionesSection({
           </p>
         </div>
 
-        {/* Solo si hay ayudas del organismo configurado */}
+        {/* Solo si hay ayudas del Ayuntamiento de {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName} */}
         {itemsTargetAuthority.length > 0 && (
           <div className="p-4 rounded-xl bg-[#ecfdf5] border border-[#d1fae5] space-y-1">
             <span className="text-[11px] font-bold text-[#0d9373] uppercase tracking-wider block">
@@ -264,7 +265,7 @@ export default function EmpresaSubvencionesSection({
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Organismos configurados ({itemsTargetAuthority.length})
+              Ayto. {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName} ({itemsTargetAuthority.length})
             </button>
           )}
 
@@ -396,7 +397,7 @@ export default function EmpresaSubvencionesSection({
                               {esAutonoma && <Building2 className="h-3 w-3 text-[#2563eb]" />}
                               {esNacional && <Globe className="h-3 w-3 text-[#6d28d9]" />}
                               {esTargetAuthority
-                                ? 'el ámbito configurado'
+                                ? SITE_CONFIG.localityName
                                 : esOtraLocal
                                 ? `Ayto. ${sub.granting_authority_level_2 || 'Local'}`
                                 : sub.granting_authority_level_2 || sub.granting_authority_level_1 || 'Entidad Pública'}
