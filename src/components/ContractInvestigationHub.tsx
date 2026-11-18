@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { getPlacspId } from '@/lib/placsp';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { 
@@ -227,7 +228,7 @@ export default function ContractInvestigationHub({
                   <div className="flex items-center gap-2">
                     <Coins className="h-4 w-4 text-[#16a34a] shrink-0" />
                     <span>
-                      <strong>{adjudicatario}</strong> acumula <strong>{statsEmpresa.totalContratos} contratos</strong> en los registros del ámbito configurado.
+                      <strong>{adjudicatario}</strong> acumula <strong>{statsEmpresa.totalContratos} contratos</strong> en los registros de {SITE_CONFIG.localityName}.
                     </span>
                   </div>
                   <div className="flex items-center gap-3 self-start sm:self-auto">
