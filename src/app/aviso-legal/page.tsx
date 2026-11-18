@@ -96,15 +96,15 @@ export default function AvisoLegalPage() {
               <span className="font-bold text-slate-800 block mb-1">Órganos Locales de Gestión y Control:</span>
               <ul className="list-disc list-inside space-y-0.5 text-slate-600">
                 <li>Al órgano de contratación competente.</li>
-                <li>A la intervención de la administración competente.</li>
-                <li>A la secretaría de la administración competente.</li>
+                <li>{SITE_CONFIG.legalMunicipalInterventionLabel ?? 'A la intervención de la administración competente.'}</li>
+                <li>{SITE_CONFIG.legalMunicipalSecretaryLabel ?? 'A la secretaría de la administración competente.'}</li>
               </ul>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
               <span className="font-bold text-slate-800 block mb-1">Órganos Fiscalizadores y Jurisdiccionales:</span>
               <ul className="list-disc list-inside space-y-0.5 text-slate-600">
                 <li>Al Tribunal de Cuentas (art. 136 CE).</li>
-                <li>Al órgano autonómico de control externo que corresponda.</li>
+                <li>{SITE_CONFIG.legalRegionalAuditBodyLabel ?? 'Al órgano autonómico de control externo que corresponda.'}</li>
                 <li>A los tribunales administrativos de recursos contractuales (TACRC / TARC).</li>
                 <li>A los Juzgados y Tribunales del orden jurisdiccional contencioso-administrativo o penal.</li>
               </ul>
@@ -121,7 +121,7 @@ export default function AvisoLegalPage() {
             Los datos analizados proceden íntegramente de los canales públicos sindicados de la <strong>Plataforma de Contratación del Sector Público (PLACSP)</strong> gestionada por la Dirección General del Patrimonio del Estado (Ministerio de Hacienda), en el marco de la <strong>Ley 37/2007, de 16 de noviembre, sobre reutilización de la información del sector público</strong> y el artículo 8 de la Ley 19/2013 de Transparencia.
           </p>
           <p className="text-xs text-slate-600">
-            {SITE_CONFIG.siteName} procesa y estructura estos datos de manera automatizada. No puede garantizar la exactitud, exhaustividad o integridad de los documentos o metadatos volcados en origen por las entidades contratantes en la plataforma estatal. Cuando un documento no se localiza en la fuente telemática, ello no permite concluir que no exista en el expediente físico o electrónico custodiado por la administración.
+            La plataforma procesa y estructura estos datos de manera automatizada. No puede garantizar la exactitud, exhaustividad o integridad de los documentos o metadatos volcados en origen por las entidades contratantes en la plataforma estatal. Cuando un documento no se localiza en la fuente telemática, ello no permite concluir que no exista en el expediente físico o electrónico custodiado por la administración.
           </p>
         </section>
 

@@ -115,7 +115,7 @@ export default function RectificacionPage() {
               <span>Identificación del expediente o entidad</span>
             </div>
             <p className="text-xs text-slate-600 ml-8">
-              Indique el enlace de la ficha de {SITE_CONFIG.siteName} y el número oficial del expediente en PLACSP o el NIF mercantil de la entidad.
+              Indique el enlace de la ficha en {SITE_CONFIG.siteName} y el número oficial del expediente en PLACSP o el NIF mercantil de la entidad.
             </p>
           </div>
 
