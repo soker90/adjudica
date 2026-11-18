@@ -167,7 +167,7 @@ export default function EmpresaSubvencionesSection({
         {itemsTargetAuthority.length > 0 && (
           <div className="p-4 rounded-xl bg-[#ecfdf5] border border-[#d1fae5] space-y-1">
             <span className="text-[11px] font-bold text-[#0d9373] uppercase tracking-wider block">
-              organismo configurado
+              Ayuntamiento de {SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName}
             </span>
             <div className="text-xl font-bold font-mono text-[#065f46]">
               {formatCompactCurrency(volTargetAuthority)}
