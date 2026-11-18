@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: `Buzón de Discrepancias e Inconsistencias Registrales | ${SITE_CONFIG.siteName}`,
   description:
-    'Monitor de incidencias cronológicas, registrales y metodológicas detectadas en los expedientes de contratación pública del ámbito configurado para revisión manual y asistida por IA.',
+    `Monitor de incidencias cronológicas, registrales y metodológicas detectadas en los expedientes de contratación pública de ${SITE_CONFIG.localityName} para revisión manual y asistida por IA.`,
 };
 
 export default function DiscrepanciasPage() {
