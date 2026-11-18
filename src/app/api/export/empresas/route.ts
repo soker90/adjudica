@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getEmpresasExportData, toCsv, EMPRESAS_CSV_COLUMNS } from '@/lib/export';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,7 +11,7 @@ export async function GET(req: NextRequest) {
     const ambito = searchParams.get('ambito') || undefined;
 
     const data = getEmpresasExportData(ambito);
-    const filenameBase = ambito ? `empresas_${ambito}` : 'empresas';
+    const filenameBase = `${SITE_CONFIG.exportFilenamePrefixes?.companies ?? 'empresas'}_${ambito || SITE_CONFIG.exportFilenamePrefixes?.defaultScope || 'organismo_objetivo'}`;
 
     if (format === 'json') {
       return new NextResponse(JSON.stringify(data, null, 2), {
