@@ -28,6 +28,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [filtroRanking, setFiltroRanking] = useState<'locales' | 'externas' | 'todas'>('todas');
   const localidad = SITE_CONFIG.localityName || 'el ámbito local';
+  const localidadCorta = SITE_CONFIG.localityShortName || localidad;
   const provincia = SITE_CONFIG.provinceName ? `Provincia de ${SITE_CONFIG.provinceName}` : 'Ámbito provincial';
 
   const { 
@@ -66,7 +67,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-[#1e293b] flex items-center gap-2">
-                <span>Empresas locales frente a externas: impacto territorial</span>
+                <span>Empresas Locales vs. Externas: Impacto Territorial</span>
                 <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-[#ecfdf5] border border-[#d1fae5] text-[#0d9373]">
                   Registro Mercantil / BORME
                 </span>
@@ -239,7 +240,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
             }`}
           >
             <Building2 className="h-4 w-4" />
-            <span>Empresas locales frente a externas</span>
+            <span>Top Empresas Locales vs. Externas</span>
           </button>
 
           <button
@@ -407,7 +408,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                 <div className="space-y-2 text-xs font-mono">
                   <div>
                     <div className="flex justify-between text-[11px] mb-1">
-                      <span className="text-[#0d9373] font-bold">Local ({localidad}): {formatCompactCurrency(t.volumenLocal)}</span>
+                      <span className="text-[#0d9373] font-bold">Local ({localidadCorta}): {formatCompactCurrency(t.volumenLocal)}</span>
                       <strong className="text-[#0d9373]">{t.pctLocal}%</strong>
                     </div>
                     <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
@@ -463,7 +464,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                 className="text-xs bg-white border border-[#e2e8f0] rounded-lg px-2.5 py-1.5 focus:outline-hidden"
               >
                 <option value="todas">Todas las adjudicatarias</option>
-                <option value="locales">Solo empresas locales de {localidad}</option>
+                <option value="locales">Solo empresas locales de {localidadCorta}</option>
                 <option value="externas">Solo empresas nacionales / externas</option>
               </select>
             </div>
@@ -477,7 +478,7 @@ export function EmpresasLocalesSection({ data }: EmpresasLocalesSectionProps) {
                   <div className="flex items-center gap-2">
                     <Building2 className="h-4 w-4 text-[#0d9373]" />
                     <h3 className="font-bold text-[#1e293b] text-sm">
-                      Empresas locales ({localidad})
+                      Top Empresas Locales ({localidad})
                     </h3>
                   </div>
                   <span className="text-xs text-[#0d9373] font-mono font-bold">

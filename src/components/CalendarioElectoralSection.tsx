@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { getPlacspId } from '@/lib/placsp';
 import { CalendarioElectoralStats } from '@/lib/db';
 import { formatCurrency } from '@/lib/format';
@@ -41,7 +42,7 @@ export default function CalendarioElectoralSection({ data }: CalendarioElectoral
               <Vote className="h-5 w-5" />
             </span>
             <h3 className="font-bold text-[#1e293b] text-base sm:text-lg tracking-tight">
-              Adjudicaciones y calendario electoral (ciclo político)
+              Adjudicaciones vs. Calendario Electoral (Ciclo Político)
             </h3>
           </div>
           <p className="text-xs text-[#64748b] mt-1.5 max-w-2xl">

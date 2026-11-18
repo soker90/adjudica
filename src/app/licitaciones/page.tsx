@@ -4,6 +4,7 @@ import { getScopeLabel, SCOPE_PRESENTATION } from '@/lib/scope-presentation';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { formatCurrency, formatNumber, formatDate, formatNif } from '@/lib/format';
 import { getPlacspId } from '@/lib/placsp';
 import { getEconomicFlow } from '@/lib/naturaleza-economica';
@@ -249,7 +250,7 @@ function LicitacionesContent() {
             </h1>
           </div>
           <p className="text-xs sm:text-sm text-[#64748b] mt-1">
-            Buscador oficial en los {formatNumber(total)} contratos adjudicados directa o indirectamente por el organismo configurado
+            Buscador oficial en los {formatNumber(total)} contratos adjudicados directa o indirectamente por el Ayuntamiento de {SITE_CONFIG.localityName}
           </p>
         </div>
 

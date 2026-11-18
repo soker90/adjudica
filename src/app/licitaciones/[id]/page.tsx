@@ -1079,15 +1079,15 @@ export default async function LicitacionDetailPage({
                   <span className="font-semibold text-slate-800">
                     {lic.ubicacion && lic.ubicacion.includes('(')
                       ? lic.ubicacion.split('(')[0].trim()
-                      : (lic.contracting_authority_city || 'el ámbito configurado')}
+                      : (lic.contracting_authority_city || SITE_CONFIG.localityName)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between border-t border-slate-200/60 pt-1">
                   <span className="text-slate-500">Provincia:</span>
                   <span className="font-medium text-slate-700">
                     {lic.ubicacion && lic.ubicacion.includes('(')
-                      ? lic.ubicacion.match(/\(([^)]+)\)/)?.[1] || 'provincia configurada'
-                      : (lic.ubicacion || 'provincia configurada')}
+                      ? lic.ubicacion.match(/\(([^)]+)\)/)?.[1] || SITE_CONFIG.provinceName || 'provincia configurada'
+                      : (lic.ubicacion || SITE_CONFIG.provinceName || 'provincia configurada')}
                   </span>
                 </div>
                 {lic.nuts && (

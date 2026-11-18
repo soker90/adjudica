@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: `Centro de Análisis de Riesgos de Contratación | ${SITE_CONFIG.siteName}`,
   description:
-    'Monitoreo preventivo y señales estadísticas sobre la contratación pública del ámbito configurado conforme a los criterios de la LCSP.',
+    `Monitoreo preventivo y señales estadísticas sobre la contratación pública de ${SITE_CONFIG.localityName} conforme a los criterios de la LCSP.`,
 };
 
 interface AuditoriaPageProps {

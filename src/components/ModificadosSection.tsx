@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { getPlacspId } from '@/lib/placsp';
 import { 
   AlertTriangle, 
@@ -222,10 +223,10 @@ export function ModificadosSection({ data }: ModificadosSectionProps) {
           <Info className="h-4 w-4 text-[#e11d48] shrink-0 mt-0.5" />
           <div>
             <span className="font-bold text-slate-900 block mb-0.5">
-              Diferenciación analítica: modificados formales frente a encarecimiento en cascada
+              Diferenciación analítica: Modificados formales vs. Encarecimiento en cascada
             </span>
             <span className="leading-relaxed">
-              Los registros oficiales de PLACSP rara vez publican modificaciones formales directas bajo el art. 205 LCSP ({resumen.totalCasos} detectados en el periodo). Paralelamente, la plataforma documenta el fenómeno de <strong>relicitaciones en cascada tras renuncia</strong>, como el caso paradigmático de la <em>Estación de Autobuses</em> (+64,0% acumulado entre 2023 y 2025).
+              Los registros oficiales de PLACSP rara vez publican modificaciones formales directas bajo el art. 205 LCSP ({resumen.totalCasos} detectados en el periodo). Paralelamente, {SITE_CONFIG.siteName} documenta el fenómeno de <strong>relicitaciones en cascada tras renuncia</strong>, como el caso paradigmático de la <em>Estación de Autobuses</em> (+64,0% acumulado entre 2023 y 2025).
             </span>
           </div>
         </div>
@@ -317,7 +318,7 @@ export function ModificadosSection({ data }: ModificadosSectionProps) {
           <div className="p-4 rounded-xl bg-[#fff1f2]/40 border border-[#fecdd3] text-xs text-[#9f1239] leading-relaxed flex items-start gap-3">
             <Info className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#e11d48]" />
             <div>
-              <strong>Modificaciones contractuales registradas en PLACSP:</strong> En obras públicas complejas, cuando las variaciones requeridas superan los límites del art. 205 LCSP (incluido el umbral sustancial del 20%) o concurre la renuncia del contratista, la modificación no puede ser aprobada sobre el contrato en vigor. De resultar imprescindible alterar sustancialmente el proyecto para el interés público, procede la resolución contractual (art. 211.1.g LCSP) y una nueva licitación pública. A continuación se auditan las cadenas de proyectos reconstruidas en el ámbito configurado.
+              <strong>Modificaciones contractuales registradas en PLACSP:</strong> En obras públicas complejas, cuando las variaciones requeridas superan los límites del art. 205 LCSP (incluido el umbral sustancial del 20%) o concurre la renuncia del contratista, la modificación no puede ser aprobada sobre el contrato en vigor. De resultar imprescindible alterar sustancialmente el proyecto para el interés público, procede la resolución contractual (art. 211.1.g LCSP) y una nueva licitación pública. A continuación se auditan las cadenas de proyectos reconstruidas en {SITE_CONFIG.localityName}.
             </div>
           </div>
 
