@@ -53,7 +53,11 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     preElectionPeriod2019?: string;
     preElectionWindowLabel?: string;
   };
-  dataPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>> };
+  dataPresentation?: {
+    scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>;
+    currentScopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>;
+  };
+  contractExplorerPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>> };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
     contractsSubtitle?: string;
     contractsBadge?: string;
