@@ -93,7 +93,7 @@ const QUICK_ACTIONS: PaletteItem[] = [
   {
     type: 'action',
     id: 'act-empresas',
-    title: `Top Empresas Adjudicatarias de ${SITE_CONFIG.localityName}`,
+    title: `Top Empresas Adjudicatarias de ${SITE_CONFIG.localityShortName ?? SITE_CONFIG.localityName}`,
     subtitle: 'Ranking de proveedores por volumen total y número de contratos',
     meta: 'Directorio',
     href: '/empresas',
@@ -257,7 +257,7 @@ export default function CommandPalette() {
       <div 
         role="dialog"
         aria-modal="true"
-        aria-label="Búsqueda rápida en la plataforma"
+        aria-label={`Búsqueda rápida en ${SITE_CONFIG.siteName}`}
         className="relative w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl border border-[#e2e8f0] flex flex-col max-h-[80vh] sm:max-h-[75vh] animate-in fade-in-0 zoom-in-95 duration-150 z-10"
       >
         {/* Search Input Bar */}
