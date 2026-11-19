@@ -509,7 +509,7 @@ export function parseScope(scope?: string | null): 'Directa Municipal' | 'Indire
   if (a === 'directa' || a === 'directa municipal' || a === 'directa_municipal') {
     return 'Directa Municipal';
   }
-  if (a === 'mancomunidad' || a === 'organismo_asociado' || a === 'indirecta' || a === 'indirecta (mancomunidad)' || a === 'indirecta_mancomunidad') {
+  if (a === 'mancomunidad' || a === 'comsermancha' || a === 'organismo_asociado' || a === 'indirecta' || a === 'indirecta (mancomunidad)' || a === 'indirecta_mancomunidad') {
     return 'Indirecta (Mancomunidad)';
   }
   return null;
