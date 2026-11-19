@@ -1,6 +1,7 @@
 'use client';
 
-import { getScopeLabel } from '@/lib/scope-presentation';
+import { getScopeLabel, getScopePresentationKey } from '@/lib/scope-presentation';
+import { SITE_CONFIG } from '@/lib/site-config';
 import { useState } from 'react';
 import Link from 'next/link';
 import { getPlacspId } from '@/lib/placsp';
@@ -118,7 +119,7 @@ export default function ContratosVivosSection({ data, ambito }: ContratosVivosSe
         <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto shrink-0">
           {ambito && (
             <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#eff6ff] text-[#2563eb] border border-[#bfdbfe]">
-              {getScopeLabel(ambito)}
+              {SITE_CONFIG.analysisPresentation?.scopeLabels?.[getScopePresentationKey(ambito)] ?? getScopeLabel(ambito)}
             </span>
           )}
           <Link
