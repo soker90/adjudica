@@ -292,7 +292,7 @@ export default function EmpresasClientView({
             </div>
 
             <CsvExportButton
-              filename={`empresas_${new Date().toISOString().slice(0, 10)}.csv`}
+              filename={`${SITE_CONFIG.exportFilenamePrefixes?.companies ?? 'empresas'}_${SITE_CONFIG.exportFilenamePrefixes?.defaultScope ?? 'alcazar'}_${new Date().toISOString().slice(0, 10)}.csv`}
               headers={['Nombre', 'CIF/NIF', 'Contratos', 'Gasto Adjudicado (€)', 'Ingresos / Cánones (€)', 'Volumen Total (€)', 'Organismos Distintos', 'Último Contrato']}
               rows={data.map((e) => [
                 e.nombre,
