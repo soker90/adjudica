@@ -612,7 +612,7 @@ export function ModificadosSection({ data }: ModificadosSectionProps) {
               <div className="flex items-center gap-2">
                 <Building2 className="h-4 w-4 text-[#e11d48]" />
                 <h3 className="font-bold text-[#1e293b] text-sm">
-                  Contratistas con más modificaciones
+                  {SITE_CONFIG.analysisPresentation?.modifiedContractorsTitle ?? 'Contratistas con más modificaciones'}
                 </h3>
               </div>
               <span className="text-xs text-slate-400 font-mono">
