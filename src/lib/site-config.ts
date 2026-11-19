@@ -64,6 +64,7 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
     spendSubtitle?: string;
     organismsSubtitle?: string;
     organismsBadge?: string;
+    authorityBadge?: string;
   }>;
   scopePresentation?: {
     selectorTitle?: string;
