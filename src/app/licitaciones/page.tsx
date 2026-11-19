@@ -1,6 +1,6 @@
 'use client';
 
-import { getScopeLabel, SCOPE_PRESENTATION } from '@/lib/scope-presentation';
+import { getScopeLabel, getScopePresentationKey, SCOPE_PRESENTATION } from '@/lib/scope-presentation';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -230,7 +230,7 @@ function LicitacionesContent() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `licitaciones_organismo_objetivo_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `${SITE_CONFIG.exportFilenamePrefixes?.contracts ?? 'licitaciones'}_${SITE_CONFIG.exportFilenamePrefixes?.defaultScope ?? 'organismo_objetivo'}_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -327,7 +327,7 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            {getScopeLabel('todos')} ({formatNumber(total)})
+            {SITE_CONFIG.contractExplorerPresentation?.scopeLabels?.all ?? getScopeLabel('todos')} ({formatNumber(total)})
           </button>
           <button
             onClick={() => handleFilterChange(setAmbito, 'Directa Municipal')}
@@ -337,7 +337,7 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            {getScopeLabel('directa')}
+            {SITE_CONFIG.contractExplorerPresentation?.scopeLabels?.primary ?? getScopeLabel('directa')}
           </button>
           {SCOPE_PRESENTATION.associated.enabled && (
           <button
@@ -348,7 +348,7 @@ function LicitacionesContent() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            {getScopeLabel('mancomunidad')}
+            {SITE_CONFIG.contractExplorerPresentation?.scopeLabels?.associated ?? getScopeLabel('mancomunidad')}
           </button>
           )}
         </div>
