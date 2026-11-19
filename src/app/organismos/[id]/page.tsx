@@ -44,7 +44,7 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
                 ? 'bg-[#eff6ff] border-[#bfdbfe] text-[#2563eb]'
                 : 'bg-[#ecfdf5] border-[#d1fae5] text-[#0d9373]'
             }`}>
-              {isAssociated ? 'Entidad supramunicipal (mancomunidad)' : authority.scope || 'Ámbito no indicado'}
+              {isAssociated ? 'Entidad Supramunicipal (Mancomunidad)' : authority.scope || 'Ámbito no indicado'}
             </span>
             {history?.badge && (
               <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
@@ -62,7 +62,7 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
           className="self-start sm:self-auto px-5 py-2.5 rounded-lg bg-[#0a0a0a] hover:bg-[#1e293b] font-semibold text-xs sm:text-sm text-white shadow-xs transition-all flex items-center gap-2 shrink-0"
         >
           <FileText className="h-4 w-4" />
-          <span>Ver {formatNumber(authority.total_contratos)} licitaciones</span>
+          <span>Ver {formatNumber(authority.total_contratos)} Licitaciones</span>
         </Link>
       </section>
 
@@ -73,8 +73,7 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
           </div>
           <div className="space-y-1 text-xs sm:text-sm text-slate-700">
             {history.title && <p className="font-bold text-[#1e293b]">{history.title}</p>}
-            <p className="leading-relaxed text-slate-600 text-xs">{history.description}</p>
-            {history.detail && <p className="leading-relaxed text-slate-600 text-xs">{history.detail}</p>}
+            <p className="leading-relaxed text-slate-600 text-xs">{history.description} {history.detail}</p>}
             <Link href="/metodologia#cobertura-temporal" className="inline-flex items-center gap-1 font-semibold text-[#0d9373] hover:underline text-xs">
               <span>Consultar marco temporal y metodología de cobertura</span>
               <ChevronRight className="h-3 w-3" />
@@ -140,7 +139,7 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <HorizontalBarList
-          title="Tipos de contrato del organismo"
+          title="Tipos de Contrato del Organismo"
           filterType="tipo"
           items={authority.porTipo.map((item: any) => ({ label: item.tipo, count: item.contratos, volumen: item.volumen }))}
           total={authority.volumen_total}
@@ -149,7 +148,7 @@ export default async function ContractingAuthorityDetailPage({ params }: { param
           <div className="flex items-center justify-between border-b border-[#e2e8f0] pb-3">
             <h2 className="font-bold text-[#1e293b] text-base flex items-center gap-2">
               <Briefcase className="h-4 w-4 text-[#0d9373]" />
-              <span>Principales proveedores adjudicatarios</span>
+              <span>Principales Proveedores Adjudicatarios</span>
             </h2>
           </div>
           {authority.topAdjudicatarios?.length ? (
