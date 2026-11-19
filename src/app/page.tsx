@@ -231,13 +231,13 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
                         Nº {idx + 1}
                       </span>
                       <div className="flex items-center gap-1.5">
-                        {org.scope === 'Indirecta (Mancomunidad)' ? (
+                        {getScopePresentationKey(org.scope) === 'associated' ? (
                           <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#eff6ff] text-[#2563eb] border border-[#bfdbfe]">
-                            Asociado
+                            {SITE_CONFIG.homePresentation?.associated?.authorityBadge ?? 'Asociado'}
                           </span>
                         ) : (
                           <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-[#f8fafb] text-slate-600 border border-[#e2e8f0]">
-                            Directa
+                            {SITE_CONFIG.homePresentation?.primary?.authorityBadge ?? 'Directa'}
                           </span>
                         )}
                         <span className="font-mono">{formatNumber(org.contratos)} lic.</span>
