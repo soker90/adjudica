@@ -44,7 +44,15 @@ type SiteConfig = Omit<typeof siteConfig, 'localityAliases' | 'localSupplierNifs
   homeTopCompaniesTitle?: string;
   homeAuthoritiesDescription?: string;
   homeRecentContractsDescription?: string;
-  analysisPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>; methodologyLinkLabel?: string; methodologyLinkHref?: string };
+  analysisPresentation?: {
+    scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>>;
+    methodologyLinkLabel?: string;
+    methodologyLinkHref?: string;
+    modifiedContractorsTitle?: string;
+    preElectionPeriod2023?: string;
+    preElectionPeriod2019?: string;
+    preElectionWindowLabel?: string;
+  };
   dataPresentation?: { scopeLabels?: Partial<Record<'primary' | 'associated' | 'all', string>> };
   homePresentation?: Record<'primary' | 'associated' | 'all', {
     contractsSubtitle?: string;
