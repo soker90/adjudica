@@ -21,6 +21,7 @@ describe('parseScope helper', () => {
 
   it('correctly maps mancomunidad aliases to Indirecta (Mancomunidad)', () => {
     expect(parseScope('mancomunidad')).toBe('Indirecta (Mancomunidad)');
+    expect(parseScope('comsermancha')).toBe('Indirecta (Mancomunidad)');
     expect(parseScope('organismo_asociado')).toBe('Indirecta (Mancomunidad)');
     expect(parseScope('indirecta')).toBe('Indirecta (Mancomunidad)');
     expect(parseScope('Indirecta (Mancomunidad)')).toBe('Indirecta (Mancomunidad)');
