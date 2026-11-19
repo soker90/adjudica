@@ -39,6 +39,7 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
   const stats = getStats(undefined, effectiveAmbito);
   const currentScopeKey = getScopePresentationKey(currentAmbito);
   const activeScopeLabel = SITE_CONFIG.dataPresentation?.scopeLabels?.[currentScopeKey] ?? getScopeLabel(currentAmbito);
+  const currentScopeLabel = SITE_CONFIG.dataPresentation?.currentScopeLabels?.[currentScopeKey] ?? getScopeLabel(currentAmbito);
   const totalAlertas = getAlertasExportData(effectiveAmbito).length;
 
   const datasets = [
@@ -192,7 +193,7 @@ export default async function DatosPage({ searchParams }: DatosPageProps) {
         <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
           <span>Catálogo de Conjuntos de Datos Disponibles</span>
           <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-normal">
-            Ámbito actual: {getScopeLabel(currentAmbito)}
+            Ámbito actual: {currentScopeLabel}
           </span>
         </h2>
 
