@@ -211,7 +211,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
               <span>{menoresRecurrentes.length} proveedores recurrentes</span>
             </div>
             <CsvExportButton
-              filename={`menores_recurrentes_organismo_objetivo_${new Date().toISOString().slice(0, 10)}.csv`}
+              filename={`menores_recurrentes_${SITE_CONFIG.exportFilenamePrefixes?.recurrentMinors ?? 'organismo_objetivo'}_${new Date().toISOString().slice(0, 10)}.csv`}
               headers={['Empresa', 'NIF', 'Tipo Predominante', 'Contratos Menores', 'Volumen Acumulado (€)', 'Mayor VEC (€)', 'Umbral Legal (€)', 'Años']}
               rows={menoresRecurrentes.map((item) => [
                 item.adjudicatario,
@@ -347,7 +347,7 @@ export default async function AnalisisPage({ searchParams }: { searchParams: Pro
               <span>{fraccionamientoTotal} casos · {anoEfectivo ? `ejercicio ${anoEfectivo}` : 'todos los años'}</span>
             </div>
             <CsvExportButton
-              filename={`fraccionamiento_${new Date().toISOString().slice(0, 10)}.csv`}
+              filename={`fraccionamiento_${SITE_CONFIG.exportFilenamePrefixes?.fractioning ?? 'organismo_objetivo'}_${new Date().toISOString().slice(0, 10)}.csv`}
               headers={['Empresa', 'NIF', 'Organismo', 'Categoría', 'Suma (€)', 'Umbral (€)', 'Exceso (%)', 'Severidad', 'Patrón', 'Contratos', 'Periodo Inicio', 'Periodo Fin']}
               rows={fraccionamiento.map((caso) => [
                 caso.grupoNombre || caso.adjudicatario,
